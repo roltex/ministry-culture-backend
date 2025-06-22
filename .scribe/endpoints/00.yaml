@@ -1,0 +1,1058 @@
+name: Endpoints
+description: ''
+endpoints:
+  -
+    httpMethods:
+      - GET
+    uri: api/user
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/v1/news
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"data":[{"id":5,"title":{"ka":"\u10d0\u10ee\u10d0\u10da\u10d2\u10d0\u10d6\u10e0\u10d3\u10d0 \u10e1\u10de\u10dd\u10e0\u10e2\u10e1\u10db\u10d4\u10dc\u10d4\u10d1\u10db\u10d0 \u10e1\u10d0\u10d4\u10e0\u10d7\u10d0\u10e8\u10dd\u10e0\u10d8\u10e1\u10dd \u10e2\u10e3\u10e0\u10dc\u10d8\u10e0\u10d6\u10d4 \u10ec\u10d0\u10e0\u10db\u10d0\u10e2\u10d4\u10d1\u10d0\u10e1 \u10db\u10d8\u10d0\u10e6\u10ec\u10d8\u10d4\u10e1","en":"Young athletes achieved success at an international tournament"},"content":{"ka":"<p>\u10e1\u10d0\u10e5\u10d0\u10e0\u10d7\u10d5\u10d4\u10da\u10dd\u10e1 \u10eb\u10d8\u10e3\u10d3\u10dd\u10d8\u10e1\u10e2\u10d7\u10d0 \u10d0\u10ee\u10d0\u10da\u10d2\u10d0\u10d6\u10e0\u10d3\u10e3\u10da\u10db\u10d0 \u10dc\u10d0\u10d9\u10e0\u10d4\u10d1\u10db\u10d0 \u10de\u10e0\u10d0\u10e6\u10d0\u10e8\u10d8 \u10d2\u10d0\u10db\u10d0\u10e0\u10d7\u10e3\u10da \u10d4\u10d5\u10e0\u10dd\u10de\u10d8\u10e1 \u10d7\u10d0\u10e1\u10d6\u10d4 3 \u10dd\u10e5\u10e0\u10dd\u10e1, 2 \u10d5\u10d4\u10e0\u10ea\u10ee\u10da\u10d8\u10e1\u10d0 \u10d3\u10d0 5 \u10d1\u10e0\u10d8\u10dc\u10ef\u10d0\u10dd\u10e1 \u10db\u10d4\u10d3\u10d0\u10da\u10d8 \u10db\u10dd\u10d8\u10de\u10dd\u10d5\u10d0. \u10d2\u10e3\u10dc\u10d3\u10e3\u10e0 \u10e9\u10d0\u10d7\u10d5\u10da\u10d0\u10e8\u10d8 \u10e1\u10d0\u10e5\u10d0\u10e0\u10d7\u10d5\u10d4\u10da\u10dd\u10db \u10de\u10d8\u10e0\u10d5\u10d4\u10da\u10d8 \u10d0\u10d3\u10d2\u10d8\u10da\u10d8 \u10d3\u10d0\u10d8\u10d9\u10d0\u10d5\u10d0.<\/p><p>\u10e1\u10d0\u10db\u10d8\u10dc\u10d8\u10e1\u10e2\u10e0\u10dd \u10e3\u10da\u10dd\u10ea\u10d0\u10d5\u10e1 \u10e1\u10de\u10dd\u10e0\u10e2\u10e1\u10db\u10d4\u10dc\u10d4\u10d1\u10e1 \u10d0\u10db \u10db\u10dc\u10d8\u10e8\u10d5\u10dc\u10d4\u10da\u10dd\u10d5\u10d0\u10dc \u10d2\u10d0\u10db\u10d0\u10e0\u10ef\u10d5\u10d4\u10d1\u10d0\u10e1.<\/p>","en":"<p>The Georgian youth judo team won 3 gold, 2 silver, and 5 bronze medals at the European Cup held in Prague. Georgia took first place in the team competition.<\/p><p>The Ministry congratulates the athletes on this important victory.<\/p>"},"excerpt":{"ka":"\u10e1\u10d0\u10e5\u10d0\u10e0\u10d7\u10d5\u10d4\u10da\u10dd\u10e1 \u10eb\u10d8\u10e3\u10d3\u10dd\u10d8\u10e1\u10e2\u10d7\u10d0 \u10d0\u10ee\u10d0\u10da\u10d2\u10d0\u10d6\u10e0\u10d3\u10e3\u10da\u10db\u10d0 \u10dc\u10d0\u10d9\u10e0\u10d4\u10d1\u10db\u10d0 10 \u10db\u10d4\u10d3\u10d0\u10da\u10d8 \u10db\u10dd\u10d8\u10de\u10dd\u10d5\u10d0.","en":"The Georgian youth judo team won 10 medals."},"slug":"young-athletes-achieved-success-at-an-international-tournament","featured_image":"news-images\/01JY7J5A93NYKBG2P821NX3THC.jpg","is_published":true,"published_at":"2025-06-11T20:52:36.000000Z","views_count":2,"created_at":"2025-06-20T20:51:58.000000Z","updated_at":"2025-06-20T20:58:22.000000Z"},{"id":4,"title":{"ka":"\u10e1\u10d0\u10e5\u10d0\u10e0\u10d7\u10d5\u10d4\u10da\u10dd\u10e1 \u10e4\u10dd\u10da\u10d9\u10da\u10dd\u10e0\u10d8\u10e1 \u10d4\u10e0\u10dd\u10d5\u10dc\u10e3\u10da\u10d8 \u10e4\u10d4\u10e1\u10e2\u10d8\u10d5\u10d0\u10da\u10d8 \u10d8\u10ec\u10e7\u10d4\u10d1\u10d0","en":"The National Folklore Festival of Georgia begins"},"content":{"ka":"<p>\u10e4\u10d4\u10e1\u10e2\u10d8\u10d5\u10d0\u10da\u10d8, \u10e0\u10dd\u10db\u10d4\u10da\u10d8\u10ea \u10ec\u10d4\u10da\u10e1 \u10e1\u10d0\u10e5\u10d0\u10e0\u10d7\u10d5\u10d4\u10da\u10dd\u10e1 \u10e1\u10ee\u10d5\u10d0\u10d3\u10d0\u10e1\u10ee\u10d5\u10d0 \u10e0\u10d4\u10d2\u10d8\u10dd\u10dc\u10e8\u10d8 \u10d2\u10d0\u10d8\u10db\u10d0\u10e0\u10d7\u10d4\u10d1\u10d0, \u10db\u10d8\u10d6\u10dc\u10d0\u10d3 \u10d8\u10e1\u10d0\u10ee\u10d0\u10d5\u10e1 \u10e5\u10d0\u10e0\u10d7\u10e3\u10da\u10d8 \u10ee\u10d0\u10da\u10ee\u10e3\u10e0\u10d8 \u10e1\u10d8\u10db\u10e6\u10d4\u10e0\u10d8\u10e1\u10d0 \u10d3\u10d0 \u10ea\u10d4\u10d9\u10d5\u10d8\u10e1 \u10e3\u10dc\u10d8\u10d9\u10d0\u10da\u10e3\u10e0\u10d8 \u10dc\u10d8\u10db\u10e3\u10e8\u10d4\u10d1\u10d8\u10e1 \u10e8\u10d4\u10dc\u10d0\u10e0\u10e9\u10e3\u10dc\u10d4\u10d1\u10d0\u10e1\u10d0 \u10d3\u10d0 \u10de\u10dd\u10de\u10e3\u10da\u10d0\u10e0\u10d8\u10d6\u10d0\u10ea\u10d8\u10d0\u10e1. \u10d3\u10d0\u10e1\u10d9\u10d5\u10dc\u10d8\u10d7\u10d8 \u10d2\u10d0\u10da\u10d0 \u10d9\u10dd\u10dc\u10ea\u10d4\u10e0\u10e2\u10d8 \u10d7\u10d1\u10d8\u10da\u10d8\u10e1\u10e8\u10d8, \u10e4\u10d8\u10da\u10d0\u10e0\u10db\u10dd\u10dc\u10d8\u10d8\u10e1 \u10d3\u10d8\u10d3 \u10e1\u10d0\u10d9\u10dd\u10dc\u10ea\u10d4\u10e0\u10e2\u10dd \u10d3\u10d0\u10e0\u10d1\u10d0\u10d6\u10e8\u10d8 \u10d2\u10d0\u10d8\u10db\u10d0\u10e0\u10d7\u10d4\u10d1\u10d0.<\/p>","en":"<p>The festival, which will be held in different regions of Georgia this year, aims to preserve and popularize unique examples of Georgian folk song and dance. The final gala concert will be held in Tbilisi, in the Grand Concert Hall of the Philharmonic.<\/p>"},"excerpt":{"ka":"\u10e4\u10d4\u10e1\u10e2\u10d8\u10d5\u10d0\u10da\u10d8 \u10db\u10d8\u10d6\u10dc\u10d0\u10d3 \u10d8\u10e1\u10d0\u10ee\u10d0\u10d5\u10e1 \u10e5\u10d0\u10e0\u10d7\u10e3\u10da\u10d8 \u10ee\u10d0\u10da\u10ee\u10e3\u10e0\u10d8 \u10e1\u10d8\u10db\u10e6\u10d4\u10e0\u10d8\u10e1\u10d0 \u10d3\u10d0 \u10ea\u10d4\u10d9\u10d5\u10d8\u10e1 \u10de\u10dd\u10de\u10e3\u10da\u10d0\u10e0\u10d8\u10d6\u10d0\u10ea\u10d8\u10d0\u10e1.","en":"The festival aims to promote Georgian folk song and dance."},"slug":"the-national-folklore-festival-of-georgia-begins","featured_image":null,"is_published":true,"published_at":"2025-06-07T20:52:36.000000Z","views_count":3028,"created_at":"2025-06-20T20:51:58.000000Z","updated_at":"2025-06-20T20:52:36.000000Z"},{"id":2,"title":{"ka":"\u10e5\u10d0\u10e0\u10d7\u10e3\u10da\u10d8 \u10d9\u10d8\u10dc\u10dd\u10e1 \u10db\u10ee\u10d0\u10e0\u10d3\u10d0\u10ed\u10d4\u10e0\u10d8\u10e1 \u10d0\u10ee\u10d0\u10da\u10d8 \u10de\u10e0\u10dd\u10d2\u10e0\u10d0\u10db\u10d0 \u10d0\u10db\u10dd\u10e5\u10db\u10d4\u10d3\u10d3\u10d0","en":"A new support program for Georgian cinema has been launched"},"content":{"ka":"<p>\u10d9\u10d8\u10dc\u10dd\u10ea\u10d4\u10dc\u10e2\u10e0 \u201e\u10e5\u10d0\u10e0\u10d7\u10e3\u10da\u10d8 \u10e4\u10d8\u10da\u10db\u10d8\u10e1\u201c \u10d8\u10dc\u10d8\u10ea\u10d8\u10d0\u10e2\u10d8\u10d5\u10d8\u10d7 \u10d3\u10d0 \u10d9\u10e3\u10da\u10e2\u10e3\u10e0\u10d8\u10e1 \u10e1\u10d0\u10db\u10d8\u10dc\u10d8\u10e1\u10e2\u10e0\u10dd\u10e1 \u10db\u10ee\u10d0\u10e0\u10d3\u10d0\u10ed\u10d4\u10e0\u10d8\u10d7, \u10d0\u10ee\u10d0\u10da\u10d8 \u10de\u10e0\u10dd\u10d2\u10e0\u10d0\u10db\u10d0 \u10d0\u10db\u10dd\u10e5\u10db\u10d4\u10d3\u10d3\u10d0, \u10e0\u10dd\u10db\u10d4\u10da\u10d8\u10ea \u10db\u10d8\u10d6\u10dc\u10d0\u10d3 \u10d8\u10e1\u10d0\u10ee\u10d0\u10d5\u10e1 \u10d0\u10ee\u10d0\u10da\u10d2\u10d0\u10d6\u10e0\u10d3\u10d0 \u10e0\u10d4\u10df\u10d8\u10e1\u10dd\u10e0\u10d4\u10d1\u10d8\u10e1 \u10d3\u10d0\u10e4\u10d8\u10dc\u10d0\u10dc\u10e1\u10d4\u10d1\u10d0\u10e1 \u10d3\u10d0 \u10e5\u10d0\u10e0\u10d7\u10e3\u10da\u10d8 \u10d9\u10d8\u10dc\u10dd\u10de\u10e0\u10dd\u10d3\u10e3\u10e5\u10ea\u10d8\u10d8\u10e1 \u10e1\u10d0\u10d4\u10e0\u10d7\u10d0\u10e8\u10dd\u10e0\u10d8\u10e1\u10dd \u10d1\u10d0\u10d6\u10d0\u10e0\u10d6\u10d4 \u10de\u10dd\u10de\u10e3\u10da\u10d0\u10e0\u10d8\u10d6\u10d0\u10ea\u10d8\u10d0\u10e1. \u10de\u10e0\u10dd\u10d2\u10e0\u10d0\u10db\u10d8\u10e1 \u10d1\u10d8\u10e3\u10ef\u10d4\u10e2\u10d8 2 \u10db\u10d8\u10da\u10d8\u10dd\u10dc \u10da\u10d0\u10e0\u10e1 \u10e8\u10d4\u10d0\u10d3\u10d2\u10d4\u10dc\u10e1.<\/p>","en":"<p>With the initiative of the \"Georgian Film\" National Film Center and the support of the Ministry of Culture, a new program has been launched to finance young directors and promote Georgian film production on the international market. The program budget is 2 million GEL.<\/p>"},"excerpt":{"ka":"\u10de\u10e0\u10dd\u10d2\u10e0\u10d0\u10db\u10d0 \u10db\u10d8\u10d6\u10dc\u10d0\u10d3 \u10d8\u10e1\u10d0\u10ee\u10d0\u10d5\u10e1 \u10d0\u10ee\u10d0\u10da\u10d2\u10d0\u10d6\u10e0\u10d3\u10d0 \u10e0\u10d4\u10df\u10d8\u10e1\u10dd\u10e0\u10d4\u10d1\u10d8\u10e1 \u10d3\u10d0\u10e4\u10d8\u10dc\u10d0\u10dc\u10e1\u10d4\u10d1\u10d0\u10e1 \u10d3\u10d0 \u10e5\u10d0\u10e0\u10d7\u10e3\u10da\u10d8 \u10d9\u10d8\u10dc\u10dd\u10e1 \u10de\u10dd\u10de\u10e3\u10da\u10d0\u10e0\u10d8\u10d6\u10d0\u10ea\u10d8\u10d0\u10e1.","en":"The program aims to finance young directors and promote Georgian cinema."},"slug":"a-new-support-program-for-georgian-cinema-has-been-launched","featured_image":null,"is_published":true,"published_at":"2025-06-05T20:52:36.000000Z","views_count":478,"created_at":"2025-06-20T20:51:58.000000Z","updated_at":"2025-06-20T20:52:36.000000Z"},{"id":3,"title":{"ka":"\u10d7\u10d1\u10d8\u10da\u10d8\u10e1\u10e8\u10d8 \u10ec\u10d8\u10d2\u10dc\u10d8\u10e1 \u10e1\u10d0\u10d4\u10e0\u10d7\u10d0\u10e8\u10dd\u10e0\u10d8\u10e1\u10dd \u10e4\u10d4\u10e1\u10e2\u10d8\u10d5\u10d0\u10da\u10d8 \u10d2\u10d0\u10d8\u10ee\u10e1\u10dc\u10d0","en":"Tbilisi International Book Festival has opened"},"content":{"ka":"<p>\u10d3\u10e6\u10d4\u10e1, \u10d4\u10e5\u10e1\u10de\u10dd \u10ef\u10dd\u10e0\u10ef\u10d8\u10d0\u10e1 \u10e1\u10d0\u10d2\u10d0\u10db\u10dd\u10e4\u10d4\u10dc\u10dd \u10de\u10d0\u10d5\u10d8\u10da\u10d8\u10dd\u10dc\u10d4\u10d1\u10e8\u10d8 \u10d7\u10d1\u10d8\u10da\u10d8\u10e1\u10d8\u10e1 \u10ec\u10d8\u10d2\u10dc\u10d8\u10e1 \u10e1\u10d0\u10d4\u10e0\u10d7\u10d0\u10e8\u10dd\u10e0\u10d8\u10e1\u10dd \u10e4\u10d4\u10e1\u10e2\u10d8\u10d5\u10d0\u10da\u10d8 \u10dd\u10e4\u10d8\u10ea\u10d8\u10d0\u10da\u10e3\u10e0\u10d0\u10d3 \u10d2\u10d0\u10d8\u10ee\u10e1\u10dc\u10d0. \u10e4\u10d4\u10e1\u10e2\u10d8\u10d5\u10d0\u10da\u10e8\u10d8 50-\u10d6\u10d4 \u10db\u10d4\u10e2\u10d8 \u10d2\u10d0\u10db\u10dd\u10db\u10ea\u10d4\u10db\u10da\u10dd\u10d1\u10d0 \u10d3\u10d0 20-\u10db\u10d3\u10d4 \u10e3\u10ea\u10ee\u10dd\u10d4\u10da\u10d8 \u10d0\u10d5\u10e2\u10dd\u10e0\u10d8 \u10db\u10dd\u10dc\u10d0\u10ec\u10d8\u10da\u10d4\u10dd\u10d1\u10e1. \u10e4\u10d4\u10e1\u10e2\u10d8\u10d5\u10d0\u10da\u10d8\u10e1 \u10e4\u10d0\u10e0\u10d2\u10da\u10d4\u10d1\u10e8\u10d8 \u10d2\u10d0\u10d8\u10db\u10d0\u10e0\u10d7\u10d4\u10d1\u10d0 \u10de\u10e0\u10d4\u10d6\u10d4\u10dc\u10e2\u10d0\u10ea\u10d8\u10d4\u10d1\u10d8, \u10d3\u10d8\u10e1\u10d9\u10e3\u10e1\u10d8\u10d4\u10d1\u10d8 \u10d3\u10d0 \u10d5\u10dd\u10e0\u10e5\u10e8\u10dd\u10e4\u10d4\u10d1\u10d8.<\/p>","en":"<p>Today, the Tbilisi International Book Festival was officially opened in the exhibition pavilions of Expo Georgia. More than 50 publishing houses and up to 20 foreign authors are participating in the festival. Presentations, discussions, and workshops will be held within the framework of the festival.<\/p>"},"excerpt":{"ka":"\u10e4\u10d4\u10e1\u10e2\u10d8\u10d5\u10d0\u10da\u10e8\u10d8 50-\u10d6\u10d4 \u10db\u10d4\u10e2\u10d8 \u10d2\u10d0\u10db\u10dd\u10db\u10ea\u10d4\u10db\u10da\u10dd\u10d1\u10d0 \u10d3\u10d0 20-\u10db\u10d3\u10d4 \u10e3\u10ea\u10ee\u10dd\u10d4\u10da\u10d8 \u10d0\u10d5\u10e2\u10dd\u10e0\u10d8 \u10db\u10dd\u10dc\u10d0\u10ec\u10d8\u10da\u10d4\u10dd\u10d1\u10e1.","en":"More than 50 publishing houses and up to 20 foreign authors are participating in the festival."},"slug":"tbilisi-international-book-festival-has-opened","featured_image":null,"is_published":true,"published_at":"2025-05-31T20:52:36.000000Z","views_count":1326,"created_at":"2025-06-20T20:51:58.000000Z","updated_at":"2025-06-20T20:52:36.000000Z"},{"id":1,"title":{"ka":"\u10e1\u10d0\u10e5\u10d0\u10e0\u10d7\u10d5\u10d4\u10da\u10dd\u10e1 \u10d9\u10e3\u10da\u10e2\u10e3\u10e0\u10d8\u10e1 \u10e1\u10d0\u10db\u10d8\u10dc\u10d8\u10e1\u10e2\u10e0\u10dd \u10ea\u10d8\u10e4\u10e0\u10e3\u10da\u10d8 \u10e2\u10e0\u10d0\u10dc\u10e1\u10e4\u10dd\u10e0\u10db\u10d0\u10ea\u10d8\u10d8\u10e1 \u10d0\u10ee\u10d0\u10da \u10d4\u10e2\u10d0\u10de\u10d6\u10d4 \u10d2\u10d0\u10d3\u10d0\u10d3\u10d8\u10e1","en":"The Ministry of Culture of Georgia is entering a new stage of digital transformation"},"content":{"ka":"<p>\u10e1\u10d0\u10e5\u10d0\u10e0\u10d7\u10d5\u10d4\u10da\u10dd\u10e1 \u10d9\u10e3\u10da\u10e2\u10e3\u10e0\u10d8\u10e1, \u10e1\u10de\u10dd\u10e0\u10e2\u10d8\u10e1\u10d0 \u10d3\u10d0 \u10d0\u10ee\u10d0\u10da\u10d2\u10d0\u10d6\u10e0\u10d3\u10dd\u10d1\u10d8\u10e1 \u10e1\u10d0\u10db\u10d8\u10dc\u10d8\u10e1\u10e2\u10e0\u10dd \u10d0\u10ea\u10ee\u10d0\u10d3\u10d4\u10d1\u10e1, \u10e0\u10dd\u10db \u10d8\u10ec\u10e7\u10d4\u10d1\u10e1 \u10db\u10d0\u10e1\u10e8\u10e2\u10d0\u10d1\u10e3\u10e0 \u10de\u10e0\u10dd\u10d4\u10e5\u10e2\u10e1, \u10e0\u10dd\u10db\u10d4\u10da\u10d8\u10ea \u10db\u10d8\u10d6\u10dc\u10d0\u10d3 \u10d8\u10e1\u10d0\u10ee\u10d0\u10d5\u10e1 \u10d9\u10e3\u10da\u10e2\u10e3\u10e0\u10e3\u10da\u10d8 \u10db\u10d4\u10db\u10d9\u10d5\u10d8\u10d3\u10e0\u10d4\u10dd\u10d1\u10d8\u10e1 \u10d2\u10d0\u10ea\u10d8\u10e4\u10e0\u10e3\u10da\u10d4\u10d1\u10d0\u10e1 \u10d3\u10d0 \u10d7\u10d0\u10dc\u10d0\u10db\u10d4\u10d3\u10e0\u10dd\u10d5\u10d4 \u10e2\u10d4\u10e5\u10dc\u10dd\u10da\u10dd\u10d2\u10d8\u10d4\u10d1\u10d8\u10e1 \u10d3\u10d0\u10dc\u10d4\u10e0\u10d2\u10d5\u10d0\u10e1 \u10e1\u10d0\u10db\u10e3\u10d6\u10d4\u10e3\u10db\u10dd \u10d3\u10d0 \u10e1\u10d0\u10d0\u10e0\u10e5\u10d8\u10d5\u10dd \u10e1\u10d8\u10d5\u10e0\u10ea\u10d4\u10d4\u10d1\u10e8\u10d8. \u10de\u10e0\u10dd\u10d4\u10e5\u10e2\u10d8 \u10db\u10dd\u10d8\u10ea\u10d0\u10d5\u10e1 \u10d4\u10e0\u10dd\u10d5\u10dc\u10e3\u10da\u10d8 \u10db\u10e3\u10d6\u10d4\u10e3\u10db\u10d8\u10e1 \u10d4\u10e5\u10e1\u10de\u10dd\u10dc\u10d0\u10e2\u10d4\u10d1\u10d8\u10e1 3D \u10e1\u10d9\u10d0\u10dc\u10d8\u10e0\u10d4\u10d1\u10d0\u10e1, \u10d5\u10d8\u10e0\u10e2\u10e3\u10d0\u10da\u10e3\u10e0\u10d8 \u10e2\u10e3\u10e0\u10d4\u10d1\u10d8\u10e1 \u10e8\u10d4\u10e5\u10db\u10dc\u10d0\u10e1 \u10d3\u10d0 \u10d9\u10e3\u10da\u10e2\u10e3\u10e0\u10e3\u10da\u10d8 \u10e6\u10dd\u10dc\u10d8\u10e1\u10eb\u10d8\u10d4\u10d1\u10d4\u10d1\u10d8\u10e1 \u10dd\u10dc\u10da\u10d0\u10d8\u10dc \u10de\u10da\u10d0\u10e2\u10e4\u10dd\u10e0\u10db\u10d8\u10e1 \u10d2\u10d0\u10dc\u10d5\u10d8\u10d7\u10d0\u10e0\u10d4\u10d1\u10d0\u10e1.<\/p><p>\u201e\u10e9\u10d5\u10d4\u10dc\u10d8 \u10db\u10d8\u10d6\u10d0\u10dc\u10d8\u10d0, \u10e1\u10d0\u10e5\u10d0\u10e0\u10d7\u10d5\u10d4\u10da\u10dd\u10e1 \u10db\u10d3\u10d8\u10d3\u10d0\u10e0\u10d8 \u10d9\u10e3\u10da\u10e2\u10e3\u10e0\u10d0 \u10ee\u10d4\u10da\u10db\u10d8\u10e1\u10d0\u10ec\u10d5\u10d3\u10dd\u10db\u10d8 \u10d2\u10d0\u10d5\u10ee\u10d0\u10d3\u10dd\u10d7 \u10db\u10d7\u10d4\u10da\u10d8 \u10db\u10e1\u10dd\u10e4\u10da\u10d8\u10dd\u10e1\u10d7\u10d5\u10d8\u10e1,\u201c - \u10d2\u10d0\u10dc\u10d0\u10ea\u10ee\u10d0\u10d3\u10d0 \u10db\u10d8\u10dc\u10d8\u10e1\u10e2\u10e0\u10db\u10d0.<\/p>","en":"<p>The Ministry of Culture, Sport and Youth of Georgia announces the launch of a large-scale project aimed at digitizing cultural heritage and introducing modern technologies in museums and archives. The project includes 3D scanning of exhibits from the National Museum, creating virtual tours, and developing an online platform for cultural events.<\/p><p>\"Our goal is to make Georgia''s rich culture accessible to the whole world,\" said the Minister.<\/p>"},"excerpt":{"ka":"\u10e1\u10d0\u10db\u10d8\u10dc\u10d8\u10e1\u10e2\u10e0\u10dd \u10d9\u10e3\u10da\u10e2\u10e3\u10e0\u10e3\u10da\u10d8 \u10db\u10d4\u10db\u10d9\u10d5\u10d8\u10d3\u10e0\u10d4\u10dd\u10d1\u10d8\u10e1 \u10d2\u10d0\u10ea\u10d8\u10e4\u10e0\u10e3\u10da\u10d4\u10d1\u10d8\u10e1 \u10db\u10d0\u10e1\u10e8\u10e2\u10d0\u10d1\u10e3\u10e0 \u10de\u10e0\u10dd\u10d4\u10e5\u10e2\u10e1 \u10d8\u10ec\u10e7\u10d4\u10d1\u10e1.","en":"The Ministry is launching a large-scale project for the digitization of cultural heritage."},"slug":"the-ministry-of-culture-of-georgia-is-entering-a-new-stage-of-digital-transformation","featured_image":null,"is_published":true,"published_at":"2025-05-29T20:52:36.000000Z","views_count":1420,"created_at":"2025-06-20T20:51:58.000000Z","updated_at":"2025-06-20T20:52:36.000000Z"}],"links":{"first":"http:\/\/localhost:8000\/api\/v1\/news?page=1","last":"http:\/\/localhost:8000\/api\/v1\/news?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":1,"last_page":1,"links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"http:\/\/localhost:8000\/api\/v1\/news?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"path":"http:\/\/localhost:8000\/api\/v1\/news","per_page":12,"to":5,"total":5}}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/v1/news/featured
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"data":[{"id":5,"title":{"ka":"\u10d0\u10ee\u10d0\u10da\u10d2\u10d0\u10d6\u10e0\u10d3\u10d0 \u10e1\u10de\u10dd\u10e0\u10e2\u10e1\u10db\u10d4\u10dc\u10d4\u10d1\u10db\u10d0 \u10e1\u10d0\u10d4\u10e0\u10d7\u10d0\u10e8\u10dd\u10e0\u10d8\u10e1\u10dd \u10e2\u10e3\u10e0\u10dc\u10d8\u10e0\u10d6\u10d4 \u10ec\u10d0\u10e0\u10db\u10d0\u10e2\u10d4\u10d1\u10d0\u10e1 \u10db\u10d8\u10d0\u10e6\u10ec\u10d8\u10d4\u10e1","en":"Young athletes achieved success at an international tournament"},"content":{"ka":"<p>\u10e1\u10d0\u10e5\u10d0\u10e0\u10d7\u10d5\u10d4\u10da\u10dd\u10e1 \u10eb\u10d8\u10e3\u10d3\u10dd\u10d8\u10e1\u10e2\u10d7\u10d0 \u10d0\u10ee\u10d0\u10da\u10d2\u10d0\u10d6\u10e0\u10d3\u10e3\u10da\u10db\u10d0 \u10dc\u10d0\u10d9\u10e0\u10d4\u10d1\u10db\u10d0 \u10de\u10e0\u10d0\u10e6\u10d0\u10e8\u10d8 \u10d2\u10d0\u10db\u10d0\u10e0\u10d7\u10e3\u10da \u10d4\u10d5\u10e0\u10dd\u10de\u10d8\u10e1 \u10d7\u10d0\u10e1\u10d6\u10d4 3 \u10dd\u10e5\u10e0\u10dd\u10e1, 2 \u10d5\u10d4\u10e0\u10ea\u10ee\u10da\u10d8\u10e1\u10d0 \u10d3\u10d0 5 \u10d1\u10e0\u10d8\u10dc\u10ef\u10d0\u10dd\u10e1 \u10db\u10d4\u10d3\u10d0\u10da\u10d8 \u10db\u10dd\u10d8\u10de\u10dd\u10d5\u10d0. \u10d2\u10e3\u10dc\u10d3\u10e3\u10e0 \u10e9\u10d0\u10d7\u10d5\u10da\u10d0\u10e8\u10d8 \u10e1\u10d0\u10e5\u10d0\u10e0\u10d7\u10d5\u10d4\u10da\u10dd\u10db \u10de\u10d8\u10e0\u10d5\u10d4\u10da\u10d8 \u10d0\u10d3\u10d2\u10d8\u10da\u10d8 \u10d3\u10d0\u10d8\u10d9\u10d0\u10d5\u10d0.<\/p><p>\u10e1\u10d0\u10db\u10d8\u10dc\u10d8\u10e1\u10e2\u10e0\u10dd \u10e3\u10da\u10dd\u10ea\u10d0\u10d5\u10e1 \u10e1\u10de\u10dd\u10e0\u10e2\u10e1\u10db\u10d4\u10dc\u10d4\u10d1\u10e1 \u10d0\u10db \u10db\u10dc\u10d8\u10e8\u10d5\u10dc\u10d4\u10da\u10dd\u10d5\u10d0\u10dc \u10d2\u10d0\u10db\u10d0\u10e0\u10ef\u10d5\u10d4\u10d1\u10d0\u10e1.<\/p>","en":"<p>The Georgian youth judo team won 3 gold, 2 silver, and 5 bronze medals at the European Cup held in Prague. Georgia took first place in the team competition.<\/p><p>The Ministry congratulates the athletes on this important victory.<\/p>"},"excerpt":{"ka":"\u10e1\u10d0\u10e5\u10d0\u10e0\u10d7\u10d5\u10d4\u10da\u10dd\u10e1 \u10eb\u10d8\u10e3\u10d3\u10dd\u10d8\u10e1\u10e2\u10d7\u10d0 \u10d0\u10ee\u10d0\u10da\u10d2\u10d0\u10d6\u10e0\u10d3\u10e3\u10da\u10db\u10d0 \u10dc\u10d0\u10d9\u10e0\u10d4\u10d1\u10db\u10d0 10 \u10db\u10d4\u10d3\u10d0\u10da\u10d8 \u10db\u10dd\u10d8\u10de\u10dd\u10d5\u10d0.","en":"The Georgian youth judo team won 10 medals."},"slug":"young-athletes-achieved-success-at-an-international-tournament","featured_image":"news-images\/01JY7J5A93NYKBG2P821NX3THC.jpg","is_published":true,"published_at":"2025-06-11T20:52:36.000000Z","views_count":2,"created_at":"2025-06-20T20:51:58.000000Z","updated_at":"2025-06-20T20:58:22.000000Z"},{"id":4,"title":{"ka":"\u10e1\u10d0\u10e5\u10d0\u10e0\u10d7\u10d5\u10d4\u10da\u10dd\u10e1 \u10e4\u10dd\u10da\u10d9\u10da\u10dd\u10e0\u10d8\u10e1 \u10d4\u10e0\u10dd\u10d5\u10dc\u10e3\u10da\u10d8 \u10e4\u10d4\u10e1\u10e2\u10d8\u10d5\u10d0\u10da\u10d8 \u10d8\u10ec\u10e7\u10d4\u10d1\u10d0","en":"The National Folklore Festival of Georgia begins"},"content":{"ka":"<p>\u10e4\u10d4\u10e1\u10e2\u10d8\u10d5\u10d0\u10da\u10d8, \u10e0\u10dd\u10db\u10d4\u10da\u10d8\u10ea \u10ec\u10d4\u10da\u10e1 \u10e1\u10d0\u10e5\u10d0\u10e0\u10d7\u10d5\u10d4\u10da\u10dd\u10e1 \u10e1\u10ee\u10d5\u10d0\u10d3\u10d0\u10e1\u10ee\u10d5\u10d0 \u10e0\u10d4\u10d2\u10d8\u10dd\u10dc\u10e8\u10d8 \u10d2\u10d0\u10d8\u10db\u10d0\u10e0\u10d7\u10d4\u10d1\u10d0, \u10db\u10d8\u10d6\u10dc\u10d0\u10d3 \u10d8\u10e1\u10d0\u10ee\u10d0\u10d5\u10e1 \u10e5\u10d0\u10e0\u10d7\u10e3\u10da\u10d8 \u10ee\u10d0\u10da\u10ee\u10e3\u10e0\u10d8 \u10e1\u10d8\u10db\u10e6\u10d4\u10e0\u10d8\u10e1\u10d0 \u10d3\u10d0 \u10ea\u10d4\u10d9\u10d5\u10d8\u10e1 \u10e3\u10dc\u10d8\u10d9\u10d0\u10da\u10e3\u10e0\u10d8 \u10dc\u10d8\u10db\u10e3\u10e8\u10d4\u10d1\u10d8\u10e1 \u10e8\u10d4\u10dc\u10d0\u10e0\u10e9\u10e3\u10dc\u10d4\u10d1\u10d0\u10e1\u10d0 \u10d3\u10d0 \u10de\u10dd\u10de\u10e3\u10da\u10d0\u10e0\u10d8\u10d6\u10d0\u10ea\u10d8\u10d0\u10e1. \u10d3\u10d0\u10e1\u10d9\u10d5\u10dc\u10d8\u10d7\u10d8 \u10d2\u10d0\u10da\u10d0 \u10d9\u10dd\u10dc\u10ea\u10d4\u10e0\u10e2\u10d8 \u10d7\u10d1\u10d8\u10da\u10d8\u10e1\u10e8\u10d8, \u10e4\u10d8\u10da\u10d0\u10e0\u10db\u10dd\u10dc\u10d8\u10d8\u10e1 \u10d3\u10d8\u10d3 \u10e1\u10d0\u10d9\u10dd\u10dc\u10ea\u10d4\u10e0\u10e2\u10dd \u10d3\u10d0\u10e0\u10d1\u10d0\u10d6\u10e8\u10d8 \u10d2\u10d0\u10d8\u10db\u10d0\u10e0\u10d7\u10d4\u10d1\u10d0.<\/p>","en":"<p>The festival, which will be held in different regions of Georgia this year, aims to preserve and popularize unique examples of Georgian folk song and dance. The final gala concert will be held in Tbilisi, in the Grand Concert Hall of the Philharmonic.<\/p>"},"excerpt":{"ka":"\u10e4\u10d4\u10e1\u10e2\u10d8\u10d5\u10d0\u10da\u10d8 \u10db\u10d8\u10d6\u10dc\u10d0\u10d3 \u10d8\u10e1\u10d0\u10ee\u10d0\u10d5\u10e1 \u10e5\u10d0\u10e0\u10d7\u10e3\u10da\u10d8 \u10ee\u10d0\u10da\u10ee\u10e3\u10e0\u10d8 \u10e1\u10d8\u10db\u10e6\u10d4\u10e0\u10d8\u10e1\u10d0 \u10d3\u10d0 \u10ea\u10d4\u10d9\u10d5\u10d8\u10e1 \u10de\u10dd\u10de\u10e3\u10da\u10d0\u10e0\u10d8\u10d6\u10d0\u10ea\u10d8\u10d0\u10e1.","en":"The festival aims to promote Georgian folk song and dance."},"slug":"the-national-folklore-festival-of-georgia-begins","featured_image":null,"is_published":true,"published_at":"2025-06-07T20:52:36.000000Z","views_count":3028,"created_at":"2025-06-20T20:51:58.000000Z","updated_at":"2025-06-20T20:52:36.000000Z"},{"id":2,"title":{"ka":"\u10e5\u10d0\u10e0\u10d7\u10e3\u10da\u10d8 \u10d9\u10d8\u10dc\u10dd\u10e1 \u10db\u10ee\u10d0\u10e0\u10d3\u10d0\u10ed\u10d4\u10e0\u10d8\u10e1 \u10d0\u10ee\u10d0\u10da\u10d8 \u10de\u10e0\u10dd\u10d2\u10e0\u10d0\u10db\u10d0 \u10d0\u10db\u10dd\u10e5\u10db\u10d4\u10d3\u10d3\u10d0","en":"A new support program for Georgian cinema has been launched"},"content":{"ka":"<p>\u10d9\u10d8\u10dc\u10dd\u10ea\u10d4\u10dc\u10e2\u10e0 \u201e\u10e5\u10d0\u10e0\u10d7\u10e3\u10da\u10d8 \u10e4\u10d8\u10da\u10db\u10d8\u10e1\u201c \u10d8\u10dc\u10d8\u10ea\u10d8\u10d0\u10e2\u10d8\u10d5\u10d8\u10d7 \u10d3\u10d0 \u10d9\u10e3\u10da\u10e2\u10e3\u10e0\u10d8\u10e1 \u10e1\u10d0\u10db\u10d8\u10dc\u10d8\u10e1\u10e2\u10e0\u10dd\u10e1 \u10db\u10ee\u10d0\u10e0\u10d3\u10d0\u10ed\u10d4\u10e0\u10d8\u10d7, \u10d0\u10ee\u10d0\u10da\u10d8 \u10de\u10e0\u10dd\u10d2\u10e0\u10d0\u10db\u10d0 \u10d0\u10db\u10dd\u10e5\u10db\u10d4\u10d3\u10d3\u10d0, \u10e0\u10dd\u10db\u10d4\u10da\u10d8\u10ea \u10db\u10d8\u10d6\u10dc\u10d0\u10d3 \u10d8\u10e1\u10d0\u10ee\u10d0\u10d5\u10e1 \u10d0\u10ee\u10d0\u10da\u10d2\u10d0\u10d6\u10e0\u10d3\u10d0 \u10e0\u10d4\u10df\u10d8\u10e1\u10dd\u10e0\u10d4\u10d1\u10d8\u10e1 \u10d3\u10d0\u10e4\u10d8\u10dc\u10d0\u10dc\u10e1\u10d4\u10d1\u10d0\u10e1 \u10d3\u10d0 \u10e5\u10d0\u10e0\u10d7\u10e3\u10da\u10d8 \u10d9\u10d8\u10dc\u10dd\u10de\u10e0\u10dd\u10d3\u10e3\u10e5\u10ea\u10d8\u10d8\u10e1 \u10e1\u10d0\u10d4\u10e0\u10d7\u10d0\u10e8\u10dd\u10e0\u10d8\u10e1\u10dd \u10d1\u10d0\u10d6\u10d0\u10e0\u10d6\u10d4 \u10de\u10dd\u10de\u10e3\u10da\u10d0\u10e0\u10d8\u10d6\u10d0\u10ea\u10d8\u10d0\u10e1. \u10de\u10e0\u10dd\u10d2\u10e0\u10d0\u10db\u10d8\u10e1 \u10d1\u10d8\u10e3\u10ef\u10d4\u10e2\u10d8 2 \u10db\u10d8\u10da\u10d8\u10dd\u10dc \u10da\u10d0\u10e0\u10e1 \u10e8\u10d4\u10d0\u10d3\u10d2\u10d4\u10dc\u10e1.<\/p>","en":"<p>With the initiative of the \"Georgian Film\" National Film Center and the support of the Ministry of Culture, a new program has been launched to finance young directors and promote Georgian film production on the international market. The program budget is 2 million GEL.<\/p>"},"excerpt":{"ka":"\u10de\u10e0\u10dd\u10d2\u10e0\u10d0\u10db\u10d0 \u10db\u10d8\u10d6\u10dc\u10d0\u10d3 \u10d8\u10e1\u10d0\u10ee\u10d0\u10d5\u10e1 \u10d0\u10ee\u10d0\u10da\u10d2\u10d0\u10d6\u10e0\u10d3\u10d0 \u10e0\u10d4\u10df\u10d8\u10e1\u10dd\u10e0\u10d4\u10d1\u10d8\u10e1 \u10d3\u10d0\u10e4\u10d8\u10dc\u10d0\u10dc\u10e1\u10d4\u10d1\u10d0\u10e1 \u10d3\u10d0 \u10e5\u10d0\u10e0\u10d7\u10e3\u10da\u10d8 \u10d9\u10d8\u10dc\u10dd\u10e1 \u10de\u10dd\u10de\u10e3\u10da\u10d0\u10e0\u10d8\u10d6\u10d0\u10ea\u10d8\u10d0\u10e1.","en":"The program aims to finance young directors and promote Georgian cinema."},"slug":"a-new-support-program-for-georgian-cinema-has-been-launched","featured_image":null,"is_published":true,"published_at":"2025-06-05T20:52:36.000000Z","views_count":478,"created_at":"2025-06-20T20:51:58.000000Z","updated_at":"2025-06-20T20:52:36.000000Z"},{"id":3,"title":{"ka":"\u10d7\u10d1\u10d8\u10da\u10d8\u10e1\u10e8\u10d8 \u10ec\u10d8\u10d2\u10dc\u10d8\u10e1 \u10e1\u10d0\u10d4\u10e0\u10d7\u10d0\u10e8\u10dd\u10e0\u10d8\u10e1\u10dd \u10e4\u10d4\u10e1\u10e2\u10d8\u10d5\u10d0\u10da\u10d8 \u10d2\u10d0\u10d8\u10ee\u10e1\u10dc\u10d0","en":"Tbilisi International Book Festival has opened"},"content":{"ka":"<p>\u10d3\u10e6\u10d4\u10e1, \u10d4\u10e5\u10e1\u10de\u10dd \u10ef\u10dd\u10e0\u10ef\u10d8\u10d0\u10e1 \u10e1\u10d0\u10d2\u10d0\u10db\u10dd\u10e4\u10d4\u10dc\u10dd \u10de\u10d0\u10d5\u10d8\u10da\u10d8\u10dd\u10dc\u10d4\u10d1\u10e8\u10d8 \u10d7\u10d1\u10d8\u10da\u10d8\u10e1\u10d8\u10e1 \u10ec\u10d8\u10d2\u10dc\u10d8\u10e1 \u10e1\u10d0\u10d4\u10e0\u10d7\u10d0\u10e8\u10dd\u10e0\u10d8\u10e1\u10dd \u10e4\u10d4\u10e1\u10e2\u10d8\u10d5\u10d0\u10da\u10d8 \u10dd\u10e4\u10d8\u10ea\u10d8\u10d0\u10da\u10e3\u10e0\u10d0\u10d3 \u10d2\u10d0\u10d8\u10ee\u10e1\u10dc\u10d0. \u10e4\u10d4\u10e1\u10e2\u10d8\u10d5\u10d0\u10da\u10e8\u10d8 50-\u10d6\u10d4 \u10db\u10d4\u10e2\u10d8 \u10d2\u10d0\u10db\u10dd\u10db\u10ea\u10d4\u10db\u10da\u10dd\u10d1\u10d0 \u10d3\u10d0 20-\u10db\u10d3\u10d4 \u10e3\u10ea\u10ee\u10dd\u10d4\u10da\u10d8 \u10d0\u10d5\u10e2\u10dd\u10e0\u10d8 \u10db\u10dd\u10dc\u10d0\u10ec\u10d8\u10da\u10d4\u10dd\u10d1\u10e1. \u10e4\u10d4\u10e1\u10e2\u10d8\u10d5\u10d0\u10da\u10d8\u10e1 \u10e4\u10d0\u10e0\u10d2\u10da\u10d4\u10d1\u10e8\u10d8 \u10d2\u10d0\u10d8\u10db\u10d0\u10e0\u10d7\u10d4\u10d1\u10d0 \u10de\u10e0\u10d4\u10d6\u10d4\u10dc\u10e2\u10d0\u10ea\u10d8\u10d4\u10d1\u10d8, \u10d3\u10d8\u10e1\u10d9\u10e3\u10e1\u10d8\u10d4\u10d1\u10d8 \u10d3\u10d0 \u10d5\u10dd\u10e0\u10e5\u10e8\u10dd\u10e4\u10d4\u10d1\u10d8.<\/p>","en":"<p>Today, the Tbilisi International Book Festival was officially opened in the exhibition pavilions of Expo Georgia. More than 50 publishing houses and up to 20 foreign authors are participating in the festival. Presentations, discussions, and workshops will be held within the framework of the festival.<\/p>"},"excerpt":{"ka":"\u10e4\u10d4\u10e1\u10e2\u10d8\u10d5\u10d0\u10da\u10e8\u10d8 50-\u10d6\u10d4 \u10db\u10d4\u10e2\u10d8 \u10d2\u10d0\u10db\u10dd\u10db\u10ea\u10d4\u10db\u10da\u10dd\u10d1\u10d0 \u10d3\u10d0 20-\u10db\u10d3\u10d4 \u10e3\u10ea\u10ee\u10dd\u10d4\u10da\u10d8 \u10d0\u10d5\u10e2\u10dd\u10e0\u10d8 \u10db\u10dd\u10dc\u10d0\u10ec\u10d8\u10da\u10d4\u10dd\u10d1\u10e1.","en":"More than 50 publishing houses and up to 20 foreign authors are participating in the festival."},"slug":"tbilisi-international-book-festival-has-opened","featured_image":null,"is_published":true,"published_at":"2025-05-31T20:52:36.000000Z","views_count":1326,"created_at":"2025-06-20T20:51:58.000000Z","updated_at":"2025-06-20T20:52:36.000000Z"},{"id":1,"title":{"ka":"\u10e1\u10d0\u10e5\u10d0\u10e0\u10d7\u10d5\u10d4\u10da\u10dd\u10e1 \u10d9\u10e3\u10da\u10e2\u10e3\u10e0\u10d8\u10e1 \u10e1\u10d0\u10db\u10d8\u10dc\u10d8\u10e1\u10e2\u10e0\u10dd \u10ea\u10d8\u10e4\u10e0\u10e3\u10da\u10d8 \u10e2\u10e0\u10d0\u10dc\u10e1\u10e4\u10dd\u10e0\u10db\u10d0\u10ea\u10d8\u10d8\u10e1 \u10d0\u10ee\u10d0\u10da \u10d4\u10e2\u10d0\u10de\u10d6\u10d4 \u10d2\u10d0\u10d3\u10d0\u10d3\u10d8\u10e1","en":"The Ministry of Culture of Georgia is entering a new stage of digital transformation"},"content":{"ka":"<p>\u10e1\u10d0\u10e5\u10d0\u10e0\u10d7\u10d5\u10d4\u10da\u10dd\u10e1 \u10d9\u10e3\u10da\u10e2\u10e3\u10e0\u10d8\u10e1, \u10e1\u10de\u10dd\u10e0\u10e2\u10d8\u10e1\u10d0 \u10d3\u10d0 \u10d0\u10ee\u10d0\u10da\u10d2\u10d0\u10d6\u10e0\u10d3\u10dd\u10d1\u10d8\u10e1 \u10e1\u10d0\u10db\u10d8\u10dc\u10d8\u10e1\u10e2\u10e0\u10dd \u10d0\u10ea\u10ee\u10d0\u10d3\u10d4\u10d1\u10e1, \u10e0\u10dd\u10db \u10d8\u10ec\u10e7\u10d4\u10d1\u10e1 \u10db\u10d0\u10e1\u10e8\u10e2\u10d0\u10d1\u10e3\u10e0 \u10de\u10e0\u10dd\u10d4\u10e5\u10e2\u10e1, \u10e0\u10dd\u10db\u10d4\u10da\u10d8\u10ea \u10db\u10d8\u10d6\u10dc\u10d0\u10d3 \u10d8\u10e1\u10d0\u10ee\u10d0\u10d5\u10e1 \u10d9\u10e3\u10da\u10e2\u10e3\u10e0\u10e3\u10da\u10d8 \u10db\u10d4\u10db\u10d9\u10d5\u10d8\u10d3\u10e0\u10d4\u10dd\u10d1\u10d8\u10e1 \u10d2\u10d0\u10ea\u10d8\u10e4\u10e0\u10e3\u10da\u10d4\u10d1\u10d0\u10e1 \u10d3\u10d0 \u10d7\u10d0\u10dc\u10d0\u10db\u10d4\u10d3\u10e0\u10dd\u10d5\u10d4 \u10e2\u10d4\u10e5\u10dc\u10dd\u10da\u10dd\u10d2\u10d8\u10d4\u10d1\u10d8\u10e1 \u10d3\u10d0\u10dc\u10d4\u10e0\u10d2\u10d5\u10d0\u10e1 \u10e1\u10d0\u10db\u10e3\u10d6\u10d4\u10e3\u10db\u10dd \u10d3\u10d0 \u10e1\u10d0\u10d0\u10e0\u10e5\u10d8\u10d5\u10dd \u10e1\u10d8\u10d5\u10e0\u10ea\u10d4\u10d4\u10d1\u10e8\u10d8. \u10de\u10e0\u10dd\u10d4\u10e5\u10e2\u10d8 \u10db\u10dd\u10d8\u10ea\u10d0\u10d5\u10e1 \u10d4\u10e0\u10dd\u10d5\u10dc\u10e3\u10da\u10d8 \u10db\u10e3\u10d6\u10d4\u10e3\u10db\u10d8\u10e1 \u10d4\u10e5\u10e1\u10de\u10dd\u10dc\u10d0\u10e2\u10d4\u10d1\u10d8\u10e1 3D \u10e1\u10d9\u10d0\u10dc\u10d8\u10e0\u10d4\u10d1\u10d0\u10e1, \u10d5\u10d8\u10e0\u10e2\u10e3\u10d0\u10da\u10e3\u10e0\u10d8 \u10e2\u10e3\u10e0\u10d4\u10d1\u10d8\u10e1 \u10e8\u10d4\u10e5\u10db\u10dc\u10d0\u10e1 \u10d3\u10d0 \u10d9\u10e3\u10da\u10e2\u10e3\u10e0\u10e3\u10da\u10d8 \u10e6\u10dd\u10dc\u10d8\u10e1\u10eb\u10d8\u10d4\u10d1\u10d4\u10d1\u10d8\u10e1 \u10dd\u10dc\u10da\u10d0\u10d8\u10dc \u10de\u10da\u10d0\u10e2\u10e4\u10dd\u10e0\u10db\u10d8\u10e1 \u10d2\u10d0\u10dc\u10d5\u10d8\u10d7\u10d0\u10e0\u10d4\u10d1\u10d0\u10e1.<\/p><p>\u201e\u10e9\u10d5\u10d4\u10dc\u10d8 \u10db\u10d8\u10d6\u10d0\u10dc\u10d8\u10d0, \u10e1\u10d0\u10e5\u10d0\u10e0\u10d7\u10d5\u10d4\u10da\u10dd\u10e1 \u10db\u10d3\u10d8\u10d3\u10d0\u10e0\u10d8 \u10d9\u10e3\u10da\u10e2\u10e3\u10e0\u10d0 \u10ee\u10d4\u10da\u10db\u10d8\u10e1\u10d0\u10ec\u10d5\u10d3\u10dd\u10db\u10d8 \u10d2\u10d0\u10d5\u10ee\u10d0\u10d3\u10dd\u10d7 \u10db\u10d7\u10d4\u10da\u10d8 \u10db\u10e1\u10dd\u10e4\u10da\u10d8\u10dd\u10e1\u10d7\u10d5\u10d8\u10e1,\u201c - \u10d2\u10d0\u10dc\u10d0\u10ea\u10ee\u10d0\u10d3\u10d0 \u10db\u10d8\u10dc\u10d8\u10e1\u10e2\u10e0\u10db\u10d0.<\/p>","en":"<p>The Ministry of Culture, Sport and Youth of Georgia announces the launch of a large-scale project aimed at digitizing cultural heritage and introducing modern technologies in museums and archives. The project includes 3D scanning of exhibits from the National Museum, creating virtual tours, and developing an online platform for cultural events.<\/p><p>\"Our goal is to make Georgia''s rich culture accessible to the whole world,\" said the Minister.<\/p>"},"excerpt":{"ka":"\u10e1\u10d0\u10db\u10d8\u10dc\u10d8\u10e1\u10e2\u10e0\u10dd \u10d9\u10e3\u10da\u10e2\u10e3\u10e0\u10e3\u10da\u10d8 \u10db\u10d4\u10db\u10d9\u10d5\u10d8\u10d3\u10e0\u10d4\u10dd\u10d1\u10d8\u10e1 \u10d2\u10d0\u10ea\u10d8\u10e4\u10e0\u10e3\u10da\u10d4\u10d1\u10d8\u10e1 \u10db\u10d0\u10e1\u10e8\u10e2\u10d0\u10d1\u10e3\u10e0 \u10de\u10e0\u10dd\u10d4\u10e5\u10e2\u10e1 \u10d8\u10ec\u10e7\u10d4\u10d1\u10e1.","en":"The Ministry is launching a large-scale project for the digitization of cultural heritage."},"slug":"the-ministry-of-culture-of-georgia-is-entering-a-new-stage-of-digital-transformation","featured_image":null,"is_published":true,"published_at":"2025-05-29T20:52:36.000000Z","views_count":1420,"created_at":"2025-06-20T20:51:58.000000Z","updated_at":"2025-06-20T20:52:36.000000Z"}]}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/v1/news/{slug}'
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      slug:
+        name: slug
+        description: 'The slug of the news.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      slug: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 404
+        content: |-
+          {
+              "message": "No query results for model [App\\Models\\News]."
+          }
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/v1/projects
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 500
+        content: |-
+          {
+              "message": "Server Error"
+          }
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/v1/projects/featured
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"data":[]}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/v1/projects/statuses
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"data":{"active":"Active","completed":"Completed","planned":"Planned"}}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/v1/projects/{slug}'
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      slug:
+        name: slug
+        description: 'The slug of the project.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      slug: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 500
+        content: |-
+          {
+              "message": "Server Error"
+          }
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/v1/competitions
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"data":[{"id":1,"title":{"ka":"asdasd","en":"asdasd"},"description":{"ka":"sadas","en":"asdas"},"requirements":{"ka":"dasd","en":"asdasd"},"slug":"asdasda","application_deadline":null,"start_date":null,"end_date":null,"featured_image":"competition-images\/01JY7J3H8PAW7TV8E6RDZD22SM.jpeg","is_active":true,"created_at":"2025-06-20T20:57:24.000000Z","updated_at":"2025-06-20T20:57:24.000000Z","content":{"ka":"<p>asdasd<\/p>","en":"<p>asdsad<\/p>"},"category":"arts","prize_amount":"123.00","max_participants":123,"contact_email":"asdasd@gmail.c","contact_phone":"12321312","competition_start":"2025-06-20T20:56:47.000000Z","competition_end":"2025-06-20T20:56:47.000000Z","results_announcement":"2025-06-20T20:56:47.000000Z","is_published":true,"published_at":"2025-06-20T20:56:47.000000Z","application_form":"competition-forms\/01JY7J3H8SGAGT6R9W94QJDYRR.pdf"}],"links":{"first":"http:\/\/localhost:8000\/api\/v1\/competitions?page=1","last":"http:\/\/localhost:8000\/api\/v1\/competitions?page=1","prev":null,"next":null},"meta":{"current_page":1,"from":1,"last_page":1,"links":[{"url":null,"label":"&laquo; Previous","active":false},{"url":"http:\/\/localhost:8000\/api\/v1\/competitions?page=1","label":"1","active":true},{"url":null,"label":"Next &raquo;","active":false}],"path":"http:\/\/localhost:8000\/api\/v1\/competitions","per_page":12,"to":1,"total":1}}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/v1/competitions/active
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"data":[]}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/v1/competitions/{slug}'
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      slug:
+        name: slug
+        description: 'The slug of the competition.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      slug: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 404
+        content: |-
+          {
+              "message": "No query results for model [App\\Models\\Competition]."
+          }
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/v1/vacancies
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 500
+        content: |-
+          {
+              "message": "Server Error"
+          }
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/v1/vacancies/active
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 500
+        content: |-
+          {
+              "message": "Server Error"
+          }
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/v1/vacancies/{slug}'
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      slug:
+        name: slug
+        description: 'The slug of the vacancy.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      slug: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 500
+        content: |-
+          {
+              "message": "Server Error"
+          }
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/v1/legislation
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"success":true,"data":[],"pagination":{"current_page":1,"last_page":1,"per_page":20,"total":0}}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/v1/legislation/categories
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"success":true,"data":{"law":"Law","regulation":"Regulation","decree":"Decree","order":"Order","resolution":"Resolution"}}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/v1/legislation/{id}'
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the legislation.'
+        required: true
+        example: 11
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      id: 11
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"success":true,"data":{"id":11,"document_type":"Law","act_number":"#2323","adoption_date":"2025-06-22T00:00:00.000000Z","effective_date":"2025-06-28T00:00:00.000000Z","download_count":0,"created_at":"2025-06-20T21:08:58.000000Z","updated_at":"2025-06-20T21:08:58.000000Z","title":{"ka":"\u10d9\u10d0\u10dc\u10dd\u10dc\u10db\u10d3\u10d4\u10d1\u10da\u10dd\u10d1\u10d0","en":"Legislation"},"description":{"ka":"<p>\u10d0\u10e1\u10d3\u10e1\u10d0\u10d3\u10e1\u10d0\u10d3<\/p>","en":"<p>sdadsadasd<\/p>"},"content":{"ka":"<p>\u10d0\u10e1\u10d3\u10e1\u10d0\u10d3\u10e1\u10d0\u10d3<\/p>","en":"<p>asdsadsad<\/p>"},"slug":"sadsadsa","is_published":true,"published_at":"2025-06-20T21:08:05.000000Z"}}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: 'api/v1/legislation/{id}/download'
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the legislation.'
+        required: true
+        example: 11
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      id: 11
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/v1/subordinate-institutions
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"success":true,"data":[{"id":1,"name":{"ka":"\u10e1\u10e1\u10d8\u10de\u10d8 \u10db\u10d0\u10ee\u10d0\u10e0\u10d0","en":"Subordinate Makhara"},"description":{"ka":"<p>\u10e1\u10d0\u10d3\u10d0\u10e1\u10d3\u10e1\u10d0\u10d3<\/p>","en":"<p>asdsadsad<\/p>"},"logo":"institution-logos\/01JY7K10TXT638DW105D3ACXGS.png","website_url":null,"email":"adsad@adsadsad.dsadas","phone":"123213213213","address":"\u10e1\u10d0\u10db\u10e2\u10e0\u10d4\u10d3\u10d8\u10d0","sort_order":0,"is_active":true,"created_at":"2025-06-20T21:13:30.000000Z","updated_at":"2025-06-20T21:14:24.000000Z","slug":"21323","mission":{"ka":"\u10d0\u10e1\u10d3\u10e1\u10d0\u10d3\u10d0\u10e1\u10d3","en":"asdasd"},"vision":{"ka":"\u10d0\u10e1\u10d3\u10e1\u10d0\u10d3\u10e1\u10d0\u10d3","en":"asdasd"},"type":"library","status":"active","director_name":"\u10d6\u10d0\u10d6\u10d0","establishment_year":"1923","facebook":"https:\/\/www.facebook.com\/photo?fbid=1287570322733763&set=a.488868739270596","instagram":"https:\/\/www.facebook.com\/photo?fbid=1287570322733763&set=a.488868739270596","twitter":"https:\/\/www.facebook.com\/photo?fbid=1287570322733763&set=a.488868739270596","featured_image":"institution-images\/01JY7K10V1MRAJT36Q5JFY14XN.png","is_published":true,"is_featured":false,"published_at":"2025-06-20T21:09:33.000000Z"}]}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/v1/subordinate-institutions/{id}'
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the subordinate institution.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"success":true,"data":{"id":1,"name":{"ka":"\u10e1\u10e1\u10d8\u10de\u10d8 \u10db\u10d0\u10ee\u10d0\u10e0\u10d0","en":"Subordinate Makhara"},"description":{"ka":"<p>\u10e1\u10d0\u10d3\u10d0\u10e1\u10d3\u10e1\u10d0\u10d3<\/p>","en":"<p>asdsadsad<\/p>"},"logo":"institution-logos\/01JY7K10TXT638DW105D3ACXGS.png","website_url":null,"email":"adsad@adsadsad.dsadas","phone":"123213213213","address":"\u10e1\u10d0\u10db\u10e2\u10e0\u10d4\u10d3\u10d8\u10d0","sort_order":0,"is_active":true,"created_at":"2025-06-20T21:13:30.000000Z","updated_at":"2025-06-20T21:14:24.000000Z","slug":"21323","mission":{"ka":"\u10d0\u10e1\u10d3\u10e1\u10d0\u10d3\u10d0\u10e1\u10d3","en":"asdasd"},"vision":{"ka":"\u10d0\u10e1\u10d3\u10e1\u10d0\u10d3\u10e1\u10d0\u10d3","en":"asdasd"},"type":"library","status":"active","director_name":"\u10d6\u10d0\u10d6\u10d0","establishment_year":"1923","facebook":"https:\/\/www.facebook.com\/photo?fbid=1287570322733763&set=a.488868739270596","instagram":"https:\/\/www.facebook.com\/photo?fbid=1287570322733763&set=a.488868739270596","twitter":"https:\/\/www.facebook.com\/photo?fbid=1287570322733763&set=a.488868739270596","featured_image":"institution-images\/01JY7K10V1MRAJT36Q5JFY14XN.png","is_published":true,"is_featured":false,"published_at":"2025-06-20T21:09:33.000000Z"}}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/v1/settings
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"data":{"":null}}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/v1/settings/all
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"data":{"":null}}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/v1/settings/contact
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"data":[]}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/v1/settings/social
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"data":[]}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/contact
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
