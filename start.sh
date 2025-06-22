@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e  # Exit on any error
+
 echo "Starting Laravel application setup..."
 
 # Create database if it doesn't exist
@@ -20,10 +22,10 @@ if [ -z "$APP_KEY" ]; then
 fi
 
 # Clear all caches first
-php artisan config:clear
-php artisan cache:clear
-php artisan route:clear
-php artisan view:clear
+php artisan config:clear || echo "Config clear failed, continuing..."
+php artisan cache:clear || echo "Cache clear failed, continuing..."
+php artisan route:clear || echo "Route clear failed, continuing..."
+php artisan view:clear || echo "View clear failed, continuing..."
 echo "Cleared all caches"
 
 # Run migrations with error handling
@@ -56,5 +58,5 @@ fi
 
 echo "Setup completed. Starting server..."
 
-# Start the application
-exec php artisan serve --host=0.0.0.0 --port=$PORT 
+# Start the application with proper error handling
+exec php -S 0.0.0.0:$PORT -t public/ 

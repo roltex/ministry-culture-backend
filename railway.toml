@@ -2,7 +2,7 @@
 builder = "nixpacks"
 
 [deploy]
-startCommand = "vendor/bin/heroku-php-apache2 public/"
+startCommand = "bash start.sh"
 healthcheckPath = "/health.php"
 healthcheckTimeout = 100
 restartPolicyType = "ON_FAILURE"
