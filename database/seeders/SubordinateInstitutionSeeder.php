@@ -14,6 +14,30 @@ class SubordinateInstitutionSeeder extends Seeder
      */
     public function run(): void
     {
+        // Available institution logos
+        $institutionLogos = [
+            '01JYCXHGV40FWXSF0VE97QMKAB.png',
+            '01JYCXCWW8TNT9QQT46BSAA1N7.png',
+            '01JYCX6BVPCMX6PV04KEHMHEK6.png',
+            '01JYCX1XR3EW4BWNMWR33AZ0TQ.PNG',
+            '01JYCWZP8RPF0VQPJWCD9V0EVR.png',
+            '01JYCWY7TPFDQN46FGNEVGC4AP.png',
+            '01JYCWVSD616YSEKRK0NVHNQQ8.png',
+            '01JYCWT1X0YE89Y9M5K5AXBMP7.jpg',
+            '01JYCWQK419838JVR0JMG2VX1J.jpg',
+            '01JYCWNTYC9FM4PM3DG7TG6YA7.png',
+            '01JYCWHP7Z5T67927B7DVEVM0F.png',
+            '01JYAAZQJSJHR0YNZT4AK5A84X.png',
+            '01JY7K10TXT638DW105D3ACXGS.png',
+            '01JY7JY35JDRK5PQQDZC8NT6Y0.png',
+        ];
+
+        // Available institution images
+        $institutionImages = [
+            '01JY7K10V1MRAJT36Q5JFY14XN.png',
+            '01JY7JY35P0G7MZRK85D7QV84Q.png',
+        ];
+
         $institutions = [
             [
                 'name' => [
@@ -37,7 +61,7 @@ class SubordinateInstitutionSeeder extends Seeder
                 'status' => 'active',
                 'director_name' => 'დავით ლორთქიფანიძე',
                 'establishment_year' => '2004',
-                'logo' => null,
+                'logo' => 'institution-logos/' . $institutionLogos[array_rand($institutionLogos)],
                 'website_url' => 'https://museum.ge',
                 'email' => 'info@museum.ge',
                 'phone' => '+995 32 299 80 22',
@@ -73,7 +97,7 @@ class SubordinateInstitutionSeeder extends Seeder
                 'status' => 'active',
                 'director_name' => 'ნანა ხაჩატურიანი',
                 'establishment_year' => '1917',
-                'logo' => null,
+                'logo' => 'institution-logos/' . $institutionLogos[array_rand($institutionLogos)],
                 'website_url' => 'https://conservatoire.ge',
                 'email' => 'info@conservatoire.ge',
                 'phone' => '+995 32 298 65 55',
@@ -109,7 +133,7 @@ class SubordinateInstitutionSeeder extends Seeder
                 'status' => 'active',
                 'director_name' => 'რობერტ სტურუა',
                 'establishment_year' => '1851',
-                'logo' => null,
+                'logo' => 'institution-logos/' . $institutionLogos[array_rand($institutionLogos)],
                 'website_url' => 'https://theater.ge',
                 'email' => 'info@theater.ge',
                 'phone' => '+995 32 299 58 58',
@@ -145,7 +169,7 @@ class SubordinateInstitutionSeeder extends Seeder
                 'status' => 'active',
                 'director_name' => 'ლევან კიპიანი',
                 'establishment_year' => '2015',
-                'logo' => null,
+                'logo' => 'institution-logos/' . $institutionLogos[array_rand($institutionLogos)],
                 'website_url' => 'https://sport.gov.ge',
                 'email' => 'info@sport.gov.ge',
                 'phone' => '+995 32 240 00 00',
@@ -181,7 +205,7 @@ class SubordinateInstitutionSeeder extends Seeder
                 'status' => 'active',
                 'director_name' => 'ნატო ცინცაძე',
                 'establishment_year' => '2001',
-                'logo' => null,
+                'logo' => 'institution-logos/' . $institutionLogos[array_rand($institutionLogos)],
                 'website_url' => 'https://filmcenter.ge',
                 'email' => 'info@filmcenter.ge',
                 'phone' => '+995 32 299 58 58',
@@ -217,7 +241,7 @@ class SubordinateInstitutionSeeder extends Seeder
                 'status' => 'active',
                 'director_name' => 'ანა ბურჭულაძე',
                 'establishment_year' => '2010',
-                'logo' => null,
+                'logo' => 'institution-logos/' . $institutionLogos[array_rand($institutionLogos)],
                 'website_url' => 'https://youthcenter.ge',
                 'email' => 'info@youthcenter.ge',
                 'phone' => '+995 32 299 58 58',
@@ -253,7 +277,7 @@ class SubordinateInstitutionSeeder extends Seeder
                 'status' => 'active',
                 'director_name' => 'თეა ბუხნიკაშვილი',
                 'establishment_year' => '1920',
-                'logo' => null,
+                'logo' => 'institution-logos/' . $institutionLogos[array_rand($institutionLogos)],
                 'website_url' => 'https://archives.ge',
                 'email' => 'info@archives.ge',
                 'phone' => '+995 32 299 58 58',
@@ -289,7 +313,7 @@ class SubordinateInstitutionSeeder extends Seeder
                 'status' => 'active',
                 'director_name' => 'გიორგი კეკელიძე',
                 'establishment_year' => '1846',
-                'logo' => null,
+                'logo' => 'institution-logos/' . $institutionLogos[array_rand($institutionLogos)],
                 'website_url' => 'https://library.ge',
                 'email' => 'info@library.ge',
                 'phone' => '+995 32 299 58 58',
@@ -325,7 +349,7 @@ class SubordinateInstitutionSeeder extends Seeder
                 'status' => 'active',
                 'director_name' => 'დავით ქაფიანიძე',
                 'establishment_year' => '2008',
-                'logo' => null,
+                'logo' => 'institution-logos/' . $institutionLogos[array_rand($institutionLogos)],
                 'website_url' => 'https://sportsmedicine.ge',
                 'email' => 'info@sportsmedicine.ge',
                 'phone' => '+995 32 299 58 58',
@@ -361,7 +385,7 @@ class SubordinateInstitutionSeeder extends Seeder
                 'status' => 'active',
                 'director_name' => 'მარიამ ჯანაშვილი',
                 'establishment_year' => '2012',
-                'logo' => null,
+                'logo' => 'institution-logos/' . $institutionLogos[array_rand($institutionLogos)],
                 'website_url' => 'https://culturaltourism.ge',
                 'email' => 'info@culturaltourism.ge',
                 'phone' => '+995 32 299 58 58',
@@ -397,7 +421,7 @@ class SubordinateInstitutionSeeder extends Seeder
                 'status' => 'active',
                 'director_name' => 'გივი მარგველაშვილი',
                 'establishment_year' => '1922',
-                'logo' => null,
+                'logo' => 'institution-logos/' . $institutionLogos[array_rand($institutionLogos)],
                 'website_url' => 'https://artsacademy.ge',
                 'email' => 'info@artsacademy.ge',
                 'phone' => '+995 32 299 58 58',

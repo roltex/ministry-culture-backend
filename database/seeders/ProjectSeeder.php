@@ -14,6 +14,25 @@ class ProjectSeeder extends Seeder
      */
     public function run(): void
     {
+        // Available project images
+        $projectImages = [
+            '01JYC17ZSG4MH3KNG8EYS7XCBF.jpg',
+            'cultural-tourism.jpg',
+            'sports-talent.jpg',
+            'folk-art-center.jpg',
+            'sports-medicine.jpg',
+            'writers-program.jpg',
+            'art-studios.jpg',
+            'digital-archive.jpg',
+            'music-academy.jpg',
+            'sports-center.jpg',
+            'film-center.jpg',
+            'national-theater.jpg',
+            '01JYBQ2J0C4JC5J6NEX54Y9TZH.jpg',
+            '01JY7J4VWXP69JR2FK3S0CZV53.jpg',
+            '01JY7GKC5APKEPNMZTYYDF1R6Y.jpeg',
+        ];
+
         $projects = [
             [
                 'title' => [

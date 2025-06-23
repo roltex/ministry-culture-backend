@@ -14,6 +14,26 @@ class CompetitionSeeder extends Seeder
      */
     public function run(): void
     {
+        // Available competition images
+        $competitionImages = [
+            '01JYCSK84QN3R8YGH7DJCWCS0A.jpg',
+            '01JYCSG95VZQDAVFYERS6TY8NA.jpg',
+            '01JYCS7ZTPZBXNARASBKWYADGP.jpg',
+            '01JYCRXV2XM3T8V2D0NFSCJRK8.jpg',
+            '01JYCRT13WRNSRJ2R9AS4APVDW.jpg',
+            '01JYCRKC98HT46N5XZG1YDMDE3.png',
+            '01JYC8BMEE8FNJDCMHGASPJQMQ.jpg',
+            '01JYC6AGEMSKZGZRJ0NAYR1NRE.jpeg',
+            '01JYC2YHKP4RHH2QPJKV905GK7.jpg',
+            '01JY7J3H8PAW7TV8E6RDZD22SM.jpeg',
+            '01JY7GRR7AWCDJ3EH8BC31PBMS.jpeg',
+            '01JY7FZ4EGT7359T4W51EWZT6Z.jpeg',
+            '01JY7FSTMKHCEQ6PFQFFD3WQ5B.jpeg',
+            '01JY7FK3KJGMNCJZY29RJCGZ4H.jpeg',
+            '01JY7FEBTZCGBKFSQ40G4J9XDB.jpeg',
+            '01JY7F23PWBQVGDN4JBZ69NFDF.jpeg',
+        ];
+
         $competitions = [
             [
                 'title' => [
@@ -33,7 +53,7 @@ class CompetitionSeeder extends Seeder
                     'en' => '200 artists from 30 countries'
                 ],
                 'slug' => 'international-young-artists-competition',
-                'featured_image' => null,
+                'featured_image' => 'competition-images/' . $competitionImages[array_rand($competitionImages)],
                 'category' => 'art',
                 'prize_amount' => 25000,
                 'max_participants' => 200,
@@ -71,7 +91,7 @@ class CompetitionSeeder extends Seeder
                     'en' => '50 ensembles from 20 countries'
                 ],
                 'slug' => 'georgian-folk-dance-festival',
-                'featured_image' => null,
+                'featured_image' => 'competition-images/' . $competitionImages[array_rand($competitionImages)],
                 'category' => 'dance',
                 'prize_amount' => 15000,
                 'max_participants' => 120,
@@ -109,7 +129,7 @@ class CompetitionSeeder extends Seeder
                     'en' => '150 musicians from 25 countries'
                 ],
                 'slug' => 'young-musicians-competition',
-                'featured_image' => null,
+                'featured_image' => 'competition-images/' . $competitionImages[array_rand($competitionImages)],
                 'category' => 'music',
                 'prize_amount' => 30000,
                 'max_participants' => null,
@@ -144,7 +164,7 @@ class CompetitionSeeder extends Seeder
                     'en' => '100 films from 40 countries'
                 ],
                 'slug' => 'georgian-film-festival',
-                'featured_image' => null,
+                'featured_image' => 'competition-images/' . $competitionImages[array_rand($competitionImages)],
                 'category' => 'film',
                 'prize_amount' => 50000,
                 'max_participants' => null,
@@ -179,7 +199,7 @@ class CompetitionSeeder extends Seeder
                     'en' => '300 writers from 35 countries'
                 ],
                 'slug' => 'young-writers-competition',
-                'featured_image' => null,
+                'featured_image' => 'competition-images/' . $competitionImages[array_rand($competitionImages)],
                 'category' => 'literature',
                 'prize_amount' => 20000,
                 'max_participants' => null,
@@ -214,7 +234,7 @@ class CompetitionSeeder extends Seeder
                     'en' => '500 athletes from 30 countries'
                 ],
                 'slug' => 'sports-talent-competition',
-                'featured_image' => null,
+                'featured_image' => 'competition-images/' . $competitionImages[array_rand($competitionImages)],
                 'category' => 'sports',
                 'prize_amount' => 40000,
                 'max_participants' => null,
@@ -249,7 +269,7 @@ class CompetitionSeeder extends Seeder
                     'en' => '1000 photographers from 50 countries'
                 ],
                 'slug' => 'photography-competition',
-                'featured_image' => null,
+                'featured_image' => 'competition-images/' . $competitionImages[array_rand($competitionImages)],
                 'category' => 'photography',
                 'prize_amount' => 15000,
                 'max_participants' => null,
@@ -284,7 +304,7 @@ class CompetitionSeeder extends Seeder
                     'en' => '400 designers from 25 countries'
                 ],
                 'slug' => 'design-competition',
-                'featured_image' => null,
+                'featured_image' => 'competition-images/' . $competitionImages[array_rand($competitionImages)],
                 'category' => 'design',
                 'prize_amount' => 25000,
                 'max_participants' => null,
@@ -319,7 +339,7 @@ class CompetitionSeeder extends Seeder
                     'en' => '200 architects from 30 countries'
                 ],
                 'slug' => 'architecture-competition',
-                'featured_image' => null,
+                'featured_image' => 'competition-images/' . $competitionImages[array_rand($competitionImages)],
                 'category' => 'architecture',
                 'prize_amount' => 35000,
                 'max_participants' => null,
@@ -354,7 +374,7 @@ class CompetitionSeeder extends Seeder
                     'en' => '150 chefs from 20 countries'
                 ],
                 'slug' => 'culinary-competition',
-                'featured_image' => null,
+                'featured_image' => 'competition-images/' . $competitionImages[array_rand($competitionImages)],
                 'category' => 'culinary',
                 'prize_amount' => 20000,
                 'max_participants' => null,
@@ -389,7 +409,7 @@ class CompetitionSeeder extends Seeder
                     'en' => '100 performers from 15 countries'
                 ],
                 'slug' => 'circus-arts-festival',
-                'featured_image' => null,
+                'featured_image' => 'competition-images/' . $competitionImages[array_rand($competitionImages)],
                 'category' => 'circus',
                 'prize_amount' => 18000,
                 'max_participants' => null,
