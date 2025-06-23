@@ -18,6 +18,7 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use App\Filament\Widgets\StatsOverview;
+use App\Http\Middleware\AdminAccess;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -53,14 +54,10 @@ class AdminPanelProvider extends PanelProvider
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
+                AdminAccess::class,
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ])
-            ->authorization([
-                'check' => function ($user) {
-                    return $user->is_admin;
-                },
             ]);
     }
 }
