@@ -7,6 +7,28 @@ echo "Starting Laravel application setup..."
 # Create .env file if it doesn't exist
 if [ ! -f /app/.env ]; then
     echo "Creating .env file..."
+    cp /app/.env.example /app/.env
+fi
+
+# Create database and log files/directories if they don't exist
+mkdir -p /app/database
+mkdir -p /app/storage/logs
+touch /app/storage/logs/laravel.log
+touch /app/storage/logs/server-debug.log
+
+if [ ! -f /app/database/database.sqlite ]; then
+    touch /app/database/database.sqlite
+    echo "Created database file"
+fi
+
+# Set proper permissions
+chmod -R 775 /app/storage
+chmod 664 /app/database/database.sqlite
+chmod 775 /app/database
+
+# Create .env file if it doesn't exist
+if [ ! -f /app/.env ]; then
+    echo "Creating .env file..."
     cat > /app/.env << EOF
 APP_NAME="Ministry of Culture and Sport"
 APP_ENV=production
@@ -67,17 +89,6 @@ EOF
     echo "Created .env file"
 fi
 
-# Create database if it doesn't exist
-mkdir -p /app/database
-if [ ! -f /app/database/database.sqlite ]; then
-    touch /app/database/database.sqlite
-    echo "Created database file"
-fi
-
-# Set proper permissions
-chmod 664 /app/database/database.sqlite
-chmod 775 /app/database
-
 # Generate application key if not set
 if [ -z "$APP_KEY" ]; then
     echo "Generating application key..."
@@ -122,5 +133,5 @@ fi
 
 echo "Setup completed. Starting server..."
 
-# Start the application with the Laravel router script
-exec php -S 0.0.0.0:$PORT server.php 
+# Start the application with the Laravel router script and redirect stderr to stdout
+exec php -S 0.0.0.0:$PORT server.php 2>&1 
