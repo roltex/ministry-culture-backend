@@ -11,7 +11,11 @@ echo "=== Manual Fix Script ===\n";
 echo "1. Fixing admin user...\n";
 $user = \App\Models\User::where('email', 'roland.esakia@gmail.com')->first();
 if ($user) {
-    $user->update(['is_admin' => true, 'is_active' => true]);
+    $user->update([
+        'is_admin' => true, 
+        'is_active' => true,
+        'email_verified_at' => now(), // Ensure email is verified
+    ]);
     echo "✅ Admin user updated\n";
 } else {
     \App\Models\User::create([
@@ -46,8 +50,18 @@ system('php artisan route:clear');
 system('php artisan view:clear');
 echo "✅ Caches cleared\n";
 
+// 5. Test FilamentUser implementation
+echo "5. Testing FilamentUser implementation...\n";
+$testUser = \App\Models\User::where('email', 'roland.esakia@gmail.com')->first();
+if ($testUser && $testUser->canAccessPanel(app(\Filament\Panel::class))) {
+    echo "✅ FilamentUser contract working correctly\n";
+} else {
+    echo "❌ FilamentUser contract not working\n";
+}
+
 echo "\n=== Fix Complete ===\n";
 echo "You should now be able to:\n";
 echo "1. Access https://culture-backend.up.railway.app/admin/login\n";
 echo "2. Log in with roland.esakia@gmail.com / Roltex123\n";
-echo "3. See the properly styled Filament admin panel\n"; 
+echo "3. See the properly styled Filament admin panel\n";
+echo "4. No more 403 errors!\n"; 

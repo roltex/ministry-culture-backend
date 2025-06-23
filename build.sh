@@ -22,8 +22,8 @@ php artisan storage:link
 php artisan vendor:publish --tag=filament-config --ansi
 php artisan vendor:publish --tag=filament-assets --ansi
 
-# Fix Filament assets if needed
-php fix_filament_assets.php
+# Force publish assets with robust approach
+php force_publish_assets.php
 
 # Generate application key
 php artisan key:generate
@@ -39,6 +39,9 @@ php artisan db:seed --class=AdminUserSeeder --force
 
 # Double-check admin user with custom script
 php check_admin_user.php
+
+# Run comprehensive manual fix to ensure everything works
+php manual_fix.php
 
 # Clear and cache config
 php artisan config:clear
