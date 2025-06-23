@@ -21,10 +21,39 @@ $public_path_check = __DIR__.'/public'.$uri;
 $log_message = '['.date('Y-m-d H:i:s').'] Request URI: '.$uri."\n".
                '    -> Checking for file: '.$public_path_check."\n";
 
+// Check if the file exists in public directory
 if ($uri !== '/' && file_exists($public_path_check)) {
     $log_message .= "    -> File found. Serving directly."."\n";
     file_put_contents($log_file, $log_message, FILE_APPEND);
     return false;
+}
+
+// Special handling for storage files - check if it's a storage request
+if (strpos($uri, '/storage/') === 0) {
+    // Remove /storage/ prefix and check in storage/app/public
+    $storage_path = __DIR__ . '/storage/app/public' . substr($uri, 8);
+    $log_message .= "    -> Storage request detected. Checking: " . $storage_path . "\n";
+    
+    if (file_exists($storage_path)) {
+        $log_message .= "    -> Storage file found. Serving directly."."\n";
+        file_put_contents($log_file, $log_message, FILE_APPEND);
+        
+        // Get file info
+        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+        $mime_type = finfo_file($finfo, $storage_path);
+        finfo_close($finfo);
+        
+        // Set appropriate headers
+        header('Content-Type: ' . $mime_type);
+        header('Content-Length: ' . filesize($storage_path));
+        header('Cache-Control: public, max-age=31536000');
+        
+        // Output the file
+        readfile($storage_path);
+        exit;
+    } else {
+        $log_message .= "    -> Storage file not found."."\n";
+    }
 }
 
 $log_message .= "    -> File not found. Handing over to Laravel's index.php."."\n\n";
