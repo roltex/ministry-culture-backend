@@ -2,11 +2,14 @@
 
 set -e  # Exit on any error
 
-echo "Starting Laravel application setup..."
+echo "--- STARTUP SCRIPT V3 ---"
+echo "Current PWD: $(pwd)"
+echo "Listing files in /app:"
+ls -la /app
 
 # Create .env file if it doesn't exist
 if [ ! -f /app/.env ]; then
-    echo "Creating .env file..."
+    echo "Creating .env file from example..."
     cp /app/.env.example /app/.env
 fi
 
@@ -18,10 +21,11 @@ touch /app/storage/logs/server-debug.log
 
 if [ ! -f /app/database/database.sqlite ]; then
     touch /app/database/database.sqlite
-    echo "Created database file"
+    echo "Created database file."
 fi
 
 # Set proper permissions
+echo "Setting permissions..."
 chmod -R 775 /app/storage
 chmod 664 /app/database/database.sqlite
 chmod 775 /app/database
@@ -89,49 +93,36 @@ EOF
     echo "Created .env file"
 fi
 
-# Generate application key if not set
-if [ -z "$APP_KEY" ]; then
+# Generate application key if it's missing from .env
+if grep -q "APP_KEY=$" /app/.env; then
     echo "Generating application key..."
     php artisan key:generate --force
-    echo "Generated application key"
 fi
 
-# Clear all caches first
-php artisan config:clear || echo "Config clear failed, continuing..."
-php artisan cache:clear || echo "Cache clear failed, continuing..."
-php artisan route:clear || echo "Route clear failed, continuing..."
-php artisan view:clear || echo "View clear failed, continuing..."
-echo "Cleared all caches"
+# Run migrations FIRST
+echo "Running migrations..."
+php artisan migrate --force
 
-# Run migrations with error handling
-if php artisan migrate --force; then
-    echo "Migrations completed successfully"
-else
-    echo "Migration failed, but continuing..."
-fi
+# Now clear caches
+echo "Clearing caches..."
+php artisan cache:clear || echo "Cache clear failed, but this is often safe to ignore."
+php artisan config:clear
+php artisan route:clear
+php artisan view:clear
 
-# Run seeders with error handling
-if php artisan db:seed --force; then
-    echo "Seeders completed successfully"
-else
-    echo "Seeding failed, but continuing..."
-fi
+# Run seeders
+echo "Running seeders..."
+php artisan db:seed --force
 
 # Cache configuration
-if php artisan config:cache; then
-    echo "Configuration cached successfully"
-else
-    echo "Configuration caching failed, but continuing..."
-fi
+echo "Caching configuration..."
+php artisan config:cache
 
 # Create storage link
-if php artisan storage:link; then
-    echo "Storage link created successfully"
-else
-    echo "Storage link creation failed, but continuing..."
-fi
+echo "Creating storage link..."
+php artisan storage:link || echo "Storage link may already exist."
 
-echo "Setup completed. Starting server..."
-
+echo "--- SETUP COMPLETE ---"
+echo "Starting PHP server..."
 # Start the application with the Laravel router script and redirect stderr to stdout
 exec php -S 0.0.0.0:$PORT server.php 2>&1 
