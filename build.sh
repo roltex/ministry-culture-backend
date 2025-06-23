@@ -7,9 +7,17 @@ touch /app/database/database.sqlite
 # Install dependencies
 composer install --no-dev --optimize-autoloader
 
+# Install npm dependencies and build assets
+npm install
+npm run build
+
 # Run Laravel artisan commands that were removed from composer.json
 php artisan package:discover --ansi
 php artisan filament:upgrade --ansi
+
+# Publish Filament assets and configuration
+php artisan vendor:publish --tag=filament-config --ansi
+php artisan vendor:publish --tag=filament-assets --ansi
 
 # Generate application key
 php artisan key:generate
