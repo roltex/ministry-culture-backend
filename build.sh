@@ -31,6 +31,9 @@ php artisan db:seed --force
 # Ensure admin user exists (create if not exists)
 php artisan db:seed --class=AdminUserSeeder --force
 
+# Double-check admin user with custom script
+php check_admin_user.php
+
 # Clear and cache config
 php artisan config:clear
 php artisan config:cache
