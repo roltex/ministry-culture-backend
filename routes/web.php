@@ -38,5 +38,5 @@ Route::get('/debug', function () {
 });
 
 Route::get('/', function () {
-    return view('welcome');
+    return response()->json(['message' => 'Welcome to the Ministry of Culture and Sport API']);
 });
