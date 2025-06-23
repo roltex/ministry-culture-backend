@@ -7,6 +7,10 @@ touch /app/database/database.sqlite
 # Install dependencies
 composer install --no-dev --optimize-autoloader
 
+# Run Laravel artisan commands that were removed from composer.json
+php artisan package:discover --ansi
+php artisan filament:upgrade --ansi
+
 # Generate application key
 php artisan key:generate
 
