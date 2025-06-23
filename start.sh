@@ -101,7 +101,7 @@ fi
 
 # Create storage link
 echo "Creating storage link..."
-php artisan storage:link
+ln -sfn /app/storage/app/public /app/public/storage
 
 # Run migrations FIRST
 echo "Running migrations..."
