@@ -16,6 +16,9 @@ php artisan migrate --force
 # Run seeders
 php artisan db:seed --force
 
+# Ensure admin user exists (create if not exists)
+php artisan db:seed --class=AdminUserSeeder --force
+
 # Clear and cache config
 php artisan config:clear
 php artisan config:cache
