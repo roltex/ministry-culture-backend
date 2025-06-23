@@ -2,7 +2,7 @@
 
 set -e  # Exit on any error
 
-echo "--- STARTUP SCRIPT V3 ---"
+echo "--- STARTUP SCRIPT V4 ---"
 echo "Current PWD: $(pwd)"
 echo "Listing files in /app:"
 ls -la /app
@@ -23,6 +23,18 @@ if [ ! -f /app/database/database.sqlite ]; then
     touch /app/database/database.sqlite
     echo "Created database file."
 fi
+
+# Create storage directories for different file types
+echo "Creating storage directories..."
+mkdir -p /app/storage/app/public/news-images
+mkdir -p /app/storage/app/public/project-images
+mkdir -p /app/storage/app/public/competition-images
+mkdir -p /app/storage/app/public/competition-forms
+mkdir -p /app/storage/app/public/institution-images
+mkdir -p /app/storage/app/public/institution-logos
+mkdir -p /app/storage/app/public/legislation-documents
+mkdir -p /app/storage/app/public/user-avatars
+mkdir -p /app/storage/app/public/vacancy-forms
 
 # Set proper permissions
 echo "Setting permissions..."
@@ -99,13 +111,29 @@ if grep -q "APP_KEY=$" /app/.env; then
     php artisan key:generate --force
 fi
 
+# Remove existing storage link if it exists
+echo "Removing existing storage link..."
+rm -f /app/public/storage
+
 # Create storage link
 echo "Creating storage link..."
 ln -sfn /app/storage/app/public /app/public/storage
 
-# Ensure the storage link exists
-echo "Ensuring storage link..."
-php artisan storage:link >/dev/null 2>&1 || true
+# Ensure the storage link exists and is working
+echo "Verifying storage link..."
+if [ ! -L /app/public/storage ]; then
+    echo "Storage link creation failed, trying alternative method..."
+    php artisan storage:link --force
+fi
+
+# Verify the link points to the correct location
+if [ -L /app/public/storage ]; then
+    echo "Storage link created successfully"
+    ls -la /app/public/storage
+else
+    echo "ERROR: Storage link still not created!"
+    exit 1
+fi
 
 # Run migrations FIRST
 echo "Running migrations..."
