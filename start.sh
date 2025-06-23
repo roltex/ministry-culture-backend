@@ -122,5 +122,5 @@ fi
 
 echo "Setup completed. Starting server..."
 
-# Start the application with proper error handling
-exec php -S 0.0.0.0:$PORT -t public/ 
+# Start the application with the Laravel router script
+exec php -S 0.0.0.0:$PORT server.php 
