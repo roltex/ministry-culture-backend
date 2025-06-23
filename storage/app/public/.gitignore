@@ -1,2 +1,12 @@
 *
 !.gitignore
+!news-images/
+!competition-images/
+!project-images/
+!institution-logos/
+!institution-images/
+!news-images/**
+!competition-images/**
+!project-images/**
+!institution-logos/**
+!institution-images/**
