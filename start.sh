@@ -115,6 +115,10 @@ php artisan view:clear
 echo "Running seeders..."
 php artisan db:seed --force
 
+# Migrate existing images to S3
+echo "Migrating existing images to S3..."
+php migrate_existing_images.php
+
 # Cache configuration
 echo "Caching configuration..."
 php artisan config:cache
