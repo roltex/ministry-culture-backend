@@ -2,7 +2,7 @@
 
 set -e  # Exit on any error
 
-echo "--- STARTUP SCRIPT V4 ---"
+echo "--- STARTUP SCRIPT V5 (S3) ---"
 echo "Current PWD: $(pwd)"
 echo "Listing files in /app:"
 ls -la /app
@@ -23,18 +23,6 @@ if [ ! -f /app/database/database.sqlite ]; then
     touch /app/database/database.sqlite
     echo "Created database file."
 fi
-
-# Create storage directories for different file types
-echo "Creating storage directories..."
-mkdir -p /app/storage/app/public/news-images
-mkdir -p /app/storage/app/public/project-images
-mkdir -p /app/storage/app/public/competition-images
-mkdir -p /app/storage/app/public/competition-forms
-mkdir -p /app/storage/app/public/institution-images
-mkdir -p /app/storage/app/public/institution-logos
-mkdir -p /app/storage/app/public/legislation-documents
-mkdir -p /app/storage/app/public/user-avatars
-mkdir -p /app/storage/app/public/vacancy-forms
 
 # Set proper permissions
 echo "Setting permissions..."
@@ -61,7 +49,7 @@ DB_DATABASE=/app/database/database.sqlite
 
 BROADCAST_DRIVER=log
 CACHE_DRIVER=file
-FILESYSTEM_DISK=public
+FILESYSTEM_DISK=s3
 QUEUE_CONNECTION=sync
 SESSION_DRIVER=file
 SESSION_LIFETIME=120
@@ -83,8 +71,9 @@ MAIL_FROM_NAME="\${APP_NAME}"
 
 AWS_ACCESS_KEY_ID=
 AWS_SECRET_ACCESS_KEY=
-AWS_DEFAULT_REGION=us-east-1
-AWS_BUCKET=
+AWS_DEFAULT_REGION=eu-north-1
+AWS_BUCKET=culture-ministry-images
+AWS_URL=https://culture-ministry-images.s3.eu-north-1.amazonaws.com
 AWS_USE_PATH_STYLE_ENDPOINT=false
 
 PUSHER_APP_ID=
@@ -111,30 +100,6 @@ if grep -q "APP_KEY=$" /app/.env; then
     php artisan key:generate --force
 fi
 
-# Remove existing storage link if it exists
-echo "Removing existing storage link..."
-rm -f /app/public/storage
-
-# Create storage link
-echo "Creating storage link..."
-ln -sfn /app/storage/app/public /app/public/storage
-
-# Ensure the storage link exists and is working
-echo "Verifying storage link..."
-if [ ! -L /app/public/storage ]; then
-    echo "Storage link creation failed, trying alternative method..."
-    php artisan storage:link --force
-fi
-
-# Verify the link points to the correct location
-if [ -L /app/public/storage ]; then
-    echo "Storage link created successfully"
-    ls -la /app/public/storage
-else
-    echo "ERROR: Storage link still not created!"
-    exit 1
-fi
-
 # Run migrations FIRST
 echo "Running migrations..."
 php artisan migrate --force
@@ -154,7 +119,7 @@ php artisan db:seed --force
 echo "Caching configuration..."
 php artisan config:cache
 
-echo "--- SETUP COMPLETE ---"
+echo "--- SETUP COMPLETE (S3) ---"
 echo "Starting PHP server..."
 # Start the application with the Laravel router script and redirect stderr to stdout
 exec php -S 0.0.0.0:$PORT server.php 2>&1 
