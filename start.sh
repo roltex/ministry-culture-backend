@@ -38,7 +38,7 @@ APP_NAME="Ministry of Culture and Sport"
 APP_ENV=production
 APP_KEY=
 APP_DEBUG=false
-APP_URL=https://culture-georgia.railway.app/
+APP_URL=https://culture-backend.up.railway.app
 
 LOG_CHANNEL=stack
 LOG_DEPRECATIONS_CHANNEL=null
