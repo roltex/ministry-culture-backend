@@ -11,6 +11,26 @@ class NewsSeeder extends Seeder
 {
     public function run(): void
     {
+        // Available news images
+        $newsImages = [
+            '01JYBHEEXVSAKQWJNZM2V281NK.jpg',
+            '01JYBHBXFQ2MBKYQB7M1YK8R96.jpeg',
+            '01JYBHABJAH0Q67204VHP1HFEC.jpg',
+            '01JYBH4YDFZRPR0X3YBZRB6QC1.png',
+            '01JYBH217QK2TNBD7XNC6D3W73.jpg',
+            '01JYBGZ218QYKKD3NBF17AK9CK.jpg',
+            '01JYBGWZ1HPSV7FRRGF6YDTRG1.jpg',
+            '01JYBGS9R3EBJ9135PP22F6X3V.jpg',
+            '01JYA3S0ZYN5GF304PPCKBDKZX.jpg',
+            '01JYA3Q258SZFBK1C6YJ9PDE8Y.jpg',
+            '01JYA3MWMJKJ88N15T35EM0XEA.jpeg',
+            '01JYA3KSSY6NHCRY9DW9H820SR.jpg',
+            '01JY9ZFW3SNCYACYGRF0ZQWVSQ.jpg',
+            '01JY7J5A93NYKBG2P821NX3THC.jpg',
+            '01JY7GF46R24K8A1MCNWV6X3N7.jpeg',
+            '01JY7DZB5HT6M8YDK074Q243CA.jpg',
+        ];
+
         $news = [
             [
                 'title' => [
@@ -26,7 +46,7 @@ class NewsSeeder extends Seeder
                     'en' => 'New digital platform for preserving cultural heritage'
                 ],
                 'slug' => 'new-digital-platform-ministry-culture',
-                'featured_image' => null,
+                'featured_image' => 'news-images/' . $newsImages[0],
                 'is_published' => true,
                 'published_at' => Carbon::now()->subDays(1),
             ],
@@ -44,7 +64,7 @@ class NewsSeeder extends Seeder
                     'en' => '10 Georgian films at Berlin Film Festival'
                 ],
                 'slug' => 'georgian-film-festival-berlin',
-                'featured_image' => null,
+                'featured_image' => 'news-images/' . $newsImages[1],
                 'is_published' => true,
                 'published_at' => Carbon::now()->subDays(2),
             ],
@@ -62,7 +82,7 @@ class NewsSeeder extends Seeder
                     'en' => 'New program for young athletes'
                 ],
                 'slug' => 'youth-athletes-support-program',
-                'featured_image' => null,
+                'featured_image' => 'news-images/' . $newsImages[2],
                 'is_published' => true,
                 'published_at' => Carbon::now()->subDays(3),
             ],
@@ -80,7 +100,7 @@ class NewsSeeder extends Seeder
                     'en' => 'Large-scale renovation of National Museum'
                 ],
                 'slug' => 'national-museum-renovation',
-                'featured_image' => null,
+                'featured_image' => 'news-images/' . $newsImages[3],
                 'is_published' => true,
                 'published_at' => Carbon::now()->subDays(4),
             ],
@@ -98,7 +118,7 @@ class NewsSeeder extends Seeder
                     'en' => 'More than 50 ensembles from 15 countries'
                 ],
                 'slug' => 'georgian-folk-dance-festival',
-                'featured_image' => null,
+                'featured_image' => 'news-images/' . $newsImages[4],
                 'is_published' => true,
                 'published_at' => Carbon::now()->subDays(5),
             ],
@@ -116,7 +136,7 @@ class NewsSeeder extends Seeder
                     'en' => '50 young artists will receive grants'
                 ],
                 'slug' => 'young-artists-grant-program',
-                'featured_image' => null,
+                'featured_image' => 'news-images/' . $newsImages[5],
                 'is_published' => true,
                 'published_at' => Carbon::now()->subDays(6),
             ],
@@ -134,7 +154,7 @@ class NewsSeeder extends Seeder
                     'en' => '20 new sports centers in regions'
                 ],
                 'slug' => 'sports-infrastructure-development',
-                'featured_image' => null,
+                'featured_image' => 'news-images/' . $newsImages[6],
                 'is_published' => true,
                 'published_at' => Carbon::now()->subDays(7),
             ],
@@ -152,7 +172,7 @@ class NewsSeeder extends Seeder
                     'en' => '100 Georgian authors in international markets'
                 ],
                 'slug' => 'georgian-literature-promotion',
-                'featured_image' => null,
+                'featured_image' => 'news-images/' . $newsImages[7],
                 'is_published' => true,
                 'published_at' => Carbon::now()->subDays(8),
             ],
@@ -170,7 +190,7 @@ class NewsSeeder extends Seeder
                     'en' => 'More than 200 events in 2025'
                 ],
                 'slug' => 'cultural-events-calendar-2025',
-                'featured_image' => null,
+                'featured_image' => 'news-images/' . $newsImages[8],
                 'is_published' => true,
                 'published_at' => Carbon::now()->subDays(9),
             ],
@@ -188,7 +208,7 @@ class NewsSeeder extends Seeder
                     'en' => '150 musicians from 25 countries'
                 ],
                 'slug' => 'young-musicians-international-competition',
-                'featured_image' => null,
+                'featured_image' => 'news-images/' . $newsImages[9],
                 'is_published' => true,
                 'published_at' => Carbon::now()->subDays(10),
             ],
@@ -198,40 +218,112 @@ class NewsSeeder extends Seeder
                     'en' => 'Sports Achievements Ceremony'
                 ],
                 'content' => [
-                    'ka' => '<p>გაიმართება საქართველოს სპორტსმენების მიღწევების ცერემონია. ცერემონიაზე დააჯილდოვდება 100-ზე მეტი სპორტსმენი.</p><p>ცერემონია გაიმართება თბილისის საკონცერტო დარბაზში.</p>',
-                    'en' => '<p>A ceremony for Georgian athletes\' achievements will be held. More than 100 athletes will be awarded at the ceremony.</p><p>The ceremony will be held at Tbilisi Concert Hall.</p>'
+                    'ka' => '<p>გაიმართება სპორტული მიღწევების ყოველწლიური ცერემონია. ცერემონიაზე დაჯილდოვდება საქართველოს საუკეთესო სპორტსმენები.</p><p>ცერემონია გაიმართება თბილისის სახელმწიფო ფილარმონიაში.</p>',
+                    'en' => '<p>An annual sports achievements ceremony will be held. The best athletes of Georgia will be awarded at the ceremony.</p><p>The ceremony will be held at the Tbilisi State Philharmonic.</p>'
                 ],
                 'excerpt' => [
-                    'ka' => '100-ზე მეტი სპორტსმენი დააჯილდოვდება',
-                    'en' => 'More than 100 athletes will be awarded'
+                    'ka' => 'საქართველოს საუკეთესო სპორტსმენები დაჯილდოვდებიან',
+                    'en' => 'Best athletes of Georgia will be awarded'
                 ],
                 'slug' => 'sports-achievements-ceremony',
-                'featured_image' => null,
+                'featured_image' => 'news-images/' . $newsImages[10],
                 'is_published' => true,
                 'published_at' => Carbon::now()->subDays(11),
             ],
             [
                 'title' => [
-                    'ka' => 'კულტურული მემკვიდრეობის დღე',
-                    'en' => 'Cultural Heritage Day'
+                    'ka' => 'კულტურული მემკვიდრეობის დაცვა',
+                    'en' => 'Cultural Heritage Protection'
                 ],
                 'content' => [
-                    'ka' => '<p>საქართველოში პირველად გაიმართება კულტურული მემკვიდრეობის ეროვნული დღე. დღის ფარგლებში გაიმართება სხვადასხვა ღონისძიება მთელი ქვეყნის მასშტაბით.</p><p>ყველა მუზეუმი უფასო იქნება ვიზიტორებისთვის.</p>',
-                    'en' => '<p>For the first time in Georgia, a national day of cultural heritage will be held. Various events will be held throughout the country as part of the day.</p><p>All museums will be free for visitors.</p>'
+                    'ka' => '<p>დაიწყება კულტურული მემკვიდრეობის დაცვის ახალი პროგრამა. პროგრამა მოიცავს ისტორიული ძეგლების რესტავრაციას და კონსერვაციას.</p><p>პროგრამაში ჩართული იქნება 50 ისტორიული ძეგლი.</p>',
+                    'en' => '<p>A new cultural heritage protection program will begin. The program includes restoration and conservation of historical monuments.</p><p>50 historical monuments will be included in the program.</p>'
                 ],
                 'excerpt' => [
-                    'ka' => 'პირველი კულტურული მემკვიდრეობის დღე საქართველოში',
-                    'en' => 'First cultural heritage day in Georgia'
+                    'ka' => '50 ისტორიული ძეგლი რესტავრაციის პროცესში',
+                    'en' => '50 historical monuments in restoration process'
                 ],
-                'slug' => 'cultural-heritage-day-georgia',
-                'featured_image' => null,
+                'slug' => 'cultural-heritage-protection',
+                'featured_image' => 'news-images/' . $newsImages[11],
                 'is_published' => true,
                 'published_at' => Carbon::now()->subDays(12),
             ],
+            [
+                'title' => [
+                    'ka' => 'ახალგაზრდა მწერლების ფესტივალი',
+                    'en' => 'Young Writers Festival'
+                ],
+                'content' => [
+                    'ka' => '<p>თბილისში გაიმართება ახალგაზრდა მწერლების საერთაშორისო ფესტივალი. ფესტივალში მონაწილეობას მიიღებს 100 მწერალი 30 ქვეყნიდან.</p><p>ფესტივალი მიზნად ისახავს ლიტერატურული ნაწარმოებების პოპულარიზაციას.</p>',
+                    'en' => '<p>An international festival for young writers will be held in Tbilisi. 100 writers from 30 countries will participate in the festival.</p><p>The festival aims to popularize literary works.</p>'
+                ],
+                'excerpt' => [
+                    'ka' => '100 მწერალი 30 ქვეყნიდან',
+                    'en' => '100 writers from 30 countries'
+                ],
+                'slug' => 'young-writers-international-festival',
+                'featured_image' => 'news-images/' . $newsImages[12],
+                'is_published' => true,
+                'published_at' => Carbon::now()->subDays(13),
+            ],
+            [
+                'title' => [
+                    'ka' => 'სპორტული მედიის განვითარება',
+                    'en' => 'Sports Media Development'
+                ],
+                'content' => [
+                    'ka' => '<p>დაიწყება სპორტული მედიის განვითარების პროგრამა. პროგრამა მოიცავს ახალგაზრდა ჟურნალისტების ტრენინგს და სპორტული კონტენტის შექმნას.</p><p>პროგრამაში მონაწილეობას მიიღებს 25 ჟურნალისტი.</p>',
+                    'en' => '<p>A sports media development program will begin. The program includes training for young journalists and creation of sports content.</p><p>25 journalists will participate in the program.</p>'
+                ],
+                'excerpt' => [
+                    'ka' => '25 ჟურნალისტი სპორტული მედიის პროგრამაში',
+                    'en' => '25 journalists in sports media program'
+                ],
+                'slug' => 'sports-media-development',
+                'featured_image' => 'news-images/' . $newsImages[13],
+                'is_published' => true,
+                'published_at' => Carbon::now()->subDays(14),
+            ],
+            [
+                'title' => [
+                    'ka' => 'კულტურული ტურიზმის პრომოცია',
+                    'en' => 'Cultural Tourism Promotion'
+                ],
+                'content' => [
+                    'ka' => '<p>დაიწყება კულტურული ტურიზმის საერთაშორისო პრომოციის კამპანია. კამპანია მოიცავს საქართველოს კულტურული ღირსშესანიშნაობების პოპულარიზაციას.</p><p>კამპანია მიმართული იქნება 20 ქვეყნის ტურისტებზე.</p>',
+                    'en' => '<p>An international cultural tourism promotion campaign will begin. The campaign includes popularization of Georgia\'s cultural attractions.</p><p>The campaign will target tourists from 20 countries.</p>'
+                ],
+                'excerpt' => [
+                    'ka' => 'საქართველოს კულტურული ღირსშესანიშნაობები 20 ქვეყანაში',
+                    'en' => 'Georgia\'s cultural attractions in 20 countries'
+                ],
+                'slug' => 'cultural-tourism-promotion',
+                'featured_image' => 'news-images/' . $newsImages[14],
+                'is_published' => true,
+                'published_at' => Carbon::now()->subDays(15),
+            ],
+            [
+                'title' => [
+                    'ka' => 'ახალგაზრდა მოცეკვავეთა კონკურსი',
+                    'en' => 'Young Dancers Competition'
+                ],
+                'content' => [
+                    'ka' => '<p>დაიწყება ახალგაზრდა მოცეკვავეთა საერთაშორისო კონკურსი. კონკურსში მონაწილეობას მიიღებს 200 მოცეკვავე 40 ქვეყნიდან.</p><p>გამარჯვებული მიიღებს 30,000 ლარის პრიზს.</p>',
+                    'en' => '<p>An international competition for young dancers will begin. 200 dancers from 40 countries will participate in the competition.</p><p>The winner will receive a prize of 30,000 GEL.</p>'
+                ],
+                'excerpt' => [
+                    'ka' => '200 მოცეკვავე 40 ქვეყნიდან',
+                    'en' => '200 dancers from 40 countries'
+                ],
+                'slug' => 'young-dancers-international-competition',
+                'featured_image' => 'news-images/' . $newsImages[15],
+                'is_published' => true,
+                'published_at' => Carbon::now()->subDays(16),
+            ],
         ];
 
-        foreach ($news as $item) {
-            News::create($item);
+        foreach ($news as $newsItem) {
+            News::create($newsItem);
         }
     }
 } 
