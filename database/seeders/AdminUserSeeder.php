@@ -23,11 +23,22 @@ class AdminUserSeeder extends Seeder
                 'email' => 'roland.esakia@gmail.com',
                 'password' => Hash::make('Roltex123'),
                 'email_verified_at' => now(),
+                'is_admin' => true,
+                'is_active' => true,
             ]);
             
             $this->command->info('Admin user created successfully!');
         } else {
-            $this->command->info('Admin user already exists.');
+            // Update existing user to be admin if not already
+            if (!$adminUser->is_admin) {
+                $adminUser->update([
+                    'is_admin' => true,
+                    'is_active' => true,
+                ]);
+                $this->command->info('Existing user updated to admin!');
+            } else {
+                $this->command->info('Admin user already exists.');
+            }
         }
     }
 } 
