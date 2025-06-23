@@ -15,9 +15,15 @@ npm run build
 php artisan package:discover --ansi
 php artisan filament:upgrade --ansi
 
+# Create storage link first (important for asset publishing)
+php artisan storage:link
+
 # Publish Filament assets and configuration
 php artisan vendor:publish --tag=filament-config --ansi
 php artisan vendor:publish --tag=filament-assets --ansi
+
+# Fix Filament assets if needed
+php fix_filament_assets.php
 
 # Generate application key
 php artisan key:generate
@@ -45,8 +51,5 @@ php artisan route:cache
 # Clear and cache views
 php artisan view:clear
 php artisan view:cache
-
-# Create storage link
-php artisan storage:link
 
 echo "Build completed successfully!" 
