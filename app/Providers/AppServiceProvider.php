@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\URL;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -21,6 +22,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // Force HTTPS for assets in production
+        if ($this->app->environment('production')) {
+            URL::forceScheme('https');
+        }
+
         // Only configure SQLite if database exists and we can connect
         try {
             if (DB::connection()->getDriverName() === 'sqlite' && 
