@@ -103,6 +103,10 @@ fi
 echo "Creating storage link..."
 ln -sfn /app/storage/app/public /app/public/storage
 
+# Ensure the storage link exists
+echo "Ensuring storage link..."
+php artisan storage:link >/dev/null 2>&1 || true
+
 # Run migrations FIRST
 echo "Running migrations..."
 php artisan migrate --force
