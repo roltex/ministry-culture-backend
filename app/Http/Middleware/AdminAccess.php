@@ -24,13 +24,10 @@ class AdminAccess
             return $next($request);
         }
 
-        // For all other admin routes, check if user is admin
+        // For all other admin routes, just check if user is authenticated
+        // Filament will handle the admin check internally
         if (!auth()->check()) {
             return redirect()->route('filament.admin.auth.login');
-        }
-
-        if (!auth()->user()->isAdmin()) {
-            abort(403, 'Access denied. Admin privileges required.');
         }
 
         return $next($request);
