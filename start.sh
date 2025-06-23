@@ -99,6 +99,10 @@ if grep -q "APP_KEY=$" /app/.env; then
     php artisan key:generate --force
 fi
 
+# Create storage link
+echo "Creating storage link..."
+php artisan storage:link
+
 # Run migrations FIRST
 echo "Running migrations..."
 php artisan migrate --force
@@ -117,10 +121,6 @@ php artisan db:seed --force
 # Cache configuration
 echo "Caching configuration..."
 php artisan config:cache
-
-# Create storage link
-echo "Creating storage link..."
-php artisan storage:link || echo "Storage link may already exist."
 
 echo "--- SETUP COMPLETE ---"
 echo "Starting PHP server..."
