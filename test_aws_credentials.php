@@ -64,8 +64,7 @@ try {
         $result = $s3Client->putObject([
             'Bucket' => $bucket,
             'Key'    => $testKey,
-            'Body'   => $testContent,
-            'ACL'    => 'public-read'
+            'Body'   => $testContent
         ]);
         echo "✅ Upload test successful\n";
         echo "✅ Object URL: " . $result['ObjectURL'] . "\n";

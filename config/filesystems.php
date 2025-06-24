@@ -59,6 +59,9 @@ return [
             'visibility' => 'public',
             'throw' => false,
             'report' => false,
+            'options' => [
+                'ACL' => null, // Disable ACLs
+            ],
         ],
 
     ],

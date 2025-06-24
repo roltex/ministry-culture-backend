@@ -32,7 +32,7 @@ try {
     
     // Upload test file with detailed error handling
     try {
-        $uploadResult = Storage::disk('s3')->put($testPath, $testContent, 'public');
+        $uploadResult = Storage::disk('s3')->put($testPath, $testContent);
         echo "✅ Upload result: " . ($uploadResult ? "SUCCESS" : "FAILED") . "\n";
         
         if (!$uploadResult) {
