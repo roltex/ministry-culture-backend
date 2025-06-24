@@ -37,8 +37,38 @@ Route::get('/debug', function () {
     ]);
 });
 
+// Serve Filament static assets
+Route::get('/css/filament/{path}', function ($path) {
+    $filePath = public_path("css/filament/{$path}");
+    if (file_exists($filePath)) {
+        return response()->file($filePath, [
+            'Content-Type' => 'text/css',
+            'Cache-Control' => 'public, max-age=31536000',
+            'Access-Control-Allow-Origin' => '*'
+        ]);
+    }
+    abort(404);
+})->where('path', '.*');
+
+Route::get('/js/filament/{path}', function ($path) {
+    $filePath = public_path("js/filament/{$path}");
+    if (file_exists($filePath)) {
+        return response()->file($filePath, [
+            'Content-Type' => 'application/javascript',
+            'Cache-Control' => 'public, max-age=31536000',
+            'Access-Control-Allow-Origin' => '*'
+        ]);
+    }
+    abort(404);
+})->where('path', '.*');
+
+// API routes
 Route::get('/', function () {
-    return response()->json(['message' => 'Welcome to the Ministry of Culture and Sport API']);
+    return response()->json([
+        'message' => 'Welcome to the Ministry of Culture and Sport API',
+        'version' => '1.0.0',
+        'timestamp' => now()->toISOString()
+    ]);
 });
 
 // Test route for storage debugging
