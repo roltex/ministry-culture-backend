@@ -37,16 +37,22 @@ foreach ($staticExtensions as $ext) {
     }
 }
 
-// Handle test files
-if (str_starts_with($requestUri, '/debug.php') || 
-    str_starts_with($requestUri, '/test-simple.php') || 
-    str_starts_with($requestUri, '/test-assets.php') ||
-    str_starts_with($requestUri, '/server-test.php')) {
-    
-    $filePath = __DIR__ . $requestUri;
-    if (file_exists($filePath)) {
-        include $filePath;
-        exit;
+// Handle test files (both with and without .php extension)
+$testFiles = [
+    'debug',
+    'test-simple', 
+    'test-assets',
+    'server-test',
+    'test-storage'
+];
+
+foreach ($testFiles as $testFile) {
+    if (str_starts_with($requestUri, '/' . $testFile)) {
+        $filePath = __DIR__ . '/' . $testFile . '.php';
+        if (file_exists($filePath)) {
+            include $filePath;
+            exit;
+        }
     }
 }
 
