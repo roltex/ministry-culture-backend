@@ -15,6 +15,9 @@ echo "2. Installing NPM dependencies..."
 npm install
 echo "3. Building Vite assets for Filament v3..."
 npm run build
+# Copy Vite manifest to expected location for Laravel
+echo "3a. Copying Vite manifest to public/build/manifest.json..."
+cp public/build/.vite/manifest.json public/build/manifest.json
 
 # Run Laravel artisan commands
 echo "4. Running Laravel artisan commands..."
