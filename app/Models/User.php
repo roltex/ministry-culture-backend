@@ -60,7 +60,7 @@ class User extends Authenticatable implements FilamentUser
     }
 
     /**
-     * Check if the user is an admin.
+     * Check if the user is an active admin.
      */
     public function isAdmin(): bool
     {
@@ -68,10 +68,14 @@ class User extends Authenticatable implements FilamentUser
     }
 
     /**
-     * Determine if the user can access the Filament panel.
+     * Determine if the user can access the Filament panel (required for Filament v3 production).
+     *
+     * @param Panel $panel
+     * @return bool
      */
     public function canAccessPanel(Panel $panel): bool
     {
-        return $this->isAdmin();
+        // Only allow this specific email with verified email to access Filament
+        return $this->email === 'roland.esakia@gmail.com' && $this->hasVerifiedEmail();
     }
 }
