@@ -107,3 +107,25 @@ Route::get('/test-storage', function () {
         echo "❌ news-images directory does not exist<br>";
     }
 });
+
+// Debug route to view the last 100 lines of the Laravel log
+Route::get('/laravel-log', function () {
+    $logFile = storage_path('logs/laravel.log');
+    if (!file_exists($logFile)) {
+        return response('Log file not found.', 404)->header('Content-Type', 'text/plain');
+    }
+    $lines = [];
+    $fp = fopen($logFile, 'r');
+    if ($fp) {
+        $buffer = [];
+        while (!feof($fp)) {
+            $buffer[] = fgets($fp);
+            if (count($buffer) > 100) {
+                array_shift($buffer);
+            }
+        }
+        fclose($fp);
+        $lines = $buffer;
+    }
+    return response(implode('', $lines))->header('Content-Type', 'text/plain');
+});
