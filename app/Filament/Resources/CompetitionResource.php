@@ -28,6 +28,7 @@ use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\SelectFilter;
+use Illuminate\Support\Facades\Storage;
 
 class CompetitionResource extends Resource
 {
@@ -168,20 +169,18 @@ class CompetitionResource extends Resource
                 Forms\Components\Section::make('Media & Settings')
                     ->schema([
                         FileUpload::make('featured_image')
-                            ->label('Featured Image')
+                            ->label('ფოტო')
                             ->image()
-                            ->disk('public')
                             ->directory('competition-images')
                             ->maxSize(2048)
-                            ->helperText('Recommended size: 1200x630px'),
+                            ->helperText('რეკომენდებული ზომა: 1200x630px'),
                         
                         FileUpload::make('application_form')
-                            ->label('Application Form')
-                            ->disk('public')
-                            ->acceptedFileTypes(['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'])
+                            ->label('განაცხადის ფორმა')
+                            ->acceptedFileTypes(['application/pdf'])
                             ->directory('competition-forms')
-                            ->maxSize(5120)
-                            ->helperText('PDF or Word document (max 5MB)'),
+                            ->maxSize(10240)
+                            ->helperText('PDF ფაილი (მაქს 10MB)'),
                         
                         Toggle::make('is_published')
                             ->label('Published')
@@ -205,8 +204,7 @@ class CompetitionResource extends Resource
         return $table
             ->columns([
                 ImageColumn::make('featured_image')
-                    ->disk('public')
-                    ->label('Image')
+                    ->label('ფოტო')
                     ->circular()
                     ->size(40),
                 TextColumn::make('title')
@@ -236,6 +234,11 @@ class CompetitionResource extends Resource
                     ->label('Start Date')
                     ->dateTime()
                     ->sortable(),
+                TextColumn::make('application_form')
+                    ->label('განაცხადის ფორმა')
+                    ->url(fn ($record) => $record->application_form ? Storage::url($record->application_form) : null)
+                    ->openUrlInNewTab()
+                    ->toggleable(),
                 ToggleColumn::make('is_published')
                     ->label('Published'),
                 ToggleColumn::make('is_active')

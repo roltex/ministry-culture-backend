@@ -150,12 +150,11 @@ class VacancyResource extends Resource
                 Forms\Components\Section::make('Settings')
                     ->schema([
                         FileUpload::make('application_form')
-                            ->label('Application Form')
-                            ->disk('public')
-                            ->acceptedFileTypes(['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'])
+                            ->label('განაცხადის ფორმა')
+                            ->acceptedFileTypes(['application/pdf'])
                             ->directory('vacancy-forms')
-                            ->maxSize(5120)
-                            ->helperText('PDF or Word document (max 5MB)'),
+                            ->maxSize(10240)
+                            ->helperText('PDF ფაილი (მაქს 10MB)'),
                         
                         Toggle::make('is_published')
                             ->label('Published')

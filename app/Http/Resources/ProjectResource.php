@@ -18,9 +18,7 @@ class ProjectResource extends JsonResource
         $data = parent::toArray($request);
         
         // Format the featured_image URL if it exists
-        if (!empty($data['featured_image'])) {
-            $data['featured_image'] = Storage::disk('public')->url($data['featured_image']);
-        }
+        $data['featured_image'] = $this->featured_image ? Storage::url($this->featured_image) : null;
         
         return $data;
     }

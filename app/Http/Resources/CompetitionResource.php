@@ -34,7 +34,7 @@ class CompetitionResource extends JsonResource
             'competition_end' => $this->competition_end,
             'results_announcement' => $this->results_announcement,
             'status' => $this->status,
-            'featured_image' => $this->featured_image ? \Storage::disk('public')->url($this->featured_image) : null,
+            'featured_image' => $this->featured_image ? Storage::url($this->featured_image) : null,
             'application_form' => $this->application_form,
             'is_active' => $this->is_active,
             'is_published' => $this->is_published,

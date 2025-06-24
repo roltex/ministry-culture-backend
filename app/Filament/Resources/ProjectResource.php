@@ -117,12 +117,11 @@ class ProjectResource extends Resource
                 Forms\Components\Section::make('Media & Settings')
                     ->schema([
                         FileUpload::make('featured_image')
-                            ->label('Featured Image')
+                            ->label('ფოტო')
                             ->image()
-                            ->disk('public')
                             ->directory('project-images')
                             ->maxSize(2048)
-                            ->helperText('Recommended size: 1200x630px'),
+                            ->helperText('რეკომენდებული ზომა: 1200x630px'),
                         
                         Toggle::make('is_published')
                             ->label('Published')
@@ -145,8 +144,7 @@ class ProjectResource extends Resource
         return $table
             ->columns([
                 ImageColumn::make('featured_image')
-                    ->disk('public')
-                    ->label('Image')
+                    ->label('ფოტო')
                     ->circular()
                     ->size(40),
                 TextColumn::make('title')

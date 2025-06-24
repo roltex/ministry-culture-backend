@@ -176,20 +176,18 @@ class SubordinateInstitutionResource extends Resource
                 Forms\Components\Section::make('Media & Settings')
                     ->schema([
                         FileUpload::make('logo')
-                            ->label('Logo')
+                            ->label('ლოგო')
                             ->image()
-                            ->disk('public')
                             ->directory('institution-logos')
-                            ->maxSize(2048)
-                            ->helperText('Institution logo (max 2MB)'),
+                            ->maxSize(1024)
+                            ->helperText('ლოგო (მაქს 1MB)'),
                         
-                        FileUpload::make('featured_image')
-                            ->label('Featured Image')
+                        FileUpload::make('image')
+                            ->label('სურათი')
                             ->image()
-                            ->disk('public')
                             ->directory('institution-images')
                             ->maxSize(2048)
-                            ->helperText('Featured image (max 2MB)'),
+                            ->helperText('სურათი (მაქს 2MB)'),
                         
                         Toggle::make('is_published')
                             ->label('Published')
@@ -213,8 +211,7 @@ class SubordinateInstitutionResource extends Resource
         return $table
             ->columns([
                 ImageColumn::make('logo')
-                    ->disk('public')
-                    ->label('Logo')
+                    ->label('ლოგო')
                     ->circular()
                     ->size(40),
                 TextColumn::make('name')

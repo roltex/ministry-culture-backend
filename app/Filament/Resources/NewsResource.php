@@ -89,7 +89,6 @@ class NewsResource extends Resource
                         FileUpload::make('featured_image')
                             ->label('ფოტო')
                             ->image()
-                            ->disk('public')
                             ->directory('news-images')
                             ->maxSize(2048)
                             ->helperText('რეკომენდებული ზომა: 1200x630px'),
@@ -112,7 +111,6 @@ class NewsResource extends Resource
         return $table
             ->columns([
                 ImageColumn::make('featured_image')
-                    ->disk('public')
                     ->label('ფოტო')
                     ->circular()
                     ->size(40),

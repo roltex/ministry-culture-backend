@@ -119,7 +119,6 @@ class LegislationResource extends Resource
                     ->schema([
                         FileUpload::make('document_file')
                             ->label('Document File')
-                            ->disk('public')
                             ->acceptedFileTypes(['application/pdf'])
                             ->directory('legislation-documents')
                             ->maxSize(10240)
@@ -128,7 +127,6 @@ class LegislationResource extends Resource
                         
                         FileUpload::make('document_file_ka')
                             ->label('Document File (Georgian)')
-                            ->disk('public')
                             ->acceptedFileTypes(['application/pdf'])
                             ->directory('legislation-documents')
                             ->maxSize(10240)
@@ -136,7 +134,6 @@ class LegislationResource extends Resource
                         
                         FileUpload::make('document_file_en')
                             ->label('Document File (English)')
-                            ->disk('public')
                             ->acceptedFileTypes(['application/pdf'])
                             ->directory('legislation-documents')
                             ->maxSize(10240)
