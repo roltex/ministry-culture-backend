@@ -7,11 +7,16 @@ define('LARAVEL_START', microtime(true));
 
 // Handle static assets that might not be served by the web server
 $requestUri = $_SERVER['REQUEST_URI'] ?? '';
+
+// Remove query string for file checking
+$requestPath = parse_url($requestUri, PHP_URL_PATH);
+
+// Handle static assets
 $staticExtensions = ['css', 'js', 'png', 'jpg', 'jpeg', 'gif', 'ico', 'svg', 'woff', 'woff2', 'ttf', 'eot'];
 
 foreach ($staticExtensions as $ext) {
-    if (str_ends_with($requestUri, '.' . $ext)) {
-        $filePath = __DIR__ . $requestUri;
+    if (str_ends_with($requestPath, '.' . $ext)) {
+        $filePath = __DIR__ . $requestPath;
         if (file_exists($filePath)) {
             $mimeTypes = [
                 'css' => 'text/css',
@@ -31,6 +36,7 @@ foreach ($staticExtensions as $ext) {
             $mimeType = $mimeTypes[$ext] ?? 'application/octet-stream';
             header('Content-Type: ' . $mimeType);
             header('Cache-Control: public, max-age=31536000');
+            header('Access-Control-Allow-Origin: *');
             readfile($filePath);
             exit;
         }
@@ -47,7 +53,7 @@ $testFiles = [
 ];
 
 foreach ($testFiles as $testFile) {
-    if (str_starts_with($requestUri, '/' . $testFile)) {
+    if (str_starts_with($requestPath, '/' . $testFile)) {
         $filePath = __DIR__ . '/' . $testFile . '.php';
         if (file_exists($filePath)) {
             include $filePath;
