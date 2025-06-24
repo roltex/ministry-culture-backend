@@ -67,10 +67,10 @@ foreach ($imageFolders as $folder) {
                 echo "  ✅ Uploaded: {$fileName}\n";
                 $uploadedFiles++;
             } else {
-                echo "  ❌ Failed to upload {$fileName}\n";
+                echo "  ❌ Failed to upload {$fileName} (put() returned false)\n";
                 $failedFiles++;
             }
-        } catch (Exception $e) {
+        } catch (Throwable $e) {
             echo "  ❌ Exception for {$fileName}: " . $e->getMessage() . "\n";
             $failedFiles++;
         }
