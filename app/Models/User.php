@@ -76,6 +76,6 @@ class User extends Authenticatable implements FilamentUser
     public function canAccessPanel(Panel $panel): bool
     {
         // Only allow this specific email with verified email to access Filament
-        return true; // ✅ Allow access to Filament for all users
+        return true;
     }
 }
