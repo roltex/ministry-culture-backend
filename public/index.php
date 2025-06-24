@@ -16,29 +16,37 @@ $staticExtensions = ['css', 'js', 'png', 'jpg', 'jpeg', 'gif', 'ico', 'svg', 'wo
 
 foreach ($staticExtensions as $ext) {
     if (str_ends_with($requestPath, '.' . $ext)) {
-        $filePath = __DIR__ . $requestPath;
-        if (file_exists($filePath)) {
-            $mimeTypes = [
-                'css' => 'text/css',
-                'js' => 'application/javascript',
-                'png' => 'image/png',
-                'jpg' => 'image/jpeg',
-                'jpeg' => 'image/jpeg',
-                'gif' => 'image/gif',
-                'ico' => 'image/x-icon',
-                'svg' => 'image/svg+xml',
-                'woff' => 'font/woff',
-                'woff2' => 'font/woff2',
-                'ttf' => 'font/ttf',
-                'eot' => 'application/vnd.ms-fontobject'
-            ];
-            
-            $mimeType = $mimeTypes[$ext] ?? 'application/octet-stream';
-            header('Content-Type: ' . $mimeType);
-            header('Cache-Control: public, max-age=31536000');
-            header('Access-Control-Allow-Origin: *');
-            readfile($filePath);
-            exit;
+        // Try both with and without /public prefix
+        $possiblePaths = [
+            __DIR__ . $requestPath,  // Direct path
+            __DIR__ . '/public' . $requestPath,  // With /public prefix
+            dirname(__DIR__) . '/public' . $requestPath  // From parent directory
+        ];
+        
+        foreach ($possiblePaths as $filePath) {
+            if (file_exists($filePath)) {
+                $mimeTypes = [
+                    'css' => 'text/css',
+                    'js' => 'application/javascript',
+                    'png' => 'image/png',
+                    'jpg' => 'image/jpeg',
+                    'jpeg' => 'image/jpeg',
+                    'gif' => 'image/gif',
+                    'ico' => 'image/x-icon',
+                    'svg' => 'image/svg+xml',
+                    'woff' => 'font/woff',
+                    'woff2' => 'font/woff2',
+                    'ttf' => 'font/ttf',
+                    'eot' => 'application/vnd.ms-fontobject'
+                ];
+                
+                $mimeType = $mimeTypes[$ext] ?? 'application/octet-stream';
+                header('Content-Type: ' . $mimeType);
+                header('Cache-Control: public, max-age=31536000');
+                header('Access-Control-Allow-Origin: *');
+                readfile($filePath);
+                exit;
+            }
         }
     }
 }
