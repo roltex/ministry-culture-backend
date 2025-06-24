@@ -1,20 +1,100 @@
 <?php
 
-use Illuminate\Foundation\Application;
+use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Http\Request;
 
 define('LARAVEL_START', microtime(true));
 
-// Determine if the application is in maintenance mode...
+// Handle static assets that might not be served by the web server
+$requestUri = $_SERVER['REQUEST_URI'] ?? '';
+$staticExtensions = ['css', 'js', 'png', 'jpg', 'jpeg', 'gif', 'ico', 'svg', 'woff', 'woff2', 'ttf', 'eot'];
+
+foreach ($staticExtensions as $ext) {
+    if (str_ends_with($requestUri, '.' . $ext)) {
+        $filePath = __DIR__ . $requestUri;
+        if (file_exists($filePath)) {
+            $mimeTypes = [
+                'css' => 'text/css',
+                'js' => 'application/javascript',
+                'png' => 'image/png',
+                'jpg' => 'image/jpeg',
+                'jpeg' => 'image/jpeg',
+                'gif' => 'image/gif',
+                'ico' => 'image/x-icon',
+                'svg' => 'image/svg+xml',
+                'woff' => 'font/woff',
+                'woff2' => 'font/woff2',
+                'ttf' => 'font/ttf',
+                'eot' => 'application/vnd.ms-fontobject'
+            ];
+            
+            $mimeType = $mimeTypes[$ext] ?? 'application/octet-stream';
+            header('Content-Type: ' . $mimeType);
+            header('Cache-Control: public, max-age=31536000');
+            readfile($filePath);
+            exit;
+        }
+    }
+}
+
+// Handle test files
+if (str_starts_with($requestUri, '/debug.php') || 
+    str_starts_with($requestUri, '/test-simple.php') || 
+    str_starts_with($requestUri, '/test-assets.php') ||
+    str_starts_with($requestUri, '/server-test.php')) {
+    
+    $filePath = __DIR__ . $requestUri;
+    if (file_exists($filePath)) {
+        include $filePath;
+        exit;
+    }
+}
+
+/*
+|--------------------------------------------------------------------------
+| Check If The Application Is Under Maintenance
+|--------------------------------------------------------------------------
+|
+| If the application is in maintenance / demo mode via the "down" command
+| we will load this file so that any pre-rendered content can be shown
+| instead of starting the framework, which could cause an exception.
+|
+*/
+
 if (file_exists($maintenance = __DIR__.'/../storage/framework/maintenance.php')) {
     require $maintenance;
 }
 
-// Register the Composer autoloader...
+/*
+|--------------------------------------------------------------------------
+| Register The Auto Loader
+|--------------------------------------------------------------------------
+|
+| Composer provides a convenient, automatically generated class loader for
+| this application. We just need to utilize it! We'll simply require it
+| into the script here so we don't need to manually load our classes.
+|
+*/
+
 require __DIR__.'/../vendor/autoload.php';
 
-// Bootstrap Laravel and handle the request...
-/** @var Application $app */
+/*
+|--------------------------------------------------------------------------
+| Run The Application
+|--------------------------------------------------------------------------
+|
+| Once we have the application, we can handle the incoming request using
+| the application's HTTP kernel. Then, we will send the response back
+| to this client's browser, allowing them to enjoy our application.
+|
+*/
+
 $app = require_once __DIR__.'/../bootstrap/app.php';
 
-$app->handleRequest(Request::capture());
+$kernel = $app->make(Kernel::class);
+
+$response = $kernel->handle(
+    $request = Request::capture()
+)->send();
+
+$kernel->terminate($request, $response);
