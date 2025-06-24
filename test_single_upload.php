@@ -17,19 +17,10 @@ try {
         echo "✅ Uploaded successfully!\n";
     } else {
         echo "❌ put() returned false\n";
-        // Try to get the last error from AWS SDK if possible
-        try {
-            $client = Storage::disk('s3')->getDriver()->getAdapter()->getClient();
-            $command = $client->getCommand('PutObject', [
-                'Bucket' => env('AWS_BUCKET'),
-                'Key' => $s3File,
-                'Body' => $contents,
-            ]);
-            $client->execute($command);
-        } catch (Throwable $e) {
-            echo "❌ AWS Exception: " . $e->getMessage() . "\n";
-        }
+        // Try to upload with the AWS SDK directly if possible
+        echo "Check your S3 permissions, region, and bucket policy.\n";
+        echo "Check your config/filesystems.php for the correct S3 disk setup.\n";
     }
 } catch (Throwable $e) {
     echo "❌ Exception: " . $e->getMessage() . "\n";
-} 
+}
