@@ -70,11 +70,11 @@ try {
         echo "✅ Object URL: " . $result['ObjectURL'] . "\n";
         
         // Clean up test file
-        $s3Client->deleteObject([
-            'Bucket' => $bucket,
-            'Key'    => $testKey
-        ]);
-        echo "✅ Test file cleaned up\n";
+        // $s3Client->deleteObject([
+        //     'Bucket' => $bucket,
+        //     'Key'    => $testKey
+        // ]);
+        // echo "✅ Test file cleaned up\n";
         
     } catch (AwsException $e) {
         echo "❌ Upload test failed: " . $e->getMessage() . "\n";
