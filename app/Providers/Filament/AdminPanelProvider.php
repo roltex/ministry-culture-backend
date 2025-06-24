@@ -27,24 +27,29 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('admin')
-            ->login()
+
+            // ✅ This is required for Vite + Filament v3
             ->viteTheme('resources/css/app.css')
+
+            ->login()
             ->brandName('Ministry of Culture')
+
+            // ✅ Optional: set a color palette
             ->colors([
                 'primary' => Color::Amber,
             ])
+
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
+
             ->pages([
-                \Filament\Pages\Dashboard::class,
+                Pages\Dashboard::class,
             ])
+
             ->widgets([
                 StatsOverview::class,
-                // Add more widgets here as needed, e.g.:
-                // QuickLinksWidget::class,
-                // SystemStatusWidget::class,
-                // RecentActivityWidget::class,
             ])
+
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
@@ -56,6 +61,7 @@ class AdminPanelProvider extends PanelProvider
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
             ])
+
             ->authMiddleware([
                 Authenticate::class,
             ]);
