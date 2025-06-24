@@ -2,7 +2,7 @@
 
 set -e  # Exit on any error
 
-echo "--- STARTUP SCRIPT V5 (S3) ---"
+echo "--- STARTUP SCRIPT V6 (S3 + Public Dir) ---"
 echo "Current PWD: $(pwd)"
 echo "Listing files in /app:"
 ls -la /app
@@ -47,7 +47,8 @@ LOG_LEVEL=error
 DB_CONNECTION=sqlite
 DB_DATABASE=/app/database/database.sqlite
 
-BROADCAST_DRIVER=log
+BROADCAST_DRIVER=pusher
+BROADCAST_CONNECTION=pusher
 CACHE_DRIVER=file
 FILESYSTEM_DISK=s3
 QUEUE_CONNECTION=sync
@@ -76,19 +77,16 @@ AWS_BUCKET=culture-ministry-images
 AWS_URL=https://culture-ministry-images.s3.eu-north-1.amazonaws.com
 AWS_USE_PATH_STYLE_ENDPOINT=false
 
-PUSHER_APP_ID=
-PUSHER_APP_KEY=
-PUSHER_APP_SECRET=
+PUSHER_APP_ID=2012529
+PUSHER_APP_KEY=a31be237b5613a0a77c1
+PUSHER_APP_SECRET=8b126b1a9e2075010eb7
 PUSHER_HOST=
 PUSHER_PORT=443
 PUSHER_SCHEME=https
-PUSHER_APP_CLUSTER=mt1
+PUSHER_APP_CLUSTER=ap2
 
 VITE_APP_NAME="\${APP_NAME}"
 VITE_PUSHER_APP_KEY="\${PUSHER_APP_KEY}"
-VITE_PUSHER_HOST="\${PUSHER_HOST}"
-VITE_PUSHER_PORT="\${PUSHER_PORT}"
-VITE_PUSHER_SCHEME="\${PUSHER_SCHEME}"
 VITE_PUSHER_APP_CLUSTER="\${PUSHER_APP_CLUSTER}"
 EOF
     echo "Created .env file"
@@ -123,7 +121,23 @@ php migrate_existing_images.php
 echo "Caching configuration..."
 php artisan config:cache
 
-echo "--- SETUP COMPLETE (S3) ---"
+# Create storage link if it doesn't exist
+echo "Creating storage link..."
+if [ ! -L /app/public/storage ]; then
+    ln -sfn /app/storage/app/public /app/public/storage
+    echo "Created storage symlink"
+fi
+
+echo "--- SETUP COMPLETE (S3 + Public Dir) ---"
 echo "Starting PHP server..."
-# Start the application with the Laravel router script and redirect stderr to stdout
-exec php -S 0.0.0.0:$PORT server.php 2>&1 
+
+# Check if NIXPACKS_PHP_ROOT_DIR is set to /app/public
+if [ "$NIXPACKS_PHP_ROOT_DIR" = "/app/public" ]; then
+    echo "Using public directory as root..."
+    cd /app/public
+    exec php -S 0.0.0.0:$PORT index.php 2>&1
+else
+    echo "Using server.php from root directory..."
+    cd /app
+    exec php -S 0.0.0.0:$PORT server.php 2>&1
+fi 
