@@ -25,6 +25,9 @@ php artisan vendor:publish --tag=filament-assets --ansi
 # Force publish assets with robust approach
 php force_publish_assets.php
 
+# Run the new comprehensive Filament assets fix
+php fix_filament_assets.php
+
 # Generate application key
 php artisan key:generate
 
