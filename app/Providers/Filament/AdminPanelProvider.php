@@ -28,6 +28,8 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
+            ->viteTheme('resources/css/app.css')
+            ->brandName('Ministry of Culture')
             ->colors([
                 'primary' => Color::Amber,
             ])
