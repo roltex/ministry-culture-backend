@@ -28,8 +28,7 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
 
-            // ✅ This is required for Vite + Filament v3
-            ->viteTheme('resources/css/app.css')
+
 
             ->login()
             ->brandName('Ministry of Culture')
