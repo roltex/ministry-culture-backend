@@ -131,6 +131,8 @@ class ProjectResource extends Resource
                         FileUpload::make('featured_image')
                             ->label('ფოტო')
                             ->image()
+
+                            
                             ->directory('project-images')
                             ->maxSize(2048)
                             ->helperText('რეკომენდებული ზომა: 1200x630px'),
@@ -138,6 +140,8 @@ class ProjectResource extends Resource
                         FileUpload::make('gallery')
                             ->label('გალერეა')
                             ->image()
+
+                            
                             ->multiple()
                             ->directory('project-images')
                             ->maxSize(2048)
@@ -146,7 +150,8 @@ class ProjectResource extends Resource
                         
                         FileUpload::make('attachments')
                             ->label('დანართები')
-                            ->disk('public')
+
+                        
                             ->directory('project-attachments')
                             ->multiple()
                             ->maxFiles(5)

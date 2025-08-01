@@ -85,6 +85,8 @@ class PageResource extends Resource
                         FileUpload::make('photo')
                             ->label('ფოტო')
                             ->image()
+                            
+                            
                             ->directory('pages')
                             ->maxSize(2048)
                             ->imageEditor()
@@ -123,7 +125,8 @@ class PageResource extends Resource
                 
                 FileUpload::make('attachments')
                     ->label('დანართები')
-                    ->disk('public')
+                                            
+                        
                     ->directory('page-attachments')
                     ->multiple()
                     ->maxFiles(5)
@@ -137,7 +140,7 @@ class PageResource extends Resource
     {
         return $table
             ->columns([
-                ImageColumn::make('photo')
+                                ImageColumn::make('photo')
                     ->label('ფოტო')
                     ->width(60)
                     ->height(40),

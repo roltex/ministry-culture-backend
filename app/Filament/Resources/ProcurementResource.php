@@ -77,7 +77,8 @@ class ProcurementResource extends Resource
                     ->helperText('სათაურის URL-ში გამოსაყენებელი ვერსია'),
                 FileUpload::make('attachments')
                     ->label('დანართები')
-                    ->disk('public')
+                                            
+                        
                     ->directory('procurement-attachments')
                     ->multiple()
                     ->maxFiles(10)

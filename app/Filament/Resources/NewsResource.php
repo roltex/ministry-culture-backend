@@ -100,16 +100,18 @@ class NewsResource extends Resource
                         FileUpload::make('featured_image')
                             ->label('მთავარი ფოტო')
                             ->image()
-                            ->disk('public')
+
                             ->directory('news-images')
+                            
                             ->maxSize(2048)
                             ->helperText('რეკომენდებული ზომა: 1200x630px'),
                         
                         FileUpload::make('gallery')
                             ->label('გალერეა')
                             ->image()
-                            ->disk('public')
+
                             ->directory('news-images')
+                            
                             ->multiple()
                             ->maxFiles(10)
                             ->maxSize(2048)
@@ -118,8 +120,9 @@ class NewsResource extends Resource
                         
                         FileUpload::make('attachments')
                             ->label('დანართები')
-                            ->disk('public')
+
                             ->directory('news-attachments')
+                            
                             ->multiple()
                             ->maxFiles(5)
                             ->maxSize(10240)

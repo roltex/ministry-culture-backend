@@ -165,6 +165,8 @@ class VacancyResource extends Resource
                     ->schema([
                         FileUpload::make('application_form')
                             ->label('განაცხადის ფორმა')
+                            
+                            
                             ->acceptedFileTypes(['application/pdf'])
                             ->directory('vacancy-forms')
                             ->maxSize(10240)

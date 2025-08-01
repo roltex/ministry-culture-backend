@@ -6,6 +6,8 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\URL;
+use Filament\Forms\Components\FileUpload;
+use Filament\Tables\Columns\ImageColumn;
 
 
 class AppServiceProvider extends ServiceProvider
@@ -27,6 +29,22 @@ class AppServiceProvider extends ServiceProvider
         if ($this->app->environment('production')) {
             URL::forceScheme('https');
         }
+
+        // Configure FileUpload to use the environment-specified disk
+        FileUpload::configureUsing(function (FileUpload $component): void {
+            $component->disk(config('filesystems.default'));
+        });
+
+        // Configure ImageColumn to use the environment-specified disk
+        ImageColumn::configureUsing(function (ImageColumn $component): void {
+            $component->disk(config('filesystems.default'));
+        });
+
+
+
+
+
+
 
         // Only configure SQLite if database exists and we can connect
         try {

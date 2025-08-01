@@ -168,12 +168,16 @@ class DeputyMinisterResource extends Resource
                         FileUpload::make('photo')
                             ->label('ფოტო')
                             ->image()
+                            
+                            
                             ->directory('deputy-minister-photos')
                             ->maxSize(2048)
                             ->helperText('მინისტრის მოადგილის ფოტო (მაქს 2MB)'),
                         
                         FileUpload::make('attachments')
                             ->label('დანართები')
+                            
+                            
                             ->multiple()
                             ->directory('deputy-minister-attachments')
                             ->maxSize(5120)
@@ -192,7 +196,7 @@ class DeputyMinisterResource extends Resource
     {
         return $table
             ->columns([
-                ImageColumn::make('photo')
+                                ImageColumn::make('photo')
                     ->label('ფოტო')
                     ->circular()
                     ->size(50),

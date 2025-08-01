@@ -191,6 +191,8 @@ class SubordinateInstitutionResource extends Resource
                         FileUpload::make('logo')
                             ->label('ლოგო')
                             ->image()
+                            
+                            
                             ->directory('institution-logos')
                             ->maxSize(1024)
                             ->helperText('ლოგო (მაქს 1MB)'),
@@ -198,6 +200,8 @@ class SubordinateInstitutionResource extends Resource
                         FileUpload::make('image')
                             ->label('სურათი')
                             ->image()
+                            
+                            
                             ->directory('institution-images')
                             ->maxSize(2048)
                             ->helperText('სურათი (მაქს 2MB)'),
@@ -223,7 +227,7 @@ class SubordinateInstitutionResource extends Resource
     {
         return $table
             ->columns([
-                ImageColumn::make('logo')
+                                ImageColumn::make('logo')
                     ->label('ლოგო')
                     ->circular()
                     ->size(40),

@@ -234,6 +234,8 @@ class SettingResource extends Resource
                         FileUpload::make('site_logo')
                             ->label('საიტის ლოგო')
                             ->image()
+                            
+                            
                             ->directory('site-media')
                             ->maxSize(2048)
                             ->helperText('საიტის ლოგო (მაქს 2MB)'),
@@ -241,6 +243,8 @@ class SettingResource extends Resource
                         FileUpload::make('site_favicon')
                             ->label('საიტის ფავიკონი')
                             ->image()
+                            
+                            
                             ->directory('site-media')
                             ->maxSize(1024)
                             ->helperText('ფავიკონი (მაქს 1MB, რეკომენდებული: 32x32px)'),
@@ -248,6 +252,8 @@ class SettingResource extends Resource
                         FileUpload::make('default_image')
                             ->label('ნაგულისხმევი სურათი')
                             ->image()
+                            
+                            
                             ->directory('site-media')
                             ->maxSize(2048)
                             ->helperText('ნაგულისხმევი სურათი კონტენტისთვის სურათების გარეშე'),

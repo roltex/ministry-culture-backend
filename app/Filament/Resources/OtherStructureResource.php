@@ -51,8 +51,8 @@ class OtherStructureResource extends Resource
                     ->label('სურათის ატვირთვა')
                     ->image()
                     ->imageEditor()
-                    ->directory('other-structure-images')
-                    ->visibility('public'),
+
+                    ->directory('other-structure-images'),
                 TextInput::make('link')
                     ->label('ბმული')
                     ->url()

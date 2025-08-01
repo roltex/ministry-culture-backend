@@ -72,6 +72,8 @@ class UserResource extends Resource
                         FileUpload::make('avatar')
                             ->label('ავატარი')
                             ->image()
+                            
+                            
                             ->directory('user-avatars')
                             ->maxSize(1024)
                             ->helperText('ავატარი (მაქს 1MB)'),
@@ -103,7 +105,7 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\ImageColumn::make('avatar')
+                                Tables\Columns\ImageColumn::make('avatar')
                     ->label('ავატარი')
                     ->circular()
                     ->size(40),

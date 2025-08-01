@@ -182,12 +182,16 @@ class CompetitionResource extends Resource
                         FileUpload::make('featured_image')
                             ->label('ფოტო')
                             ->image()
+                            
+                            
                             ->directory('competition-images')
                             ->maxSize(2048)
                             ->helperText('რეკომენდებული ზომა: 1200x630px'),
                         
                         FileUpload::make('application_form')
                             ->label('განაცხადის ფორმა')
+                            
+                            
                             ->acceptedFileTypes(['application/pdf'])
                             ->directory('competition-forms')
                             ->maxSize(10240)
@@ -214,7 +218,7 @@ class CompetitionResource extends Resource
     {
         return $table
             ->columns([
-                ImageColumn::make('featured_image')
+                                ImageColumn::make('featured_image')
                     ->label('ფოტო')
                     ->circular()
                     ->size(40),

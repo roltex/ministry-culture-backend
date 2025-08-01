@@ -126,6 +126,8 @@ class LegislationResource extends Resource
                     ->schema([
                         FileUpload::make('document_file')
                             ->label('დოკუმენტის ფაილი')
+                            
+                            
                             ->acceptedFileTypes(['application/pdf'])
                             ->directory('legislation-documents')
                             ->maxSize(10240)
@@ -134,6 +136,8 @@ class LegislationResource extends Resource
                         
                         FileUpload::make('document_file_ka')
                             ->label('დოკუმენტის ფაილი (ქართული)')
+                            
+                            
                             ->acceptedFileTypes(['application/pdf'])
                             ->directory('legislation-documents')
                             ->maxSize(10240)
@@ -141,6 +145,8 @@ class LegislationResource extends Resource
                         
                         FileUpload::make('document_file_en')
                             ->label('დოკუმენტის ფაილი (ინგლისური)')
+                            
+                            
                             ->acceptedFileTypes(['application/pdf'])
                             ->directory('legislation-documents')
                             ->maxSize(10240)

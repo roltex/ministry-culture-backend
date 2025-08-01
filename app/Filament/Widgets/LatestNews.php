@@ -24,7 +24,7 @@ class LatestNews extends BaseWidget
                     ->limit(5)
             )
             ->columns([
-                ImageColumn::make('featured_image')
+                                ImageColumn::make('featured_image')
                     ->label('Image')
                     ->circular()
                     ->size(40),

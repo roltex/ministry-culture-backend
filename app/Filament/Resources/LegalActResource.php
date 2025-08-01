@@ -76,7 +76,8 @@ class LegalActResource extends Resource
                     }),
                 FileUpload::make('attachments')
                     ->label('დანართები')
-                    ->disk('public')
+                                            
+                        
                     ->directory('legal-act-attachments')
                     ->multiple()
                     ->maxFiles(10)

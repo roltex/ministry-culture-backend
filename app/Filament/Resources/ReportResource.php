@@ -76,7 +76,8 @@ class ReportResource extends Resource
                     }),
                 FileUpload::make('attachments')
                     ->label('დანართები')
-                    ->disk('public')
+                                            
+                        
                     ->directory('report-attachments')
                     ->multiple()
                     ->maxFiles(10)

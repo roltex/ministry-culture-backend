@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Storage;
 
 class MinistryStructureResource extends JsonResource
 {
@@ -22,7 +23,7 @@ class MinistryStructureResource extends JsonResource
             'linkedin_url' => $this->linkedin_url,
             'youtube_url' => $this->youtube_url,
             'telegram_url' => $this->telegram_url,
-            'image' => $this->image ? url('storage/' . $this->image) : null,
+            'image' => $this->image ? Storage::url($this->image) : null,
             'parent_id' => $this->parent_id,
             'sort_order' => $this->sort_order,
             'parent' => $this->parent ? [
@@ -33,7 +34,7 @@ class MinistryStructureResource extends JsonResource
             'attachments' => $this->attachments->map(function ($attachment) {
                 return [
                     'id' => $attachment->id,
-                    'file' => $attachment->file ? url('storage/' . $attachment->file) : null,
+                    'file' => $attachment->file ? Storage::url($attachment->file) : null,
                     'name' => $attachment->name,
                 ];
             }),

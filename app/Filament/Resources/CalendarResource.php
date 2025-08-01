@@ -99,16 +99,18 @@ class CalendarResource extends Resource
                         FileUpload::make('featured_image')
                             ->label('მთავარი ფოტო')
                             ->image()
-                            ->disk('public')
+                            
                             ->directory('calendar-images')
+                            
                             ->maxSize(2048)
                             ->helperText('რეკომენდებული ზომა: 1200x630px'),
                         
                         FileUpload::make('gallery')
                             ->label('გალერეა')
                             ->image()
-                            ->disk('public')
+                            
                             ->directory('calendar-images')
+                            
                             ->multiple()
                             ->maxFiles(10)
                             ->maxSize(2048)
@@ -117,8 +119,9 @@ class CalendarResource extends Resource
                         
                         FileUpload::make('attachments')
                             ->label('დანართები')
-                            ->disk('public')
+                            
                             ->directory('calendar-attachments')
+                            
                             ->multiple()
                             ->maxFiles(5)
                             ->maxSize(10240)
@@ -147,7 +150,7 @@ class CalendarResource extends Resource
     {
         return $table
             ->columns([
-                ImageColumn::make('featured_image')
+                                ImageColumn::make('featured_image')
                     ->label('ფოტო')
                     ->circular()
                     ->size(40),
