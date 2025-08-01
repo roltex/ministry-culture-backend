@@ -17,12 +17,20 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             AdminUserSeeder::class,
+            SettingSeeder::class,
             NewsSeeder::class,
             ProjectSeeder::class,
             CompetitionSeeder::class,
             VacancySeeder::class,
             LegislationSeeder::class,
             SubordinateInstitutionSeeder::class,
+            MenuSeeder::class,
+            ProcurementSeeder::class,
+            LegalActSeeder::class,
+            ReportSeeder::class,
+            CalendarSeeder::class,
+            MinisterStructureSeeder::class,
+            MinistryStructureSeeder::class,
         ]);
     }
 }

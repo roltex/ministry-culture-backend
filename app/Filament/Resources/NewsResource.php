@@ -25,6 +25,8 @@ use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\SelectFilter;
+use Illuminate\Support\Facades\Storage;
+use App\Utils\GeorgianTransliterator;
 
 class NewsResource extends Resource
 {
@@ -35,8 +37,10 @@ class NewsResource extends Resource
     protected static ?string $navigationGroup = 'კონტენტის მართვა';
     
     protected static ?string $navigationLabel = 'სიახლეები';
+    protected static ?string $modelLabel = 'სიახლე';
+    protected static ?string $pluralModelLabel = 'სიახლეები';
     
-    protected static ?int $navigationSort = 1;
+    protected static ?int $navigationSort = 2;
 
     public static function form(Form $form): Form
     {
@@ -81,18 +85,46 @@ class NewsResource extends Resource
                     ->schema([
                         TextInput::make('slug')
                             ->label('URL-ის ნაწილი')
-                            ->required()
                             ->unique(ignoreRecord: true)
                             ->maxLength(255)
+                            ->live()
+                            ->afterStateUpdated(function ($state, $set, $get) {
+                                $georgianTitle = $get('title.ka');
+                                if (!empty($georgianTitle) && empty($state)) {
+                                    $slug = GeorgianTransliterator::generateSlug($georgianTitle);
+                                    $set('slug', $slug);
+                                }
+                            })
                             ->helperText('სათაურის URL-ში გამოსაყენებელი ვერსია'),
                         
                         FileUpload::make('featured_image')
-                            ->label('ფოტო')
+                            ->label('მთავარი ფოტო')
                             ->image()
                             ->disk('public')
                             ->directory('news-images')
                             ->maxSize(2048)
                             ->helperText('რეკომენდებული ზომა: 1200x630px'),
+                        
+                        FileUpload::make('gallery')
+                            ->label('გალერეა')
+                            ->image()
+                            ->disk('public')
+                            ->directory('news-images')
+                            ->multiple()
+                            ->maxFiles(10)
+                            ->maxSize(2048)
+                            ->reorderable()
+                            ->helperText('შეგიძლიათ ატვირთოთ მაქსიმუმ 10 ფოტო გალერეისთვის'),
+                        
+                        FileUpload::make('attachments')
+                            ->label('დანართები')
+                            ->disk('public')
+                            ->directory('news-attachments')
+                            ->multiple()
+                            ->maxFiles(5)
+                            ->maxSize(10240)
+                            ->acceptedFileTypes(['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'])
+                            ->helperText('შეგიძლიათ ატვირთოთ მაქსიმუმ 5 ფაილი (PDF, Word, Excel - თითოეული მაქს. 10MB)'),
                         
                         Toggle::make('is_published')
                             ->label('გამოქვეყნებული')
@@ -146,20 +178,13 @@ class NewsResource extends Resource
                     ->query(fn (Builder $query): Builder => $query->whereDate('published_at', today())),
             ])
             ->actions([
-                Tables\Actions\ViewAction::make()
-                    ->label('')
-                    ->tooltip('ნახვა'),
-                Tables\Actions\EditAction::make()
-                    ->label('')
-                    ->tooltip('რედაქტირება'),
-                Tables\Actions\DeleteAction::make()
-                    ->label('')
-                    ->tooltip('წაშლა'),
+                Tables\Actions\ViewAction::make()->label('ნახვა'),
+                Tables\Actions\EditAction::make()->label('რედაქტირება'),
+                Tables\Actions\DeleteAction::make()->label('წაშლა'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make()
-                        ->label('წაშლა'),
+                    Tables\Actions\DeleteBulkAction::make()->label('წაშლა'),
                 ]),
             ])
             ->defaultSort('published_at', 'desc');

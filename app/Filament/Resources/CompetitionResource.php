@@ -29,6 +29,7 @@ use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Support\Facades\Storage;
+use App\Utils\GeorgianTransliterator;
 
 class CompetitionResource extends Resource
 {
@@ -39,134 +40,144 @@ class CompetitionResource extends Resource
     protected static ?string $navigationGroup = 'კონტენტის მართვა';
     
     protected static ?string $navigationLabel = 'კონკურსები';
-    
+    protected static ?string $modelLabel = 'კონკურსი';
+    protected static ?string $pluralModelLabel = 'კონკურსები';
     protected static ?int $navigationSort = 3;
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Tabs::make('Competition Content')
+                Tabs::make('კონკურსის კონტენტი')
                     ->tabs([
-                        Tab::make('Georgian')
+                        Tab::make('ქართული')
                             ->schema([
                                 TextInput::make('title.ka')
-                                    ->label('Title (Georgian)')
+                                    ->label('სათაური (ქართული)')
                                     ->required()
                                     ->maxLength(255),
                                 RichEditor::make('content.ka')
-                                    ->label('Content (Georgian)')
+                                    ->label('კონტენტი (ქართული)')
                                     ->required()
                                     ->columnSpanFull(),
                                 Textarea::make('description.ka')
-                                    ->label('Description (Georgian)')
+                                    ->label('აღწერა (ქართული)')
                                     ->required()
                                     ->rows(3)
                                     ->maxLength(500),
                                 Textarea::make('excerpt.ka')
-                                    ->label('Excerpt (Georgian)')
+                                    ->label('მოკლე აღწერა (ქართული)')
                                     ->rows(2)
                                     ->maxLength(255),
                                 Textarea::make('requirements.ka')
-                                    ->label('Requirements (Georgian)')
+                                    ->label('მოთხოვნები (ქართული)')
                                     ->rows(4)
                                     ->columnSpanFull(),
                             ]),
-                        Tab::make('English')
+                        Tab::make('ინგლისური')
                             ->schema([
                                 TextInput::make('title.en')
-                                    ->label('Title (English)')
+                                    ->label('სათაური (ინგლისური)')
                                     ->required()
                                     ->maxLength(255),
                                 RichEditor::make('content.en')
-                                    ->label('Content (English)')
+                                    ->label('კონტენტი (ინგლისური)')
                                     ->required()
                                     ->columnSpanFull(),
                                 Textarea::make('description.en')
-                                    ->label('Description (English)')
+                                    ->label('აღწერა (ინგლისური)')
                                     ->required()
                                     ->rows(3)
                                     ->maxLength(500),
                                 Textarea::make('excerpt.en')
-                                    ->label('Excerpt (English)')
+                                    ->label('მოკლე აღწერა (ინგლისური)')
                                     ->rows(2)
                                     ->maxLength(255),
                                 Textarea::make('requirements.en')
-                                    ->label('Requirements (English)')
+                                    ->label('მოთხოვნები (ინგლისური)')
                                     ->rows(4)
                                     ->columnSpanFull(),
                             ]),
                     ])
                     ->columnSpanFull(),
                 
-                Forms\Components\Section::make('Competition Details')
+                Forms\Components\Section::make('კონკურსის დეტალები')
                     ->schema([
                         TextInput::make('slug')
-                            ->required()
+                            ->label('URL-ის ნაწილი')
                             ->unique(ignoreRecord: true)
                             ->maxLength(255)
-                            ->helperText('URL-friendly version of the title'),
+                            ->live()
+                            ->afterStateUpdated(function ($state, $set, $get) {
+                                $georgianTitle = $get('title.ka');
+                                if (!empty($georgianTitle) && empty($state)) {
+                                    $slug = GeorgianTransliterator::generateSlug($georgianTitle);
+                                    $set('slug', $slug);
+                                }
+                            })
+                            ->helperText('სათაურის URL-ში გამოსაყენებელი ვერსია'),
                         
                         Select::make('category')
                             ->options([
-                                'arts' => 'Arts',
-                                'music' => 'Music',
-                                'dance' => 'Dance',
-                                'theater' => 'Theater',
-                                'literature' => 'Literature',
-                                'film' => 'Film',
-                                'sports' => 'Sports',
-                                'other' => 'Other',
+                                'arts' => 'ხელოვნება',
+                                'music' => 'მუსიკა',
+                                'dance' => 'ცეკვა',
+                                'theater' => 'თეატრი',
+                                'literature' => 'ლიტერატურა',
+                                'film' => 'კინო',
+                                'sports' => 'სპორტი',
+                                'other' => 'სხვა',
                             ])
+                            ->label('კატეგორია')
                             ->required()
                             ->searchable(),
                         
                         TextInput::make('prize_amount')
-                            ->label('Prize Amount')
+                            ->label('პრიზის თანხა')
                             ->numeric()
                             ->prefix('₾')
-                            ->helperText('Total prize amount in Georgian Lari'),
+                            ->helperText('სულ პრიზის თანხა ლარში'),
                         
                         TextInput::make('max_participants')
-                            ->label('Max Participants')
+                            ->label('მაქს. მონაწილეები')
                             ->numeric()
-                            ->helperText('Maximum number of participants allowed'),
+                            ->helperText('მაქსიმალური მონაწილეთა რაოდენობა'),
                         
                         TextInput::make('contact_email')
-                            ->label('Contact Email')
+                            ->label('საკონტაქტო ელ-ფოსტა')
                             ->email()
                             ->required(),
                         
                         TextInput::make('contact_phone')
-                            ->label('Contact Phone')
+                            ->label('საკონტაქტო ტელეფონი')
                             ->tel(),
                     ])
                     ->columns(2),
                 
-                Forms\Components\Section::make('Timeline')
+                Forms\Components\Section::make('ვადები')
                     ->schema([
                         DateTimePicker::make('registration_deadline')
-                            ->label('Registration Deadline')
+                            ->label('რეგისტრაციის ვადა')
                             ->required()
                             ->default(now()),
                         
                         DateTimePicker::make('competition_start')
-                            ->label('Competition Start')
+                            ->label('კონკურსის დაწყების თარიღი')
                             ->required()
                             ->default(now()),
                         
                         DateTimePicker::make('competition_end')
-                            ->label('Competition End')
+                            ->label('კონკურსის დასრულების თარიღი')
                             ->required()
                             ->default(now()),
                         
                         DateTimePicker::make('results_announcement')
-                            ->label('Results Announcement Date')
+                            ->label('შედეგების გამოცხადების თარიღი')
                             ->default(now()),
                     ])
                     ->columns(2),
                 
-                Forms\Components\Section::make('Media & Settings')
+                Forms\Components\Section::make('მედია და პარამეტრები')
                     ->schema([
                         FileUpload::make('featured_image')
                             ->label('ფოტო')
@@ -183,16 +194,16 @@ class CompetitionResource extends Resource
                             ->helperText('PDF ფაილი (მაქს 10MB)'),
                         
                         Toggle::make('is_published')
-                            ->label('Published')
+                            ->label('გამოქვეყნებული')
                             ->default(true),
                         
                         Toggle::make('is_active')
-                            ->label('Active')
+                            ->label('აქტიური')
                             ->default(true)
-                            ->helperText('Is this competition currently accepting applications?'),
+                            ->helperText('მიმდინარეობს განაცხადების მიღება?'),
                         
                         DateTimePicker::make('published_at')
-                            ->label('Publish Date')
+                            ->label('გამოქვეყნების თარიღი')
                             ->default(now()),
                     ])
                     ->columns(2),
@@ -208,30 +219,42 @@ class CompetitionResource extends Resource
                     ->circular()
                     ->size(40),
                 TextColumn::make('title')
-                    ->label('Title (Georgian)')
+                    ->label('სათაური (ქართული)')
                     ->formatStateUsing(fn ($record) => $record->getTranslation('title', 'ka'))
                     ->searchable(query: function (Builder $query, string $search): Builder {
                         return $query->where('title->ka', 'like', "%{$search}%");
                     }),
                 TextColumn::make('title')
-                    ->label('Title (English)')
+                    ->label('სათაური (ინგლისური)')
                     ->formatStateUsing(fn ($record) => $record->getTranslation('title', 'en'))
                     ->searchable(query: function (Builder $query, string $search): Builder {
                         return $query->where('title->en', 'like', "%{$search}%");
                     }),
                 TextColumn::make('category')
+                    ->label('კატეგორია')
                     ->badge()
+                    ->formatStateUsing(fn ($state) => match ($state) {
+                        'arts' => 'ხელოვნება',
+                        'music' => 'მუსიკა',
+                        'dance' => 'ცეკვა',
+                        'theater' => 'თეატრი',
+                        'literature' => 'ლიტერატურა',
+                        'film' => 'კინო',
+                        'sports' => 'სპორტი',
+                        'other' => 'სხვა',
+                        default => $state,
+                    })
                     ->searchable(),
                 TextColumn::make('prize_amount')
-                    ->label('Prize')
+                    ->label('პრიზი')
                     ->money('GEL')
                     ->sortable(),
                 TextColumn::make('registration_deadline')
-                    ->label('Registration Deadline')
+                    ->label('რეგისტრაციის ვადა')
                     ->dateTime()
                     ->sortable(),
                 TextColumn::make('competition_start')
-                    ->label('Start Date')
+                    ->label('დაწყების თარიღი')
                     ->dateTime()
                     ->sortable(),
                 TextColumn::make('application_form')
@@ -240,11 +263,11 @@ class CompetitionResource extends Resource
                     ->openUrlInNewTab()
                     ->toggleable(),
                 ToggleColumn::make('is_published')
-                    ->label('Published'),
+                    ->label('გამოქვეყნებული'),
                 ToggleColumn::make('is_active')
-                    ->label('Active'),
+                    ->label('აქტიური'),
                 TextColumn::make('created_at')
-                    ->label('Created')
+                    ->label('შექმნის თარიღი')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -252,30 +275,34 @@ class CompetitionResource extends Resource
             ->filters([
                 SelectFilter::make('category')
                     ->options([
-                        'arts' => 'Arts',
-                        'music' => 'Music',
-                        'dance' => 'Dance',
-                        'theater' => 'Theater',
-                        'literature' => 'Literature',
-                        'film' => 'Film',
-                        'sports' => 'Sports',
-                        'other' => 'Other',
-                    ]),
+                        'arts' => 'ხელოვნება',
+                        'music' => 'მუსიკა',
+                        'dance' => 'ცეკვა',
+                        'theater' => 'თეატრი',
+                        'literature' => 'ლიტერატურა',
+                        'film' => 'კინო',
+                        'sports' => 'სპორტი',
+                        'other' => 'სხვა',
+                    ])
+                    ->label('კატეგორია'),
                 Filter::make('published')
+                    ->label('გამოქვეყნებული')
                     ->query(fn (Builder $query): Builder => $query->where('is_published', true)),
                 Filter::make('active')
+                    ->label('აქტიური')
                     ->query(fn (Builder $query): Builder => $query->where('is_active', true)),
                 Filter::make('registration_open')
+                    ->label('რეგისტრაცია ღიაა')
                     ->query(fn (Builder $query): Builder => $query->where('registration_deadline', '>', now())),
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\ViewAction::make()->label('ნახვა'),
+                Tables\Actions\EditAction::make()->label('რედაქტირება'),
+                Tables\Actions\DeleteAction::make()->label('წაშლა'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\DeleteBulkAction::make()->label('წაშლა'),
                 ]),
             ])
             ->defaultSort('created_at', 'desc');

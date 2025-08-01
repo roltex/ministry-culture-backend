@@ -35,7 +35,7 @@ class SettingResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-cog-6-tooth';
     
-    protected static ?string $navigationGroup = 'სისტემა';
+    protected static ?string $navigationGroup = 'სისტემის მართვა';
     
     protected static ?string $navigationLabel = 'საიტის პარამეტრები';
     
@@ -57,8 +57,8 @@ class SettingResource extends Resource
                                             ->maxLength(255),
                                         TextInput::make('site_name.en')
                                             ->label('საიტის სახელი (ინგლისური)')
-                                            ->required()
-                                            ->maxLength(255),
+                                    ->required()
+                                    ->maxLength(255),
                                         Textarea::make('site_description.ka')
                                             ->label('საიტის აღწერა (ქართული)')
                                             ->rows(3)
@@ -288,7 +288,7 @@ class SettingResource extends Resource
 
     public static function shouldRegisterNavigation(): bool
     {
-        return true;
+        return auth()->user()?->is_admin ?? false;
     }
 
     public static function getNavigationUrl(): string

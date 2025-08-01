@@ -27,6 +27,8 @@ use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\SelectFilter;
+use Illuminate\Support\Facades\Storage;
+use App\Utils\GeorgianTransliterator;
 
 class LegislationResource extends Resource
 {
@@ -37,6 +39,8 @@ class LegislationResource extends Resource
     protected static ?string $navigationGroup = 'კონტენტის მართვა';
     
     protected static ?string $navigationLabel = 'კანონმდებლობა';
+    protected static ?string $modelLabel = 'კანონმდებლობა';
+    protected static ?string $pluralModelLabel = 'კანონმდებლობა';
     
     protected static ?int $navigationSort = 5;
 
@@ -44,107 +48,110 @@ class LegislationResource extends Resource
     {
         return $form
             ->schema([
-                Tabs::make('Legislation Content')
+                Tabs::make('კანონმდებლობის კონტენტი')
                     ->tabs([
-                        Tab::make('Georgian')
+                        Tab::make('ქართული')
                             ->schema([
                                 TextInput::make('title.ka')
-                                    ->label('Title (Georgian)')
+                                    ->label('სათაური (ქართული)')
                                     ->required()
                                     ->maxLength(255),
                                 RichEditor::make('description.ka')
-                                    ->label('Description (Georgian)')
+                                    ->label('აღწერა (ქართული)')
                                     ->required()
                                     ->columnSpanFull(),
                                 RichEditor::make('content.ka')
-                                    ->label('Content (Georgian)')
+                                    ->label('კონტენტი (ქართული)')
                                     ->columnSpanFull(),
                             ]),
-                        Tab::make('English')
+                        Tab::make('ინგლისური')
                             ->schema([
                                 TextInput::make('title.en')
-                                    ->label('Title (English)')
+                                    ->label('სათაური (ინგლისური)')
                                     ->required()
                                     ->maxLength(255),
                                 RichEditor::make('description.en')
-                                    ->label('Description (English)')
+                                    ->label('აღწერა (ინგლისური)')
                                     ->required()
                                     ->columnSpanFull(),
                                 RichEditor::make('content.en')
-                                    ->label('Content (English)')
+                                    ->label('კონტენტი (ინგლისური)')
                                     ->columnSpanFull(),
                             ]),
                     ])
                     ->columnSpanFull(),
                 
-                Forms\Components\Section::make('Document Details')
+                Forms\Components\Section::make('დოკუმენტის დეტალები')
                     ->schema([
                         TextInput::make('slug')
-                            ->required()
+                            ->label('URL-ის ნაწილი')
                             ->unique(ignoreRecord: true)
                             ->maxLength(255)
-                            ->helperText('URL-friendly version of the title'),
+                            ->live()
+                            ->afterStateUpdated(function ($state, $set, $get) {
+                                $georgianTitle = $get('title.ka');
+                                if (!empty($georgianTitle) && empty($state)) {
+                                    $slug = GeorgianTransliterator::generateSlug($georgianTitle);
+                                    $set('slug', $slug);
+                                }
+                            })
+                            ->helperText('სათაურის URL-ში გამოსაყენებელი ვერსია'),
                         
                         TextInput::make('act_number')
-                            ->label('Act Number')
+                            ->label('აქტის ნომერი')
                             ->required()
                             ->maxLength(255)
-                            ->helperText('Official document number or reference'),
+                            ->helperText('ოფიციალური დოკუმენტის ნომერი ან მითითება'),
                         
-                        Select::make('document_type')
-                            ->options([
-                                'Law' => 'Law',
-                                'Decree' => 'Decree',
-                                'Regulation' => 'Regulation',
-                                'Order' => 'Order',
-                                'Resolution' => 'Resolution',
-                                'Guideline' => 'Guideline',
-                                'Policy' => 'Policy',
-                                'Other' => 'Other',
-                            ])
+                        TextInput::make('document_type.ka')
+                            ->label('დოკუმენტის ტიპი (ქართული)')
                             ->required()
-                            ->searchable(),
+                            ->maxLength(255),
+                        TextInput::make('document_type.en')
+                            ->label('დოკუმენტის ტიპი (ინგლისური)')
+                            ->required()
+                            ->maxLength(255),
                         
                         DatePicker::make('adoption_date')
-                            ->label('Adoption Date')
+                            ->label('მიღების თარიღი')
                             ->required(),
                         
                         DatePicker::make('effective_date')
-                            ->label('Effective Date')
+                            ->label('ძალის შესვლის თარიღი')
                             ->required(),
                     ])
                     ->columns(2),
                 
-                Forms\Components\Section::make('Files & Settings')
+                Forms\Components\Section::make('ფაილები და პარამეტრები')
                     ->schema([
                         FileUpload::make('document_file')
-                            ->label('Document File')
+                            ->label('დოკუმენტის ფაილი')
                             ->acceptedFileTypes(['application/pdf'])
                             ->directory('legislation-documents')
                             ->maxSize(10240)
                             ->required()
-                            ->helperText('PDF document (max 10MB)'),
+                            ->helperText('PDF დოკუმენტი (მაქს 10MB)'),
                         
                         FileUpload::make('document_file_ka')
-                            ->label('Document File (Georgian)')
+                            ->label('დოკუმენტის ფაილი (ქართული)')
                             ->acceptedFileTypes(['application/pdf'])
                             ->directory('legislation-documents')
                             ->maxSize(10240)
-                            ->helperText('PDF document in Georgian (max 10MB)'),
+                            ->helperText('PDF დოკუმენტი ქართულად (მაქს 10MB)'),
                         
                         FileUpload::make('document_file_en')
-                            ->label('Document File (English)')
+                            ->label('დოკუმენტის ფაილი (ინგლისური)')
                             ->acceptedFileTypes(['application/pdf'])
                             ->directory('legislation-documents')
                             ->maxSize(10240)
-                            ->helperText('PDF document in English (max 10MB)'),
+                            ->helperText('PDF დოკუმენტი ინგლისურად (მაქს 10MB)'),
                         
                         Toggle::make('is_published')
-                            ->label('Published')
+                            ->label('გამოქვეყნებული')
                             ->default(true),
                         
                         DateTimePicker::make('published_at')
-                            ->label('Publish Date')
+                            ->label('გამოქვეყნების თარიღი')
                             ->default(now()),
                     ])
                     ->columns(2),
@@ -156,36 +163,32 @@ class LegislationResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('act_number')
-                    ->label('Act #')
+                    ->label('აქტის ნომერი')
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('title')
-                    ->label('Title (Georgian)')
+                    ->label('სათაური')
                     ->formatStateUsing(fn ($record) => $record->getTranslation('title', 'ka'))
                     ->searchable(query: function (Builder $query, string $search): Builder {
                         return $query->where('title->ka', 'like', "%{$search}%");
                     }),
-                TextColumn::make('title')
-                    ->label('Title (English)')
-                    ->formatStateUsing(fn ($record) => $record->getTranslation('title', 'en'))
-                    ->searchable(query: function (Builder $query, string $search): Builder {
-                        return $query->where('title->en', 'like', "%{$search}%");
-                    }),
                 TextColumn::make('document_type')
+                    ->label('დოკუმენტის ტიპი')
                     ->badge()
+                    ->formatStateUsing(fn ($record) => $record->getTranslation('document_type', 'ka'))
                     ->searchable(),
                 TextColumn::make('adoption_date')
-                    ->label('Adoption Date')
+                    ->label('მიღების თარიღი')
                     ->date()
                     ->sortable(),
                 TextColumn::make('effective_date')
-                    ->label('Effective Date')
+                    ->label('ძალის შესვლის თარიღი')
                     ->date()
                     ->sortable(),
                 ToggleColumn::make('is_published')
-                    ->label('Published'),
+                    ->label('გამოქვეყნებული'),
                 TextColumn::make('created_at')
-                    ->label('Created')
+                    ->label('შექმნის თარიღი')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -193,26 +196,28 @@ class LegislationResource extends Resource
             ->filters([
                 SelectFilter::make('document_type')
                     ->options([
-                        'Law' => 'Law',
-                        'Decree' => 'Decree',
-                        'Regulation' => 'Regulation',
-                        'Order' => 'Order',
-                        'Resolution' => 'Resolution',
-                        'Guideline' => 'Guideline',
-                        'Policy' => 'Policy',
-                        'Other' => 'Other',
-                    ]),
+                        'Law' => 'კანონი',
+                        'Decree' => 'დეკრეტი',
+                        'Regulation' => 'რეგულაცია',
+                        'Order' => 'ბრძანება',
+                        'Resolution' => 'რეზოლუცია',
+                        'Guideline' => 'გაიდლაინი',
+                        'Policy' => 'პოლიტიკა',
+                        'Other' => 'სხვა',
+                    ])
+                    ->label('დოკუმენტის ტიპი'),
                 Filter::make('published')
+                    ->label('გამოქვეყნებული')
                     ->query(fn (Builder $query): Builder => $query->where('is_published', true)),
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\ViewAction::make()->label('ნახვა'),
+                Tables\Actions\EditAction::make()->label('რედაქტირება'),
+                Tables\Actions\DeleteAction::make()->label('წაშლა'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\DeleteBulkAction::make()->label('წაშლა'),
                 ]),
             ])
             ->defaultSort('effective_date', 'desc');

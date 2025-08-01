@@ -27,6 +27,8 @@ use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\SelectFilter;
+use Illuminate\Support\Facades\Storage;
+use App\Utils\GeorgianTransliterator;
 
 class ProjectResource extends Resource
 {
@@ -37,84 +39,94 @@ class ProjectResource extends Resource
     protected static ?string $navigationGroup = 'კონტენტის მართვა';
     
     protected static ?string $navigationLabel = 'პროექტები';
-    
-    protected static ?int $navigationSort = 2;
+    protected static ?string $modelLabel = 'პროექტი';
+    protected static ?string $pluralModelLabel = 'პროექტები';
+    protected static ?int $navigationSort = 3;
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Tabs::make('Project Content')
+                Tabs::make('პროექტის კონტენტი')
                     ->tabs([
-                        Tab::make('Georgian')
+                        Tab::make('ქართული')
                             ->schema([
                                 TextInput::make('title.ka')
-                                    ->label('Title (Georgian)')
+                                    ->label('სათაური (ქართული)')
                                     ->required()
                                     ->maxLength(255),
                                 RichEditor::make('content.ka')
-                                    ->label('Content (Georgian)')
+                                    ->label('კონტენტი (ქართული)')
                                     ->required()
                                     ->columnSpanFull(),
                                 Textarea::make('description.ka')
-                                    ->label('Description (Georgian)')
+                                    ->label('აღწერა (ქართული)')
                                     ->rows(3)
                                     ->maxLength(500),
                             ]),
-                        Tab::make('English')
+                        Tab::make('ინგლისური')
                             ->schema([
                                 TextInput::make('title.en')
-                                    ->label('Title (English)')
+                                    ->label('სათაური (ინგლისური)')
                                     ->required()
                                     ->maxLength(255),
                                 RichEditor::make('content.en')
-                                    ->label('Content (English)')
+                                    ->label('კონტენტი (ინგლისური)')
                                     ->required()
                                     ->columnSpanFull(),
                                 Textarea::make('description.en')
-                                    ->label('Description (English)')
+                                    ->label('აღწერა (ინგლისური)')
                                     ->rows(3)
                                     ->maxLength(500),
                             ]),
                     ])
                     ->columnSpanFull(),
                 
-                Forms\Components\Section::make('Project Details')
+                Forms\Components\Section::make('პროექტის დეტალები')
                     ->schema([
                         TextInput::make('slug')
-                            ->required()
+                            ->label('URL-ის ნაწილი')
                             ->unique(ignoreRecord: true)
                             ->maxLength(255)
-                            ->helperText('URL-friendly version of the title'),
+                            ->live()
+                            ->afterStateUpdated(function ($state, $set, $get) {
+                                $georgianTitle = $get('title.ka');
+                                if (!empty($georgianTitle) && empty($state)) {
+                                    $slug = GeorgianTransliterator::generateSlug($georgianTitle);
+                                    $set('slug', $slug);
+                                }
+                            })
+                            ->helperText('სათაურის URL-ში გამოსაყენებელი ვერსია'),
                         
                         Select::make('status')
                             ->options([
-                                'planned' => 'Planned',
-                                'ongoing' => 'Ongoing',
-                                'completed' => 'Completed',
+                                'planned' => 'დაგეგმილი',
+                                'ongoing' => 'მიმდინარე',
+                                'completed' => 'დასრულებული',
                             ])
+                            ->label('სტატუსი')
                             ->required()
                             ->default('planned'),
                         
                         DatePicker::make('start_date')
-                            ->label('Start Date'),
+                            ->label('დაწყების თარიღი'),
                         
                         DatePicker::make('end_date')
-                            ->label('End Date'),
+                            ->label('დასრულების თარიღი'),
                         
                         TextInput::make('budget')
-                            ->label('Budget')
+                            ->label('ბიუჯეტი')
                             ->numeric()
                             ->prefix('₾')
-                            ->helperText('Project budget in Georgian Lari'),
+                            ->helperText('პროექტის ბიუჯეტი ლარში'),
                         
                         TextInput::make('location')
-                            ->label('Location')
+                            ->label('ადგილმდებარეობა')
                             ->maxLength(255),
                     ])
                     ->columns(2),
                 
-                Forms\Components\Section::make('Media & Settings')
+                Forms\Components\Section::make('მედია და პარამეტრები')
                     ->schema([
                         FileUpload::make('featured_image')
                             ->label('ფოტო')
@@ -123,16 +135,35 @@ class ProjectResource extends Resource
                             ->maxSize(2048)
                             ->helperText('რეკომენდებული ზომა: 1200x630px'),
                         
+                        FileUpload::make('gallery')
+                            ->label('გალერეა')
+                            ->image()
+                            ->multiple()
+                            ->directory('project-images')
+                            ->maxSize(2048)
+                            ->maxFiles(10)
+                            ->helperText('ატვირთეთ მაქსიმუმ 10 სურათი (თითოეული მაქს. 2MB)'),
+                        
+                        FileUpload::make('attachments')
+                            ->label('დანართები')
+                            ->disk('public')
+                            ->directory('project-attachments')
+                            ->multiple()
+                            ->maxFiles(5)
+                            ->maxSize(10240)
+                            ->acceptedFileTypes(['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'])
+                            ->helperText('შეგიძლიათ ატვირთოთ მაქსიმუმ 5 ფაილი (PDF, Word, Excel - თითოეული მაქს. 10MB)'),
+                        
                         Toggle::make('is_published')
-                            ->label('Published')
+                            ->label('გამოქვეყნებული')
                             ->default(true),
                         
                         Toggle::make('is_featured')
-                            ->label('Featured Project')
+                            ->label('რჩეული პროექტი')
                             ->default(false),
                         
                         DateTimePicker::make('published_at')
-                            ->label('Publish Date')
+                            ->label('გამოქვეყნების თარიღი')
                             ->default(now()),
                     ])
                     ->columns(2),
@@ -148,42 +179,49 @@ class ProjectResource extends Resource
                     ->circular()
                     ->size(40),
                 TextColumn::make('title')
-                    ->label('Title (Georgian)')
+                    ->label('სათაური (ქართული)')
                     ->formatStateUsing(fn ($record) => $record->getTranslation('title', 'ka'))
                     ->searchable(query: function (Builder $query, string $search): Builder {
                         return $query->where('title->ka', 'like', "%{$search}%");
                     }),
                 TextColumn::make('title')
-                    ->label('Title (English)')
+                    ->label('სათაური (ინგლისური)')
                     ->formatStateUsing(fn ($record) => $record->getTranslation('title', 'en'))
                     ->searchable(query: function (Builder $query, string $search): Builder {
                         return $query->where('title->en', 'like', "%{$search}%");
                     }),
                 TextColumn::make('status')
+                    ->label('სტატუსი')
                     ->badge()
                     ->color(fn (string $state): string => match ($state) {
                         'planned' => 'gray',
                         'ongoing' => 'blue',
                         'completed' => 'green',
+                    })
+                    ->formatStateUsing(fn ($state) => match ($state) {
+                        'planned' => 'დაგეგმილი',
+                        'ongoing' => 'მიმდინარე',
+                        'completed' => 'დასრულებული',
+                        default => $state,
                     }),
                 TextColumn::make('start_date')
-                    ->label('Start Date')
+                    ->label('დაწყების თარიღი')
                     ->date()
                     ->sortable(),
                 TextColumn::make('end_date')
-                    ->label('End Date')
+                    ->label('დასრულების თარიღი')
                     ->date()
                     ->sortable(),
                 TextColumn::make('budget')
-                    ->label('Budget')
+                    ->label('ბიუჯეტი')
                     ->money('GEL')
                     ->sortable(),
                 ToggleColumn::make('is_published')
-                    ->label('Published'),
+                    ->label('გამოქვეყნებული'),
                 ToggleColumn::make('is_featured')
-                    ->label('Featured'),
+                    ->label('რჩეული'),
                 TextColumn::make('created_at')
-                    ->label('Created')
+                    ->label('შექმნის თარიღი')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -191,23 +229,26 @@ class ProjectResource extends Resource
             ->filters([
                 SelectFilter::make('status')
                     ->options([
-                        'planned' => 'Planned',
-                        'ongoing' => 'Ongoing',
-                        'completed' => 'Completed',
-                    ]),
+                        'planned' => 'დაგეგმილი',
+                        'ongoing' => 'მიმდინარე',
+                        'completed' => 'დასრულებული',
+                    ])
+                    ->label('სტატუსი'),
                 Filter::make('published')
+                    ->label('გამოქვეყნებული')
                     ->query(fn (Builder $query): Builder => $query->where('is_published', true)),
                 Filter::make('featured')
+                    ->label('რჩეული')
                     ->query(fn (Builder $query): Builder => $query->where('is_featured', true)),
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\ViewAction::make()->label('ნახვა'),
+                Tables\Actions\EditAction::make()->label('რედაქტირება'),
+                Tables\Actions\DeleteAction::make()->label('წაშლა'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\DeleteBulkAction::make()->label('წაშლა'),
                 ]),
             ])
             ->defaultSort('created_at', 'desc');

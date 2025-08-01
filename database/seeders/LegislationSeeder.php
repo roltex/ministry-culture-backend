@@ -27,7 +27,10 @@ class LegislationSeeder extends Seeder
                 ],
                 'slug' => 'cultural-heritage-protection-law',
                 'act_number' => '1234-რს',
-                'document_type' => 'law',
+                'document_type' => [
+                    'ka' => 'კანონი',
+                    'en' => 'Law'
+                ],
                 'adoption_date' => Carbon::now()->subYears(2),
                 'effective_date' => Carbon::now()->subYears(2)->addDays(30),
                 'is_published' => true,
@@ -49,7 +52,10 @@ class LegislationSeeder extends Seeder
                 ],
                 'slug' => 'sports-development-law',
                 'act_number' => '5678-რს',
-                'document_type' => 'law',
+                'document_type' => [
+                    'ka' => 'კანონი',
+                    'en' => 'Law'
+                ],
                 'adoption_date' => Carbon::now()->subYears(1),
                 'effective_date' => Carbon::now()->subYears(1)->addDays(30),
                 'is_published' => true,
@@ -71,7 +77,10 @@ class LegislationSeeder extends Seeder
                 ],
                 'slug' => 'museums-law',
                 'act_number' => '9012-რს',
-                'document_type' => 'law',
+                'document_type' => [
+                    'ka' => 'კანონი',
+                    'en' => 'Law'
+                ],
                 'adoption_date' => Carbon::now()->subMonths(18),
                 'effective_date' => Carbon::now()->subMonths(18)->addDays(30),
                 'is_published' => true,
@@ -93,7 +102,10 @@ class LegislationSeeder extends Seeder
                 ],
                 'slug' => 'youth-policy-law',
                 'act_number' => '3456-რს',
-                'document_type' => 'law',
+                'document_type' => [
+                    'ka' => 'კანონი',
+                    'en' => 'Law'
+                ],
                 'adoption_date' => Carbon::now()->subMonths(12),
                 'effective_date' => Carbon::now()->subMonths(12)->addDays(30),
                 'is_published' => true,
@@ -115,7 +127,10 @@ class LegislationSeeder extends Seeder
                 ],
                 'slug' => 'copyright-law',
                 'act_number' => '7890-რს',
-                'document_type' => 'law',
+                'document_type' => [
+                    'ka' => 'კანონი',
+                    'en' => 'Law'
+                ],
                 'adoption_date' => Carbon::now()->subMonths(6),
                 'effective_date' => Carbon::now()->subMonths(6)->addDays(30),
                 'is_published' => true,
@@ -137,7 +152,10 @@ class LegislationSeeder extends Seeder
                 ],
                 'slug' => 'cultural-events-regulation',
                 'act_number' => '2345-დ',
-                'document_type' => 'regulation',
+                'document_type' => [
+                    'ka' => 'დებულება',
+                    'en' => 'Regulation'
+                ],
                 'adoption_date' => Carbon::now()->subMonths(9),
                 'effective_date' => Carbon::now()->subMonths(9)->addDays(30),
                 'is_published' => true,
@@ -159,7 +177,10 @@ class LegislationSeeder extends Seeder
                 ],
                 'slug' => 'sports-facilities-regulation',
                 'act_number' => '4567-დ',
-                'document_type' => 'regulation',
+                'document_type' => [
+                    'ka' => 'დებულება',
+                    'en' => 'Regulation'
+                ],
                 'adoption_date' => Carbon::now()->subMonths(3),
                 'effective_date' => Carbon::now()->subMonths(3)->addDays(30),
                 'is_published' => true,
@@ -181,7 +202,10 @@ class LegislationSeeder extends Seeder
                 ],
                 'slug' => 'cultural-heritage-restoration-regulation',
                 'act_number' => '6789-დ',
-                'document_type' => 'regulation',
+                'document_type' => [
+                    'ka' => 'დებულება',
+                    'en' => 'Regulation'
+                ],
                 'adoption_date' => Carbon::now()->subMonths(6),
                 'effective_date' => Carbon::now()->subMonths(6)->addDays(30),
                 'is_published' => true,
@@ -203,7 +227,10 @@ class LegislationSeeder extends Seeder
                 ],
                 'slug' => 'athletes-support-regulation',
                 'act_number' => '8901-დ',
-                'document_type' => 'regulation',
+                'document_type' => [
+                    'ka' => 'დებულება',
+                    'en' => 'Regulation'
+                ],
                 'adoption_date' => Carbon::now()->subMonths(4),
                 'effective_date' => Carbon::now()->subMonths(4)->addDays(30),
                 'is_published' => true,
@@ -225,7 +252,10 @@ class LegislationSeeder extends Seeder
                 ],
                 'slug' => 'cultural-tourism-development-regulation',
                 'act_number' => '0123-დ',
-                'document_type' => 'regulation',
+                'document_type' => [
+                    'ka' => 'დებულება',
+                    'en' => 'Regulation'
+                ],
                 'adoption_date' => Carbon::now()->subMonths(2),
                 'effective_date' => Carbon::now()->subMonths(2)->addDays(30),
                 'is_published' => true,
@@ -247,7 +277,10 @@ class LegislationSeeder extends Seeder
                 ],
                 'slug' => 'young-artists-support-regulation',
                 'act_number' => '1357-დ',
-                'document_type' => 'regulation',
+                'document_type' => [
+                    'ka' => 'დებულება',
+                    'en' => 'Regulation'
+                ],
                 'adoption_date' => Carbon::now()->subMonths(1),
                 'effective_date' => Carbon::now()->subMonths(1)->addDays(30),
                 'is_published' => true,
@@ -269,7 +302,10 @@ class LegislationSeeder extends Seeder
                 ],
                 'slug' => 'sports-medicine-standards-regulation',
                 'act_number' => '2468-დ',
-                'document_type' => 'regulation',
+                'document_type' => [
+                    'ka' => 'დებულება',
+                    'en' => 'Regulation'
+                ],
                 'adoption_date' => Carbon::now()->subWeeks(2),
                 'effective_date' => Carbon::now()->subWeeks(2)->addDays(30),
                 'is_published' => true,

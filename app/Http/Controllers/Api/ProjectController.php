@@ -19,7 +19,7 @@ class ProjectController extends Controller
         }
 
         $projects = $query->published()
-            ->orderBy('start_date', 'desc')
+            ->orderBy('published_at', 'desc')
             ->paginate(12);
 
         return ProjectResource::collection($projects);

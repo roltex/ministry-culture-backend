@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use App\Models\Traits\HasAuditLogs;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
 
 class Competition extends Model
 {
-    use HasFactory, HasTranslations;
+    use HasFactory, HasTranslations, HasAuditLogs;
 
     protected $fillable = [
         'title',

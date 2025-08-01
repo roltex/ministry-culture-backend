@@ -35,6 +35,7 @@ class NewsController extends Controller
     public function featured(): JsonResource
     {
         $news = News::featured()
+            ->orderBy('published_at', 'desc')
             ->limit(6)
             ->get();
 

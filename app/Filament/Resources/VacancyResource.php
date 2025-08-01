@@ -26,6 +26,8 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\SelectFilter;
+use Illuminate\Support\Facades\Storage;
+use App\Utils\GeorgianTransliterator;
 
 class VacancyResource extends Resource
 {
@@ -36,6 +38,8 @@ class VacancyResource extends Resource
     protected static ?string $navigationGroup = 'კონტენტის მართვა';
     
     protected static ?string $navigationLabel = 'ვაკანსიები';
+    protected static ?string $modelLabel = 'ვაკანსია';
+    protected static ?string $pluralModelLabel = 'ვაკანსიები';
     
     protected static ?int $navigationSort = 4;
 
@@ -43,111 +47,121 @@ class VacancyResource extends Resource
     {
         return $form
             ->schema([
-                Tabs::make('Vacancy Content')
+                Tabs::make('ვაკანსიის კონტენტი')
                     ->tabs([
-                        Tab::make('Georgian')
+                        Tab::make('ქართული')
                             ->schema([
                                 TextInput::make('title.ka')
-                                    ->label('Title (Georgian)')
+                                    ->label('სათაური (ქართული)')
                                     ->required()
                                     ->maxLength(255),
                                 RichEditor::make('description.ka')
-                                    ->label('Description (Georgian)')
+                                    ->label('აღწერა (ქართული)')
                                     ->required()
                                     ->columnSpanFull(),
                                 Textarea::make('requirements.ka')
-                                    ->label('Requirements (Georgian)')
+                                    ->label('მოთხოვნები (ქართული)')
                                     ->rows(4)
                                     ->columnSpanFull(),
                             ]),
-                        Tab::make('English')
+                        Tab::make('ინგლისური')
                             ->schema([
                                 TextInput::make('title.en')
-                                    ->label('Title (English)')
+                                    ->label('სათაური (ინგლისური)')
                                     ->required()
                                     ->maxLength(255),
                                 RichEditor::make('description.en')
-                                    ->label('Description (English)')
+                                    ->label('აღწერა (ინგლისური)')
                                     ->required()
                                     ->columnSpanFull(),
                                 Textarea::make('requirements.en')
-                                    ->label('Requirements (English)')
+                                    ->label('მოთხოვნები (ინგლისური)')
                                     ->rows(4)
                                     ->columnSpanFull(),
                             ]),
                     ])
                     ->columnSpanFull(),
                 
-                Forms\Components\Section::make('Job Details')
+                Forms\Components\Section::make('სამუშაოს დეტალები')
                     ->schema([
                         TextInput::make('slug')
-                            ->required()
+                            ->label('URL-ის ნაწილი')
                             ->unique(ignoreRecord: true)
                             ->maxLength(255)
-                            ->helperText('URL-friendly version of the title'),
+                            ->live()
+                            ->afterStateUpdated(function ($state, $set, $get) {
+                                $georgianTitle = $get('title.ka');
+                                if (!empty($georgianTitle) && empty($state)) {
+                                    $slug = GeorgianTransliterator::generateSlug($georgianTitle);
+                                    $set('slug', $slug);
+                                }
+                            })
+                            ->helperText('სათაურის URL-ში გამოსაყენებელი ვერსია'),
                         
                         Select::make('department')
                             ->options([
-                                'administration' => 'Administration',
-                                'culture' => 'Culture',
-                                'sports' => 'Sports',
-                                'finance' => 'Finance',
-                                'hr' => 'Human Resources',
-                                'it' => 'Information Technology',
-                                'legal' => 'Legal',
-                                'public_relations' => 'Public Relations',
-                                'other' => 'Other',
+                                'administration' => 'ადმინისტრაცია',
+                                'culture' => 'კულტურა',
+                                'sports' => 'სპორტი',
+                                'finance' => 'ფინანსები',
+                                'hr' => 'ადამიანური რესურსები',
+                                'it' => 'ინფორმაციული ტექნოლოგიები',
+                                'legal' => 'იურიდიული',
+                                'public_relations' => 'საზოგადოებასთან ურთიერთობა',
+                                'other' => 'სხვა',
                             ])
+                            ->label('დეპარტამენტი')
                             ->required()
                             ->searchable(),
                         
                         Select::make('employment_type')
                             ->options([
-                                'full_time' => 'Full Time',
-                                'part_time' => 'Part Time',
-                                'contract' => 'Contract',
-                                'temporary' => 'Temporary',
-                                'internship' => 'Internship',
+                                'full_time' => 'სრული განაკვეთი',
+                                'part_time' => 'ნახევარი განაკვეთი',
+                                'contract' => 'კონტრაქტი',
+                                'temporary' => 'დროებითი',
+                                'internship' => 'სტაჟირება',
                             ])
+                            ->label('დასაქმების ტიპი')
                             ->required(),
                         
                         TextInput::make('salary_range')
-                            ->label('Salary Range')
+                            ->label('ხელფასის დიაპაზონი')
                             ->maxLength(255)
-                            ->helperText('e.g., 2000-3000 GEL'),
+                            ->helperText('მაგ: 2000-3000 ლარი'),
                         
                         TextInput::make('location')
-                            ->label('Location')
+                            ->label('ადგილმდებარეობა')
                             ->maxLength(255),
                         
                         TextInput::make('contact_email')
-                            ->label('Contact Email')
+                            ->label('საკონტაქტო ელ-ფოსტა')
                             ->email()
                             ->required(),
                         
                         TextInput::make('contact_phone')
-                            ->label('Contact Phone')
+                            ->label('საკონტაქტო ტელეფონი')
                             ->tel(),
                     ])
                     ->columns(2),
                 
-                Forms\Components\Section::make('Timeline')
+                Forms\Components\Section::make('ვადები')
                     ->schema([
                         DatePicker::make('application_deadline')
-                            ->label('Application Deadline')
+                            ->label('განაცხადის ვადა')
                             ->required(),
                         
                         DatePicker::make('start_date')
-                            ->label('Expected Start Date'),
+                            ->label('მოსალოდნელი დაწყების თარიღი'),
                         
                         TextInput::make('duration')
-                            ->label('Duration')
+                            ->label('ხანგრძლივობა')
                             ->maxLength(255)
-                            ->helperText('e.g., 6 months, Permanent'),
+                            ->helperText('მაგ: 6 თვე, მუდმივი'),
                     ])
                     ->columns(2),
                 
-                Forms\Components\Section::make('Settings')
+                Forms\Components\Section::make('პარამეტრები')
                     ->schema([
                         FileUpload::make('application_form')
                             ->label('განაცხადის ფორმა')
@@ -157,16 +171,16 @@ class VacancyResource extends Resource
                             ->helperText('PDF ფაილი (მაქს 10MB)'),
                         
                         Toggle::make('is_published')
-                            ->label('Published')
+                            ->label('გამოქვეყნებული')
                             ->default(true),
                         
                         Toggle::make('is_active')
-                            ->label('Active')
+                            ->label('აქტიური')
                             ->default(true)
-                            ->helperText('Is this vacancy currently accepting applications?'),
+                            ->helperText('მიმდინარეობს განაცხადების მიღება?'),
                         
                         DateTimePicker::make('published_at')
-                            ->label('Publish Date')
+                            ->label('გამოქვეყნების თარიღი')
                             ->default(now()),
                     ])
                     ->columns(2),
@@ -178,21 +192,29 @@ class VacancyResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('title')
-                    ->label('Title (Georgian)')
+                    ->label('სათაური')
                     ->formatStateUsing(fn ($record) => $record->getTranslation('title', 'ka'))
                     ->searchable(query: function (Builder $query, string $search): Builder {
                         return $query->where('title->ka', 'like', "%{$search}%");
                     }),
-                TextColumn::make('title')
-                    ->label('Title (English)')
-                    ->formatStateUsing(fn ($record) => $record->getTranslation('title', 'en'))
-                    ->searchable(query: function (Builder $query, string $search): Builder {
-                        return $query->where('title->en', 'like', "%{$search}%");
-                    }),
                 TextColumn::make('department')
+                    ->label('დეპარტამენტი')
                     ->badge()
+                    ->formatStateUsing(fn ($state) => match ($state) {
+                        'administration' => 'ადმინისტრაცია',
+                        'culture' => 'კულტურა',
+                        'sports' => 'სპორტი',
+                        'finance' => 'ფინანსები',
+                        'hr' => 'ადამიანური რესურსები',
+                        'it' => 'ინფორმაციული ტექნოლოგიები',
+                        'legal' => 'იურიდიული',
+                        'public_relations' => 'საზოგადოებასთან ურთიერთობა',
+                        'other' => 'სხვა',
+                        default => $state,
+                    })
                     ->searchable(),
                 TextColumn::make('employment_type')
+                    ->label('დასაქმების ტიპი')
                     ->badge()
                     ->color(fn (string $state): string => match ($state) {
                         'full_time' => 'green',
@@ -200,20 +222,28 @@ class VacancyResource extends Resource
                         'contract' => 'yellow',
                         'temporary' => 'orange',
                         'internship' => 'purple',
+                    })
+                    ->formatStateUsing(fn ($state) => match ($state) {
+                        'full_time' => 'სრული განაკვეთი',
+                        'part_time' => 'ნახევარი განაკვეთი',
+                        'contract' => 'კონტრაქტი',
+                        'temporary' => 'დროებითი',
+                        'internship' => 'სტაჟირება',
+                        default => $state,
                     }),
                 TextColumn::make('salary_range')
-                    ->label('Salary')
+                    ->label('ხელფასი')
                     ->searchable(),
                 TextColumn::make('application_deadline')
-                    ->label('Deadline')
+                    ->label('განაცხადის ვადა')
                     ->date()
                     ->sortable(),
                 ToggleColumn::make('is_published')
-                    ->label('Published'),
+                    ->label('გამოქვეყნებული'),
                 ToggleColumn::make('is_active')
-                    ->label('Active'),
+                    ->label('აქტიური'),
                 TextColumn::make('created_at')
-                    ->label('Created')
+                    ->label('შექმნის თარიღი')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -221,39 +251,44 @@ class VacancyResource extends Resource
             ->filters([
                 SelectFilter::make('department')
                     ->options([
-                        'administration' => 'Administration',
-                        'culture' => 'Culture',
-                        'sports' => 'Sports',
-                        'finance' => 'Finance',
-                        'hr' => 'Human Resources',
-                        'it' => 'Information Technology',
-                        'legal' => 'Legal',
-                        'public_relations' => 'Public Relations',
-                        'other' => 'Other',
-                    ]),
+                        'administration' => 'ადმინისტრაცია',
+                        'culture' => 'კულტურა',
+                        'sports' => 'სპორტი',
+                        'finance' => 'ფინანსები',
+                        'hr' => 'ადამიანური რესურსები',
+                        'it' => 'ინფორმაციული ტექნოლოგიები',
+                        'legal' => 'იურიდიული',
+                        'public_relations' => 'საზოგადოებასთან ურთიერთობა',
+                        'other' => 'სხვა',
+                    ])
+                    ->label('დეპარტამენტი'),
                 SelectFilter::make('employment_type')
                     ->options([
-                        'full_time' => 'Full Time',
-                        'part_time' => 'Part Time',
-                        'contract' => 'Contract',
-                        'temporary' => 'Temporary',
-                        'internship' => 'Internship',
-                    ]),
+                        'full_time' => 'სრული განაკვეთი',
+                        'part_time' => 'ნახევარი განაკვეთი',
+                        'contract' => 'კონტრაქტი',
+                        'temporary' => 'დროებითი',
+                        'internship' => 'სტაჟირება',
+                    ])
+                    ->label('დასაქმების ტიპი'),
                 Filter::make('published')
+                    ->label('გამოქვეყნებული')
                     ->query(fn (Builder $query): Builder => $query->where('is_published', true)),
                 Filter::make('active')
+                    ->label('აქტიური')
                     ->query(fn (Builder $query): Builder => $query->where('is_active', true)),
                 Filter::make('deadline_approaching')
+                    ->label('ვადა ახლოვდება')
                     ->query(fn (Builder $query): Builder => $query->where('application_deadline', '>', now())->where('application_deadline', '<', now()->addDays(7))),
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\ViewAction::make()->label('ნახვა'),
+                Tables\Actions\EditAction::make()->label('რედაქტირება'),
+                Tables\Actions\DeleteAction::make()->label('წაშლა'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\DeleteBulkAction::make()->label('წაშლა'),
                 ]),
             ])
             ->defaultSort('created_at', 'desc');

@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use App\Models\Traits\HasAuditLogs;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
 
 class News extends Model
 {
-    use HasFactory, HasTranslations;
+    use HasFactory, HasTranslations, HasAuditLogs;
 
     protected $fillable = [
         'title',
@@ -16,6 +17,8 @@ class News extends Model
         'excerpt',
         'slug',
         'featured_image',
+        'gallery',
+        'attachments',
         'is_published',
         'published_at',
         'views_count',
@@ -31,6 +34,8 @@ class News extends Model
         'is_published' => 'boolean',
         'published_at' => 'datetime',
         'views_count' => 'integer',
+        'gallery' => 'array',
+        'attachments' => 'array',
     ];
 
     public function scopePublished($query)

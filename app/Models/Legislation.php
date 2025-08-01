@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use App\Models\Traits\HasAuditLogs;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
 
 class Legislation extends Model
 {
-    use HasFactory, HasTranslations;
+    use HasFactory, HasTranslations, HasAuditLogs;
 
     protected $table = 'legislation';
 
@@ -24,6 +25,9 @@ class Legislation extends Model
         'effective_date',
         'status',
         'featured_image',
+        'document_file',
+        'document_file_ka',
+        'document_file_en',
         'is_published',
         'published_at',
         'download_count',
@@ -34,6 +38,7 @@ class Legislation extends Model
         'description',
         'content',
         'excerpt',
+        'document_type',
     ];
 
     protected $casts = [
@@ -42,6 +47,7 @@ class Legislation extends Model
         'published_at' => 'datetime',
         'is_published' => 'boolean',
         'download_count' => 'integer',
+        'document_type' => 'array',
     ];
 
     public function scopePublished($query)
@@ -62,11 +68,26 @@ class Legislation extends Model
     public function getDocumentTypes()
     {
         return [
-            'law' => 'Law',
-            'regulation' => 'Regulation',
-            'decree' => 'Decree',
-            'order' => 'Order',
-            'resolution' => 'Resolution',
+            'law' => [
+                'ka' => 'კანონი',
+                'en' => 'Law'
+            ],
+            'regulation' => [
+                'ka' => 'დებულება',
+                'en' => 'Regulation'
+            ],
+            'decree' => [
+                'ka' => 'დეკრეტი',
+                'en' => 'Decree'
+            ],
+            'order' => [
+                'ka' => 'ბრძანება',
+                'en' => 'Order'
+            ],
+            'resolution' => [
+                'ka' => 'რეზოლუცია',
+                'en' => 'Resolution'
+            ],
         ];
     }
 } 

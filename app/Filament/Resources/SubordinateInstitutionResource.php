@@ -27,6 +27,7 @@ use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\SelectFilter;
+use App\Utils\GeorgianTransliterator;
 
 class SubordinateInstitutionResource extends Resource
 {
@@ -37,6 +38,8 @@ class SubordinateInstitutionResource extends Resource
     protected static ?string $navigationGroup = 'კონტენტის მართვა';
     
     protected static ?string $navigationLabel = 'სსიპები';
+    protected static ?string $modelLabel = 'სსიპი';
+    protected static ?string $pluralModelLabel = 'სსიპები';
     
     protected static ?int $navigationSort = 6;
 
@@ -44,117 +47,127 @@ class SubordinateInstitutionResource extends Resource
     {
         return $form
             ->schema([
-                Tabs::make('Institution Content')
+                Tabs::make('დაწესებულების კონტენტი')
                     ->tabs([
-                        Tab::make('Georgian')
+                        Tab::make('ქართული')
                             ->schema([
                                 TextInput::make('name.ka')
-                                    ->label('Name (Georgian)')
+                                    ->label('დასახელება (ქართული)')
                                     ->required()
                                     ->maxLength(255),
                                 RichEditor::make('description.ka')
-                                    ->label('Description (Georgian)')
+                                    ->label('აღწერა (ქართული)')
                                     ->required()
                                     ->columnSpanFull(),
                                 Textarea::make('mission.ka')
-                                    ->label('Mission (Georgian)')
+                                    ->label('მისია (ქართული)')
                                     ->rows(4)
                                     ->columnSpanFull(),
                                 Textarea::make('vision.ka')
-                                    ->label('Vision (Georgian)')
+                                    ->label('ხედვა (ქართული)')
                                     ->rows(4)
                                     ->columnSpanFull(),
                             ]),
-                        Tab::make('English')
+                        Tab::make('ინგლისური')
                             ->schema([
                                 TextInput::make('name.en')
-                                    ->label('Name (English)')
+                                    ->label('დასახელება (ინგლისური)')
                                     ->required()
                                     ->maxLength(255),
                                 RichEditor::make('description.en')
-                                    ->label('Description (English)')
+                                    ->label('აღწერა (ინგლისური)')
                                     ->required()
                                     ->columnSpanFull(),
                                 Textarea::make('mission.en')
-                                    ->label('Mission (English)')
+                                    ->label('მისია (ინგლისური)')
                                     ->rows(4)
                                     ->columnSpanFull(),
                                 Textarea::make('vision.en')
-                                    ->label('Vision (English)')
+                                    ->label('ხედვა (ინგლისური)')
                                     ->rows(4)
                                     ->columnSpanFull(),
                             ]),
                     ])
                     ->columnSpanFull(),
                 
-                Forms\Components\Section::make('Institution Details')
+                Forms\Components\Section::make('დაწესებულების დეტალები')
                     ->schema([
                         TextInput::make('slug')
-                            ->required()
+                            ->label('URL-ის ნაწილი')
                             ->unique(ignoreRecord: true)
                             ->maxLength(255)
-                            ->helperText('URL-friendly version of the name'),
+                            ->live()
+                            ->afterStateUpdated(function ($state, $set, $get) {
+                                $georgianName = $get('name.ka');
+                                if (!empty($georgianName) && empty($state)) {
+                                    $slug = GeorgianTransliterator::generateSlug($georgianName);
+                                    $set('slug', $slug);
+                                }
+                            })
+                            ->helperText('სათაურის URL-ში გამოსაყენებელი ვერსია'),
                         
                         Select::make('type')
                             ->options([
-                                'museum' => 'Museum',
-                                'theater' => 'Theater',
-                                'library' => 'Library',
-                                'archive' => 'Archive',
-                                'cultural_center' => 'Cultural Center',
-                                'sports_center' => 'Sports Center',
-                                'academy' => 'Academy',
-                                'institute' => 'Institute',
-                                'agency' => 'Agency',
-                                'foundation' => 'Foundation',
-                                'other' => 'Other',
+                                'museum' => 'მუზეუმი',
+                                'theater' => 'თეატრი',
+                                'library' => 'ბიბლიოთეკა',
+                                'archive' => 'არქივი',
+                                'cultural_center' => 'კულტურის ცენტრი',
+                                'sports_center' => 'სპორტული ცენტრი',
+                                'academy' => 'აკადემია',
+                                'institute' => 'ინსტიტუტი',
+                                'agency' => 'სააგენტო',
+                                'foundation' => 'ფონდი',
+                                'other' => 'სხვა',
                             ])
+                            ->label('ტიპი')
                             ->required()
                             ->searchable(),
                         
                         Select::make('status')
                             ->options([
-                                'active' => 'Active',
-                                'inactive' => 'Inactive',
-                                'under_construction' => 'Under Construction',
-                                'temporarily_closed' => 'Temporarily Closed',
-                                'permanently_closed' => 'Permanently Closed',
+                                'active' => 'აქტიური',
+                                'inactive' => 'არააქტიური',
+                                'under_construction' => 'მშენებლობის პროცესში',
+                                'temporarily_closed' => 'დროებით დახურული',
+                                'permanently_closed' => 'მუდმივად დახურული',
                             ])
+                            ->label('სტატუსი')
                             ->required()
                             ->default('active'),
                         
                         TextInput::make('director_name')
-                            ->label('Director Name')
+                            ->label('დირექტორის სახელი')
                             ->maxLength(255),
                         
                         TextInput::make('establishment_year')
-                            ->label('Establishment Year')
+                            ->label('დაარსების წელი')
                             ->numeric()
                             ->minValue(1800)
                             ->maxValue(date('Y'))
-                            ->helperText('Year when the institution was established'),
+                            ->helperText('დაწესებულების დაარსების წელი'),
                     ])
                     ->columns(2),
                 
-                Forms\Components\Section::make('Contact Information')
+                Forms\Components\Section::make('საკონტაქტო ინფორმაცია')
                     ->schema([
                         TextInput::make('address')
-                            ->label('Address')
+                            ->label('მისამართი')
                             ->maxLength(500)
                             ->columnSpanFull(),
                         
                         TextInput::make('phone')
-                            ->label('Phone')
+                            ->label('ტელეფონი')
                             ->tel(),
                         
                         TextInput::make('email')
-                            ->label('Email')
+                            ->label('ელ-ფოსტა')
                             ->email(),
                         
                         TextInput::make('website_url')
-                            ->label('Website')
+                            ->label('ვებგვერდი')
                             ->url()
-                            ->helperText('Full URL including https://'),
+                            ->helperText('სრული URL მისამართი https:// ჩათვლით'),
                         
                         TextInput::make('facebook')
                             ->label('Facebook')
@@ -173,7 +186,7 @@ class SubordinateInstitutionResource extends Resource
                     ])
                     ->columns(2),
                 
-                Forms\Components\Section::make('Media & Settings')
+                Forms\Components\Section::make('მედია და პარამეტრები')
                     ->schema([
                         FileUpload::make('logo')
                             ->label('ლოგო')
@@ -190,16 +203,16 @@ class SubordinateInstitutionResource extends Resource
                             ->helperText('სურათი (მაქს 2MB)'),
                         
                         Toggle::make('is_published')
-                            ->label('Published')
+                            ->label('გამოქვეყნებული')
                             ->default(true),
                         
                         Toggle::make('is_featured')
-                            ->label('Featured')
+                            ->label('რჩეული')
                             ->default(false)
-                            ->helperText('Show this institution prominently'),
+                            ->helperText('გამოაჩინე დაწესებულება გამორჩეულად'),
                         
                         DateTimePicker::make('published_at')
-                            ->label('Publish Date')
+                            ->label('გამოქვეყნების თარიღი')
                             ->default(now()),
                     ])
                     ->columns(2),
@@ -215,21 +228,37 @@ class SubordinateInstitutionResource extends Resource
                     ->circular()
                     ->size(40),
                 TextColumn::make('name')
-                    ->label('Name (Georgian)')
+                    ->label('დასახელება (ქართული)')
                     ->formatStateUsing(fn ($record) => $record->getTranslation('name', 'ka'))
                     ->searchable(query: function (Builder $query, string $search): Builder {
                         return $query->where('name->ka', 'like', "%{$search}%");
                     }),
                 TextColumn::make('name')
-                    ->label('Name (English)')
+                    ->label('დასახელება (ინგლისური)')
                     ->formatStateUsing(fn ($record) => $record->getTranslation('name', 'en'))
                     ->searchable(query: function (Builder $query, string $search): Builder {
                         return $query->where('name->en', 'like', "%{$search}%");
                     }),
                 TextColumn::make('type')
+                    ->label('ტიპი')
                     ->badge()
+                    ->formatStateUsing(fn ($state) => match ($state) {
+                        'museum' => 'მუზეუმი',
+                        'theater' => 'თეატრი',
+                        'library' => 'ბიბლიოთეკა',
+                        'archive' => 'არქივი',
+                        'cultural_center' => 'კულტურის ცენტრი',
+                        'sports_center' => 'სპორტული ცენტრი',
+                        'academy' => 'აკადემია',
+                        'institute' => 'ინსტიტუტი',
+                        'agency' => 'სააგენტო',
+                        'foundation' => 'ფონდი',
+                        'other' => 'სხვა',
+                        default => $state,
+                    })
                     ->searchable(),
                 TextColumn::make('status')
+                    ->label('სტატუსი')
                     ->badge()
                     ->color(fn (string $state): string => match ($state) {
                         'active' => 'green',
@@ -237,23 +266,31 @@ class SubordinateInstitutionResource extends Resource
                         'under_construction' => 'yellow',
                         'temporarily_closed' => 'orange',
                         'permanently_closed' => 'red',
+                    })
+                    ->formatStateUsing(fn ($state) => match ($state) {
+                        'active' => 'აქტიური',
+                        'inactive' => 'არააქტიური',
+                        'under_construction' => 'მშენებლობის პროცესში',
+                        'temporarily_closed' => 'დროებით დახურული',
+                        'permanently_closed' => 'მუდმივად დახურული',
+                        default => $state,
                     }),
                 TextColumn::make('director_name')
-                    ->label('Director')
+                    ->label('დირექტორი')
                     ->searchable()
                     ->limit(30),
                 TextColumn::make('establishment_year')
-                    ->label('Est. Year')
+                    ->label('დაარსების წელი')
                     ->sortable(),
                 TextColumn::make('phone')
-                    ->label('Phone')
+                    ->label('ტელეფონი')
                     ->searchable(),
                 ToggleColumn::make('is_published')
-                    ->label('Published'),
+                    ->label('გამოქვეყნებული'),
                 ToggleColumn::make('is_featured')
-                    ->label('Featured'),
+                    ->label('რჩეული'),
                 TextColumn::make('created_at')
-                    ->label('Created')
+                    ->label('შექმნის თარიღი')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -261,41 +298,46 @@ class SubordinateInstitutionResource extends Resource
             ->filters([
                 SelectFilter::make('type')
                     ->options([
-                        'museum' => 'Museum',
-                        'theater' => 'Theater',
-                        'library' => 'Library',
-                        'archive' => 'Archive',
-                        'cultural_center' => 'Cultural Center',
-                        'sports_center' => 'Sports Center',
-                        'academy' => 'Academy',
-                        'institute' => 'Institute',
-                        'agency' => 'Agency',
-                        'foundation' => 'Foundation',
-                        'other' => 'Other',
-                    ]),
+                        'museum' => 'მუზეუმი',
+                        'theater' => 'თეატრი',
+                        'library' => 'ბიბლიოთეკა',
+                        'archive' => 'არქივი',
+                        'cultural_center' => 'კულტურის ცენტრი',
+                        'sports_center' => 'სპორტული ცენტრი',
+                        'academy' => 'აკადემია',
+                        'institute' => 'ინსტიტუტი',
+                        'agency' => 'სააგენტო',
+                        'foundation' => 'ფონდი',
+                        'other' => 'სხვა',
+                    ])
+                    ->label('ტიპი'),
                 SelectFilter::make('status')
                     ->options([
-                        'active' => 'Active',
-                        'inactive' => 'Inactive',
-                        'under_construction' => 'Under Construction',
-                        'temporarily_closed' => 'Temporarily Closed',
-                        'permanently_closed' => 'Permanently Closed',
-                    ]),
+                        'active' => 'აქტიური',
+                        'inactive' => 'არააქტიური',
+                        'under_construction' => 'მშენებლობის პროცესში',
+                        'temporarily_closed' => 'დროებით დახურული',
+                        'permanently_closed' => 'მუდმივად დახურული',
+                    ])
+                    ->label('სტატუსი'),
                 Filter::make('published')
+                    ->label('გამოქვეყნებული')
                     ->query(fn (Builder $query): Builder => $query->where('is_published', true)),
                 Filter::make('featured')
+                    ->label('რჩეული')
                     ->query(fn (Builder $query): Builder => $query->where('is_featured', true)),
                 Filter::make('active_status')
+                    ->label('აქტიური')
                     ->query(fn (Builder $query): Builder => $query->where('status', 'active')),
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\ViewAction::make()->label('ნახვა'),
+                Tables\Actions\EditAction::make()->label('რედაქტირება'),
+                Tables\Actions\DeleteAction::make()->label('წაშლა'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\DeleteBulkAction::make()->label('წაშლა'),
                 ]),
             ]);
     }

@@ -32,115 +32,68 @@ class UserResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-users';
     
-    protected static ?string $navigationGroup = 'სისტემა';
+    protected static ?string $navigationGroup = 'სისტემის მართვა';
     
     protected static ?string $navigationLabel = 'მომხმარებლები';
-    
+    protected static ?string $modelLabel = 'მომხმარებელი';
+    protected static ?string $pluralModelLabel = 'მომხმარებლები';
     protected static ?int $navigationSort = 2;
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Section::make('User Information')
+                Forms\Components\Section::make('მომხმარებლის ინფორმაცია')
                     ->schema([
                         TextInput::make('name')
-                            ->label('Full Name')
+                            ->label('სახელი')
                             ->required()
                             ->maxLength(255),
-                        
                         TextInput::make('email')
-                            ->label('Email Address')
+                            ->label('ელ-ფოსტა')
                             ->email()
                             ->required()
-                            ->unique(ignoreRecord: true)
-                            ->maxLength(255),
-                        
-                        TextInput::make('phone')
-                            ->label('Phone Number')
-                            ->tel()
-                            ->maxLength(255),
-                        
+                            ->maxLength(255)
+                            ->unique(ignoreRecord: true),
+                        TextInput::make('password')
+                            ->label('პაროლი')
+                            ->password()
+                            ->dehydrated(fn ($state) => filled($state))
+                            ->required(fn (string $context): bool => $context === 'create'),
+                        Select::make('role')
+                            ->label('როლი')
+                            ->options([
+                                'admin' => 'ადმინისტრატორი',
+                                'editor' => 'რედაქტორი',
+                                'viewer' => 'ნახვა',
+                            ])
+                            ->required()
+                            ->default('viewer'),
                         FileUpload::make('avatar')
-                            ->label('Profile Picture')
+                            ->label('ავატარი')
                             ->image()
                             ->directory('user-avatars')
-                            ->maxSize(2048)
-                            ->helperText('Profile picture (max 2MB)'),
+                            ->maxSize(1024)
+                            ->helperText('ავატარი (მაქს 1MB)'),
                     ])
                     ->columns(2),
-                
-                Section::make('Account Settings')
+                Forms\Components\Section::make('დამატებითი ინფორმაცია')
                     ->schema([
-                        TextInput::make('password')
-                            ->label('Password')
-                            ->password()
-                            ->dehydrateStateUsing(fn ($state) => Hash::make($state))
-                            ->dehydrated(fn ($state) => filled($state))
-                            ->required(fn (string $context): bool => $context === 'create')
-                            ->minLength(8)
-                            ->helperText('Minimum 8 characters'),
-                        
-                        TextInput::make('password_confirmation')
-                            ->label('Confirm Password')
-                            ->password()
-                            ->dehydrated(false)
-                            ->required(fn (string $context): bool => $context === 'create')
-                            ->same('password'),
-                        
-                        Toggle::make('is_admin')
-                            ->label('Admin Access')
-                            ->default(false)
-                            ->helperText('Grant full administrative access'),
-                        
-                        Toggle::make('is_active')
-                            ->label('Active Account')
-                            ->default(true)
-                            ->helperText('Enable or disable user account'),
-                        
-                        DateTimePicker::make('email_verified_at')
-                            ->label('Email Verified At')
-                            ->helperText('Leave empty if email is not verified'),
-                    ])
-                    ->columns(2),
-                
-                Section::make('Additional Information')
-                    ->schema([
+                        TextInput::make('phone')
+                            ->label('ტელეფონი')
+                            ->tel(),
                         TextInput::make('position')
-                            ->label('Position/Title')
-                            ->maxLength(255)
-                            ->helperText('User\'s position or title in the organization'),
-                        
-                        Select::make('department')
-                            ->options([
-                                'administration' => 'Administration',
-                                'culture' => 'Culture',
-                                'sports' => 'Sports',
-                                'finance' => 'Finance',
-                                'hr' => 'Human Resources',
-                                'it' => 'Information Technology',
-                                'legal' => 'Legal',
-                                'public_relations' => 'Public Relations',
-                                'other' => 'Other',
-                            ])
-                            ->searchable()
-                            ->helperText('User\'s department'),
-                        
+                            ->label('თანამდებობა')
+                            ->maxLength(255),
                         Textarea::make('bio')
-                            ->label('Biography')
-                            ->rows(4)
-                            ->maxLength(1000)
-                            ->helperText('Short biography or description'),
-                        
-                        TextInput::make('linkedin_url')
-                            ->label('LinkedIn Profile')
-                            ->url()
-                            ->prefix('https://'),
-                        
-                        TextInput::make('twitter_url')
-                            ->label('Twitter Profile')
-                            ->url()
-                            ->prefix('https://'),
+                            ->label('ბიოგრაფია')
+                            ->rows(3)
+                            ->columnSpanFull(),
+                        Toggle::make('is_active')
+                            ->label('აქტიური')
+                            ->default(true),
+                        DateTimePicker::make('email_verified_at')
+                            ->label('ელ-ფოსტის დადასტურების თარიღი'),
                     ])
                     ->columns(2),
             ]);
@@ -150,71 +103,74 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                ImageColumn::make('avatar')
-                    ->label('Avatar')
+                Tables\Columns\ImageColumn::make('avatar')
+                    ->label('ავატარი')
                     ->circular()
                     ->size(40),
-                TextColumn::make('name')
-                    ->label('Name')
+                Tables\Columns\TextColumn::make('name')
+                    ->label('სახელი')
                     ->searchable()
                     ->sortable(),
-                TextColumn::make('email')
-                    ->label('Email')
+                Tables\Columns\TextColumn::make('email')
+                    ->label('ელ-ფოსტა')
                     ->searchable()
                     ->sortable(),
-                TextColumn::make('position')
-                    ->label('Position')
+                Tables\Columns\TextColumn::make('role')
+                    ->label('როლი')
+                    ->badge()
+                    ->formatStateUsing(fn ($state) => match ($state) {
+                        'admin' => 'ადმინისტრატორი',
+                        'editor' => 'რედაქტორი',
+                        'viewer' => 'ნახვა',
+                        default => $state,
+                    })
+                    ->color(fn (string $state): string => match ($state) {
+                        'admin' => 'danger',
+                        'editor' => 'warning',
+                        'viewer' => 'success',
+                    }),
+                Tables\Columns\TextColumn::make('position')
+                    ->label('თანამდებობა')
                     ->searchable()
                     ->limit(30),
-                TextColumn::make('department')
-                    ->label('Department')
-                    ->badge()
-                    ->searchable(),
-                ToggleColumn::make('is_admin')
-                    ->label('Admin'),
-                ToggleColumn::make('is_active')
-                    ->label('Active'),
-                TextColumn::make('email_verified_at')
-                    ->label('Email Verified')
+                Tables\Columns\IconColumn::make('is_active')
+                    ->label('აქტიური')
+                    ->boolean(),
+                Tables\Columns\TextColumn::make('email_verified_at')
+                    ->label('დადასტურებული')
                     ->dateTime()
                     ->sortable(),
-                TextColumn::make('created_at')
-                    ->label('Created')
+                Tables\Columns\TextColumn::make('created_at')
+                    ->label('შექმნის თარიღი')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                SelectFilter::make('department')
+                SelectFilter::make('role')
                     ->options([
-                        'administration' => 'Administration',
-                        'culture' => 'Culture',
-                        'sports' => 'Sports',
-                        'finance' => 'Finance',
-                        'hr' => 'Human Resources',
-                        'it' => 'Information Technology',
-                        'legal' => 'Legal',
-                        'public_relations' => 'Public Relations',
-                        'other' => 'Other',
-                    ]),
-                Filter::make('admins')
-                    ->query(fn (Builder $query): Builder => $query->where('is_admin', true)),
-                Filter::make('active_users')
+                        'admin' => 'ადმინისტრატორი',
+                        'editor' => 'რედაქტორი',
+                        'viewer' => 'ნახვა',
+                    ])
+                    ->label('როლი'),
+                Filter::make('active')
+                    ->label('აქტიური')
                     ->query(fn (Builder $query): Builder => $query->where('is_active', true)),
-                Filter::make('verified_emails')
+                Filter::make('verified')
+                    ->label('დადასტურებული')
                     ->query(fn (Builder $query): Builder => $query->whereNotNull('email_verified_at')),
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\ViewAction::make()->label('ნახვა'),
+                Tables\Actions\EditAction::make()->label('რედაქტირება'),
+                Tables\Actions\DeleteAction::make()->label('წაშლა'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                    Tables\Actions\DeleteBulkAction::make()->label('წაშლა'),
                 ]),
-            ])
-            ->defaultSort('created_at', 'desc');
+            ]);
     }
 
     public static function getRelations(): array
@@ -231,5 +187,30 @@ class UserResource extends Resource
             'create' => Pages\CreateUser::route('/create'),
             'edit' => Pages\EditUser::route('/{record}/edit'),
         ];
+    }
+
+    public static function canViewAny(): bool
+    {
+        return auth()->user()?->is_admin ?? false;
+    }
+
+    public static function canCreate(): bool
+    {
+        return auth()->user()?->is_admin ?? false;
+    }
+
+    public static function canView($record): bool
+    {
+        return auth()->user()?->is_admin ?? false;
+    }
+
+    public static function canEdit($record): bool
+    {
+        return auth()->user()?->is_admin ?? false;
+    }
+
+    public static function canDelete($record): bool
+    {
+        return auth()->user()?->is_admin ?? false;
     }
 }

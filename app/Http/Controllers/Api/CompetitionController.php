@@ -38,6 +38,7 @@ class CompetitionController extends Controller
     {
         $competitions = Competition::active()
             ->published()
+            ->orderBy('published_at', 'desc')
             ->limit(5)
             ->get();
 

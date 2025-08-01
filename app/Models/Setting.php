@@ -44,6 +44,9 @@ class Setting extends Model
         'site_logo',
         'site_favicon',
         'default_image',
+        'about_ministry_photo',
+        'about_ministry_text_ka',
+        'about_ministry_text_en',
     ];
 
     public $translatable = [
@@ -53,6 +56,8 @@ class Setting extends Model
         'working_hours',
         'meta_title',
         'meta_description',
+        'about_ministry_text_ka',
+        'about_ministry_text_en',
     ];
 
     protected $casts = [

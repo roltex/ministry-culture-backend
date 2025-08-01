@@ -18,6 +18,8 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use App\Filament\Widgets\StatsOverview;
+use App\Http\Middleware\SetAdminLocale;
+use App\Filament\Resources\RecentAuditActivityResource\Widgets\RecentAuditActivity;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -27,13 +29,8 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('admin')
-
-
-
             ->login()
-            ->brandName('Ministry of Culture')
-
- 
+            ->brandName('კულტურის სამინისტრო')
 
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
@@ -44,6 +41,7 @@ class AdminPanelProvider extends PanelProvider
 
             ->widgets([
                 StatsOverview::class,
+                RecentAuditActivity::class,
             ])
 
             ->middleware([
@@ -56,6 +54,7 @@ class AdminPanelProvider extends PanelProvider
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
+                SetAdminLocale::class,
             ])
 
             ->authMiddleware([
