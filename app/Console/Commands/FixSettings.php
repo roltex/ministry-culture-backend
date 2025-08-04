@@ -40,11 +40,11 @@ class FixSettings extends Command
             $settings->update([
                 'site_name' => json_encode([
                     'ka' => 'საქართველოს კულტურის სამინისტრო',
-                    'en' => 'Ministry of Culture and Sport of Georgia'
+                    'en' => 'Ministry of Culture of Georgia'
                 ]),
                 'site_description' => json_encode([
                     'ka' => 'საქართველოს კულტურის სამინისტროს ოფიციალური ვებსაიტი',
-                    'en' => 'Official website of the Ministry of Culture and Sport of Georgia'
+                    'en' => 'Official website of the Ministry of Culture of Georgia'
                 ]),
                 'contact_address' => json_encode([
                     'ka' => 'თბილისი, საქართველო',

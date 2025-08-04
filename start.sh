@@ -34,7 +34,7 @@ chmod 775 /app/database
 if [ ! -f /app/.env ]; then
     echo "Creating .env file..."
     cat > /app/.env << EOF
-APP_NAME="Ministry of Culture and Sport"
+APP_NAME="Ministry of Culture of Georgia"
 APP_ENV=production
 APP_KEY=
 APP_DEBUG=false

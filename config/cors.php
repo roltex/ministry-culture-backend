@@ -22,6 +22,8 @@ return [
     'allowed_origins' => [
         'http://localhost:5173',
         'http://localhost:3000',
+        'http://localhost',
+        'http://culture.gov.ge',
         'https://*.vercel.app',
         'https://*.vercel.com',
     ],

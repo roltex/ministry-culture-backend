@@ -22,7 +22,7 @@ Route::middleware(['web'])->group(function () {
     // Default API root route
     Route::get('/', function () {
         return response()->json([
-            'message' => 'Welcome to the Ministry of Culture and Sport API',
+            'message' => 'Welcome to the Ministry of Culture of Georgia API',
             'version' => '1.0.0',
             'timestamp' => now()->toISOString()
         ]);

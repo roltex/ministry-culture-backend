@@ -32,7 +32,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// API Routes for Ministry of Culture and Sport of Georgia
+// API Routes for Ministry of Culture of Georgia
 Route::prefix('v1')->middleware([
     SetLocaleFromHeader::class
 ])->group(function () {
